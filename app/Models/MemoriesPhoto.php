@@ -1,0 +1,19 @@
+<?php 
+/*
+NAME : Sajed Ahmed
+EMAIL ADDRESS: sajedaiub@gmail.com
+*/
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class MemoriesPhoto extends Model
+{
+	
+	   protected $fillable = [
+      'ref_memories_id','memories_photo_location','memories_photo_uploaded_date_time','memories_photo_active'
+    ];
+}
+
+	
