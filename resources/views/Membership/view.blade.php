@@ -2,19 +2,57 @@
 
 @section('main')
 
-<div class="jumbotron text-center">
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">{{ __('memberships.page_title') }}</h1>
+<p class="mb-4">{{ __('memberships.welcome_msg') }}</p>
+
+
  <div align="right">
   <a href="{{ route('memberships.index') }}" class="btn btn-default">Back</a>
  </div>
  <br />
  
- <h3>{{ __('memberships.membership_username') }} - {{ $data->membership_username }} </h3>
- <h3>{{ __('memberships.membership_password_value') }} - {{ $data->membership_password_value }} </h3>
- <h3>{{ __('memberships.membership_status') }} - {{ $data->membership_status }} </h3>
- <h3>{{ __('memberships.membership_expired_date') }} - {{ $data->membership_expired_date }} </h3>
- <h3>{{ __('memberships.membership_creating_datetime') }} - {{ $data->membership_creating_datetime }} </h3>
- <h3>{{ __('memberships.membership_editing_datetime') }} - {{ $data->membership_editing_datetime }} </h3>
- 
+ <table class="table table-striped">
+        <thead >
+        <tr class="info">
 
-</div>
+            <th scope="col">Column</th>
+            <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+		<tr>
+			<td>{{ __('memberships.membership_username') }}
+ 			<td>{{ $data->membership_username }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('memberships.membership_password_value') }}
+ 			<td>{{ $data->membership_password_value }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('memberships.membership_status') }}
+ 			<td>{{ $data->membership_status }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('memberships.membership_expired_date') }}
+ 			<td>{{ $data->membership_expired_date }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('memberships.membership_creating_datetime') }}
+ 			<td>{{ $data->membership_creating_datetime }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('memberships.membership_editing_datetime') }}
+ 			<td>{{ $data->membership_editing_datetime }} </td>
+ 
+		</tr>
+		</tbody>
+</table>
+
+
 @endsection

@@ -4,6 +4,9 @@
 
 @section('main')
 
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">{{ __('board_members_categories.page_title') }}</h1>
+<p class="mb-4">{{ __('board_members_categories.welcome_msg') }}</p>
 
 <div align="right">
 	<a href="{{ route('board_members_categories.create') }}" class="btn btn-success btn-sm">{{ __('board_members_categories.create') }}</a>
@@ -61,7 +64,7 @@
 							<a href="{{ route('board_members_categories.edit', $row->id) }}" class="btn btn-warning">Edit</a>
 							@csrf
 							@method('DELETE')
-							<button type="submit" class="btn btn-danger">Delete</button>
+							<button type="submit"  onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">Delete</button>
 					  {{ Form::close() }}
 					   
 					   </td> 

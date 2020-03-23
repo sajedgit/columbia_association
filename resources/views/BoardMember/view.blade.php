@@ -2,21 +2,67 @@
 
 @section('main')
 
-<div class="jumbotron text-center">
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">{{ __('board_members.page_title') }}</h1>
+<p class="mb-4">{{ __('board_members.welcome_msg') }}</p>
+
+
  <div align="right">
   <a href="{{ route('board_members.index') }}" class="btn btn-default">Back</a>
  </div>
  <br />
  
- <h3>{{ __('board_members.ref_board_members_category_id') }} - {{ $data->ref_board_members_category_id }} </h3>
- <h3>{{ __('board_members.board_members_first_name') }} - {{ $data->board_members_first_name }} </h3>
- <h3>{{ __('board_members.board_members_last_name') }} - {{ $data->board_members_last_name }} </h3>
- <h3>{{ __('board_members.board_members_image_location') }} - {{ $data->board_members_image_location }} </h3>
- <h3>{{ __('board_members.board_member_designation') }} - {{ $data->board_member_designation }} </h3>
- <h3>{{ __('board_members.board_members_email_address') }} - {{ $data->board_members_email_address }} </h3>
- <h3>{{ __('board_members.board_members_position') }} - {{ $data->board_members_position }} </h3>
- <h3>{{ __('board_members.board_members_active') }} - {{ $data->board_members_active }} </h3>
- 
+ <table class="table table-striped">
+        <thead >
+        <tr class="info">
 
-</div>
+            <th scope="col">Column</th>
+            <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+		<tr>
+			<td>{{ __('board_members.ref_board_members_category_id') }}
+ 			<td>{{ $data->ref_board_members_category_id }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('board_members.board_members_first_name') }}
+ 			<td>{{ $data->board_members_first_name }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('board_members.board_members_last_name') }}
+ 			<td>{{ $data->board_members_last_name }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('board_members.board_members_image_location') }}
+ 			<td>{{ $data->board_members_image_location }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('board_members.board_member_designation') }}
+ 			<td>{{ $data->board_member_designation }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('board_members.board_members_email_address') }}
+ 			<td>{{ $data->board_members_email_address }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('board_members.board_members_position') }}
+ 			<td>{{ $data->board_members_position }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('board_members.board_members_active') }}
+ 			<td>{{ $data->board_members_active }} </td>
+ 
+		</tr>
+		</tbody>
+</table>
+
+
 @endsection

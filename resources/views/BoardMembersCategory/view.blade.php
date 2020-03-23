@@ -2,16 +2,42 @@
 
 @section('main')
 
-<div class="jumbotron text-center">
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">{{ __('board_members_categories.page_title') }}</h1>
+<p class="mb-4">{{ __('board_members_categories.welcome_msg') }}</p>
+
+
  <div align="right">
   <a href="{{ route('board_members_categories.index') }}" class="btn btn-default">Back</a>
  </div>
  <br />
  
- <h3>{{ __('board_members_categories.board_members_category_name') }} - {{ $data->board_members_category_name }} </h3>
- <h3>{{ __('board_members_categories.board_members_category_position') }} - {{ $data->board_members_category_position }} </h3>
- <h3>{{ __('board_members_categories.board_members_category_active') }} - {{ $data->board_members_category_active }} </h3>
- 
+ <table class="table table-striped">
+        <thead >
+        <tr class="info">
 
-</div>
+            <th scope="col">Column</th>
+            <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+		<tr>
+			<td>{{ __('board_members_categories.board_members_category_name') }}
+ 			<td>{{ $data->board_members_category_name }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('board_members_categories.board_members_category_position') }}
+ 			<td>{{ $data->board_members_category_position }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('board_members_categories.board_members_category_active') }}
+ 			<td>{{ $data->board_members_category_active }} </td>
+ 
+		</tr>
+		</tbody>
+</table>
+
+
 @endsection

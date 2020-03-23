@@ -2,17 +2,47 @@
 
 @section('main')
 
-<div class="jumbotron text-center">
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">{{ __('memories_photos.page_title') }}</h1>
+<p class="mb-4">{{ __('memories_photos.welcome_msg') }}</p>
+
+
  <div align="right">
   <a href="{{ route('memories_photos.index') }}" class="btn btn-default">Back</a>
  </div>
  <br />
  
- <h3>{{ __('memories_photos.ref_memories_id') }} - {{ $data->ref_memories_id }} </h3>
- <h3>{{ __('memories_photos.memories_photo_location') }} - {{ $data->memories_photo_location }} </h3>
- <h3>{{ __('memories_photos.memories_photo_uploaded_date_time') }} - {{ $data->memories_photo_uploaded_date_time }} </h3>
- <h3>{{ __('memories_photos.memories_photo_active') }} - {{ $data->memories_photo_active }} </h3>
- 
+ <table class="table table-striped">
+        <thead >
+        <tr class="info">
 
-</div>
+            <th scope="col">Column</th>
+            <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+		<tr>
+			<td>{{ __('memories_photos.ref_memories_id') }}
+ 			<td>{{ $data->ref_memories_id }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('memories_photos.memories_photo_location') }}
+ 			<td>{{ $data->memories_photo_location }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('memories_photos.memories_photo_uploaded_date_time') }}
+ 			<td>{{ $data->memories_photo_uploaded_date_time }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('memories_photos.memories_photo_active') }}
+ 			<td>{{ $data->memories_photo_active }} </td>
+ 
+		</tr>
+		</tbody>
+</table>
+
+
 @endsection

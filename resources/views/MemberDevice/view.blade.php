@@ -2,18 +2,52 @@
 
 @section('main')
 
-<div class="jumbotron text-center">
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">{{ __('member_devices.page_title') }}</h1>
+<p class="mb-4">{{ __('member_devices.welcome_msg') }}</p>
+
+
  <div align="right">
   <a href="{{ route('member_devices.index') }}" class="btn btn-default">Back</a>
  </div>
  <br />
  
- <h3>{{ __('member_devices.ref_member_device_membership_id') }} - {{ $data->ref_member_device_membership_id }} </h3>
- <h3>{{ __('member_devices.member_device_os_type') }} - {{ $data->member_device_os_type }} </h3>
- <h3>{{ __('member_devices.member_device_token_id') }} - {{ $data->member_device_token_id }} </h3>
- <h3>{{ __('member_devices.member_device_unique_id') }} - {{ $data->member_device_unique_id }} </h3>
- <h3>{{ __('member_devices.member_device_storing_datetime') }} - {{ $data->member_device_storing_datetime }} </h3>
- 
+ <table class="table table-striped">
+        <thead >
+        <tr class="info">
 
-</div>
+            <th scope="col">Column</th>
+            <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+		<tr>
+			<td>{{ __('member_devices.ref_member_device_membership_id') }}
+ 			<td>{{ $data->ref_member_device_membership_id }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('member_devices.member_device_os_type') }}
+ 			<td>{{ $data->member_device_os_type }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('member_devices.member_device_token_id') }}
+ 			<td>{{ $data->member_device_token_id }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('member_devices.member_device_unique_id') }}
+ 			<td>{{ $data->member_device_unique_id }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('member_devices.member_device_storing_datetime') }}
+ 			<td>{{ $data->member_device_storing_datetime }} </td>
+ 
+		</tr>
+		</tbody>
+</table>
+
+
 @endsection

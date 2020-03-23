@@ -2,22 +2,72 @@
 
 @section('main')
 
-<div class="jumbotron text-center">
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">{{ __('sponsors.page_title') }}</h1>
+<p class="mb-4">{{ __('sponsors.welcome_msg') }}</p>
+
+
  <div align="right">
   <a href="{{ route('sponsors.index') }}" class="btn btn-default">Back</a>
  </div>
  <br />
  
- <h3>{{ __('sponsors.sponsor_name') }} - {{ $data->sponsor_name }} </h3>
- <h3>{{ __('sponsors.sponsor_details') }} - {{ $data->sponsor_details }} </h3>
- <h3>{{ __('sponsors.sponsor_address') }} - {{ $data->sponsor_address }} </h3>
- <h3>{{ __('sponsors.sponsor_email') }} - {{ $data->sponsor_email }} </h3>
- <h3>{{ __('sponsors.sponsor_website') }} - {{ $data->sponsor_website }} </h3>
- <h3>{{ __('sponsors.sponsor_logo_photo') }} - {{ $data->sponsor_logo_photo }} </h3>
- <h3>{{ __('sponsors.sponsor_position') }} - {{ $data->sponsor_position }} </h3>
- <h3>{{ __('sponsors.sponsor_created_datetime') }} - {{ $data->sponsor_created_datetime }} </h3>
- <h3>{{ __('sponsors.sponsor_edited_date_time') }} - {{ $data->sponsor_edited_date_time }} </h3>
- 
+ <table class="table table-striped">
+        <thead >
+        <tr class="info">
 
-</div>
+            <th scope="col">Column</th>
+            <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+		<tr>
+			<td>{{ __('sponsors.sponsor_name') }}
+ 			<td>{{ $data->sponsor_name }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('sponsors.sponsor_details') }}
+ 			<td>{{ $data->sponsor_details }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('sponsors.sponsor_address') }}
+ 			<td>{{ $data->sponsor_address }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('sponsors.sponsor_email') }}
+ 			<td>{{ $data->sponsor_email }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('sponsors.sponsor_website') }}
+ 			<td>{{ $data->sponsor_website }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('sponsors.sponsor_logo_photo') }}
+ 			<td>{{ $data->sponsor_logo_photo }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('sponsors.sponsor_position') }}
+ 			<td>{{ $data->sponsor_position }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('sponsors.sponsor_created_datetime') }}
+ 			<td>{{ $data->sponsor_created_datetime }} </td>
+ 
+		</tr>
+		<tr>
+			<td>{{ __('sponsors.sponsor_edited_date_time') }}
+ 			<td>{{ $data->sponsor_edited_date_time }} </td>
+ 
+		</tr>
+		</tbody>
+</table>
+
+
 @endsection
