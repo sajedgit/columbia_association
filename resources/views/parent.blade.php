@@ -51,7 +51,7 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      
+
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
@@ -77,8 +77,8 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="#">View All Events</a>
-            <a class="collapse-item" href="#">Add New Events</a> 
+            <a class="collapse-item" href="{{ route('events.index') }}">View All Events</a>
+            <a class="collapse-item" href="{{ route('events.create') }}">Add New Events</a>
           </div>
         </div>
       </li>
@@ -96,14 +96,14 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Memories:</h6>
-            <a class="collapse-item" href="#">View All Memories</a>
-            <a class="collapse-item" href="#">Add New Memories</a> 
+            <a class="collapse-item" href="{{ route('memories.index') }}">View All Memories</a>
+            <a class="collapse-item" href="{{ route('memories.create') }}">Add New Memories</a>
           </div>
         </div>
       </li>
 
-     
-	  
+
+
 	   <!-- Nav Item - Board Members Collapse Menu -->
       <li class="nav-item active">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages">
@@ -112,14 +112,14 @@
         </a>
         <div id="collapsePages2" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Memories:</h6>
-            <a class="collapse-item" href="#">View All Board Members</a>
-            <a class="collapse-item" href="#">Add New Board Members</a> 
+            <h6 class="collapse-header">Board Members:</h6>
+            <a class="collapse-item" href="{{ route('board_members.index') }}">View All Board Members</a>
+            <a class="collapse-item" href="{{ route('board_members.create') }}">Add New Board Members</a>
           </div>
         </div>
       </li>
 
-       
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -181,7 +181,7 @@
               </div>
             </li>
 
-           
+
 
 
             <!-- Nav Item - User Information -->
@@ -196,7 +196,7 @@
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
-              
+
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -270,7 +270,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
-  
+
    <!-- Page level plugins -->
   <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>

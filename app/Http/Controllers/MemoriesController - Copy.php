@@ -13,7 +13,7 @@ class MemoriesController extends Controller
      */
     public function index()
     {
-        $data = Memory::orderBy('id', 'desc')->paginate(5); 
+        $data = Memory::orderBy('id', 'desc')->paginate(5);
         return view('Memory/index', compact('data'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -116,7 +116,7 @@ class MemoriesController extends Controller
             'last_name'        =>   $request->last_name,
             'image'            =>   $image_name
         );
-  
+
         Memory::whereId($id)->update($form_data);
 
         return redirect('Memory/index')->with('success', 'Data is successfully updated');
@@ -137,5 +137,4 @@ class MemoriesController extends Controller
     }
 }
 
-	
-	
+

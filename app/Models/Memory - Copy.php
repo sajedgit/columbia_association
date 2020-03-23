@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 NAME : Sajed Ahmed
 EMAIL ADDRESS: sajedaiub@gmail.com
@@ -10,10 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Memory extends Model
 {
-	
+
+
+
 	   protected $fillable = [
       'memories_name','memories_details','memories_created_date_time','memories_editing_datetime','memories_active'
     ];
 }
 
-	
+

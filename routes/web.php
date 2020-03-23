@@ -34,4 +34,3 @@ Route::get('/', function () {
 	Route::resource('messages','MessagesController');
 	Route::resource('organize_infos','OrganizeInfosController');
 	Route::resource('sponsors','SponsorsController');
-	
