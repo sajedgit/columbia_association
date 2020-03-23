@@ -43,7 +43,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="<?php echo url('/'); ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -62,8 +62,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Member:</h6>
-            <a class="collapse-item" href="#">View All Members</a>
-            <a class="collapse-item" href="#">Add New Member</a>
+            <a class="collapse-item" href="{{ route('memberships.index') }}">View All Members</a>
+            <a class="collapse-item" href="{{ route('memberships.create') }}">Add New Member</a>
           </div>
         </div>
       </li>

@@ -23,54 +23,30 @@
 				 @csrf
                 @method('PATCH')
 
+			 
+
 				<div class="form-group">
-				{{ Form::label('id', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.id')),array('class'=>'control-label col-md-4')) }}	
+				{{ Form::label('membership_username', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_username')),array('class'=>'control-label col-md-4')) }}	
 					<div class="col-md-8">
-						{{ Form::text('id', $value = $data->id ,array('class' => 'form-control input-lg')) }}
+						{{ Form::text('membership_username', $value = $data->membership_username ,array('class' => 'form-control input-lg')) }}
 					</div>
 				</div>
 
 				<div class="form-group">
-				{{ Form::label('id', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_username')),array('class'=>'control-label col-md-4')) }}	
+				{{ Form::label('membership_password_value', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_password_value')),array('class'=>'control-label col-md-4')) }}	
 					<div class="col-md-8">
-						{{ Form::text('id', $value = $data->membership_username ,array('class' => 'form-control input-lg')) }}
+						{{ Form::text('membership_password_value', $value = $data->membership_password_value ,array('class' => 'form-control input-lg')) }}
 					</div>
 				</div>
 
 				<div class="form-group">
-				{{ Form::label('id', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_password_value')),array('class'=>'control-label col-md-4')) }}	
+				{{ Form::label('membership_status', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_status')),array('class'=>'control-label col-md-4')) }}	
 					<div class="col-md-8">
-						{{ Form::text('id', $value = $data->membership_password_value ,array('class' => 'form-control input-lg')) }}
+						{{ Form::text('membership_status', $value = $data->membership_status ,array('class' => 'form-control input-lg')) }}
 					</div>
 				</div>
 
-				<div class="form-group">
-				{{ Form::label('id', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_status')),array('class'=>'control-label col-md-4')) }}	
-					<div class="col-md-8">
-						{{ Form::text('id', $value = $data->membership_status ,array('class' => 'form-control input-lg')) }}
-					</div>
-				</div>
-
-				<div class="form-group">
-				{{ Form::label('id', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_expired_date')),array('class'=>'control-label col-md-4')) }}	
-					<div class="col-md-8">
-						{{ Form::text('id', $value = $data->membership_expired_date ,array('class' => 'form-control input-lg')) }}
-					</div>
-				</div>
-
-				<div class="form-group">
-				{{ Form::label('id', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_creating_datetime')),array('class'=>'control-label col-md-4')) }}	
-					<div class="col-md-8">
-						{{ Form::text('id', $value = $data->membership_creating_datetime ,array('class' => 'form-control input-lg')) }}
-					</div>
-				</div>
-
-				<div class="form-group">
-				{{ Form::label('id', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_editing_datetime')),array('class'=>'control-label col-md-4')) }}	
-					<div class="col-md-8">
-						{{ Form::text('id', $value = $data->membership_editing_datetime ,array('class' => 'form-control input-lg')) }}
-					</div>
-				</div>
+				 
 
 				
 				<br />
