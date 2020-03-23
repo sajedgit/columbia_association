@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'MemberPersonalInfo',
+	'page_title' => 'member_personal_infos',
+	'welcome_msg' => '',
 	'create' => 'Create MemberPersonalInfo',
 	'view' => 'View MemberPersonalInfo',
 	'delete' => 'Delete MemberPersonalInfo',

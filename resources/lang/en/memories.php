@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'Memory',
+	'page_title' => 'memories',
+	'welcome_msg' => '',
 	'create' => 'Create Memory',
 	'view' => 'View Memory',
 	'delete' => 'Delete Memory',

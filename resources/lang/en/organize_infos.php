@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'OrganizeInfo',
+	'page_title' => 'organize_infos',
+	'welcome_msg' => '',
 	'create' => 'Create OrganizeInfo',
 	'view' => 'View OrganizeInfo',
 	'delete' => 'Delete OrganizeInfo',

@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'ContactU',
+	'page_title' => 'contact_us',
+	'welcome_msg' => '',
 	'create' => 'Create ContactU',
 	'view' => 'View ContactU',
 	'delete' => 'Delete ContactU',

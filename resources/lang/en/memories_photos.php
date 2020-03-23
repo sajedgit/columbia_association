@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'MemoriesPhoto',
+	'page_title' => 'memories_photos',
+	'welcome_msg' => '',
 	'create' => 'Create MemoriesPhoto',
 	'view' => 'View MemoriesPhoto',
 	'delete' => 'Delete MemoriesPhoto',

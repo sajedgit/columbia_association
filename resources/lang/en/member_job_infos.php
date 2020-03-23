@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'MemberJobInfo',
+	'page_title' => 'member_job_infos',
+	'welcome_msg' => '',
 	'create' => 'Create MemberJobInfo',
 	'view' => 'View MemberJobInfo',
 	'delete' => 'Delete MemberJobInfo',

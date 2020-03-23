@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'EventTicketPayment',
+	'page_title' => 'event_ticket_payments',
+	'welcome_msg' => '',
 	'create' => 'Create EventTicketPayment',
 	'view' => 'View EventTicketPayment',
 	'delete' => 'Delete EventTicketPayment',

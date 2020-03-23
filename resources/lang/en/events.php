@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'Event',
+	'page_title' => 'events',
+	'welcome_msg' => '',
 	'create' => 'Create Event',
 	'view' => 'View Event',
 	'delete' => 'Delete Event',

@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'Sponsor',
+	'page_title' => 'sponsors',
+	'welcome_msg' => '',
 	'create' => 'Create Sponsor',
 	'view' => 'View Sponsor',
 	'delete' => 'Delete Sponsor',

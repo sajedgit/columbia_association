@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'MembershipPayment',
+	'page_title' => 'membership_payments',
+	'welcome_msg' => '',
 	'create' => 'Create MembershipPayment',
 	'view' => 'View MembershipPayment',
 	'delete' => 'Delete MembershipPayment',

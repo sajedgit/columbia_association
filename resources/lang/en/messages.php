@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'Message',
+	'page_title' => 'messages',
+	'welcome_msg' => '',
 	'create' => 'Create Message',
 	'view' => 'View Message',
 	'delete' => 'Delete Message',

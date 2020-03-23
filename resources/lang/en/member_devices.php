@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'MemberDevice',
+	'page_title' => 'member_devices',
+	'welcome_msg' => '',
 	'create' => 'Create MemberDevice',
 	'view' => 'View MemberDevice',
 	'delete' => 'Delete MemberDevice',

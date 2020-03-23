@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'BoardMembersCategory',
+	'page_title' => 'board_members_categories',
+	'welcome_msg' => '',
 	'create' => 'Create BoardMembersCategory',
 	'view' => 'View BoardMembersCategory',
 	'delete' => 'Delete BoardMembersCategory',

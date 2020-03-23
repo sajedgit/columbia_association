@@ -12,6 +12,8 @@ return [
     */
 
     'page_name' => 'EventTicketBuyer',
+	'page_title' => 'event_ticket_buyers',
+	'welcome_msg' => '',
 	'create' => 'Create EventTicketBuyer',
 	'view' => 'View EventTicketBuyer',
 	'delete' => 'Delete EventTicketBuyer',
