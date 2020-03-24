@@ -11,14 +11,15 @@ return [
     |
     */
 
-    'page_name' => 'Event',
-	'page_title' => 'events',
+    'page_name' => 'Events',
+	'page_title' => 'Events',
 	'welcome_msg' => '',
 	'create' => 'Create Event',
 	'view' => 'View Event',
 	'delete' => 'Delete Event',
 	'update' => 'Update Event',
 	'enter_msg' => 'Enter',
+	'edit_msg' => 'Edit',
 	'submit_btn_msg' => 'Submit',
 	'update_btn_msg' => 'Update',
 	'id' => 'id',
@@ -28,7 +29,7 @@ return [
 	'event_flyer_location' => 'Location',
 	'event_flyer_type' => 'Flyer Type',
 	'event_starting_date' => 'Starting Date',
-	'event_starting_time' => 'Sarting Time',
+	'event_starting_time' => 'Starting Time',
 	'event_ending_date' => 'Ending Date',
 	'event_ending_time' => 'Ending Time',
 	'event_ticket_price' => 'Ticket Price',

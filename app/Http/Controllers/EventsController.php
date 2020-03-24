@@ -36,25 +36,39 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-//        $request->validate([
-//            'first_name'    =>  'required',
-//            'last_name'     =>  'required',
-//            'image'         =>  'required|image|max:2048'
-//        ]);
+        $request->validate([
+            'event_title'    =>  'required',
+            'event_venue'     =>  'required',
+            'event_flyer_location'    =>  'required',
+            'event_flyer_type'     =>  'required',
+//            'event_starting_date'    =>  'required',
+//            'event_starting_time'     =>  'required',
+//            'event_ending_date'    =>  'required',
+//            'event_ending_time'     =>  'required',
+            'event_ticket_price'    =>  'required',
+            'event_total_seat'     =>  'required'
 
-        $image = $request->file('image');
+        ]);
 
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $new_name
+            'event_title'       =>   $request->event_title,
+            'event_details'       =>   $request->event_details,
+            'event_venue'        =>   $request->event_venue,
+            'event_flyer_location'        =>   $request->event_flyer_location,
+            'event_flyer_type'        =>   $request->event_flyer_type,
+            'event_starting_date'        =>   $request->event_starting_date,
+            'event_starting_time'        =>   $request->event_starting_time,
+            'event_ending_date'        =>   $request->event_ending_date,
+            'event_ending_time'        =>   $request->event_ending_time,
+            'event_ticket_price'        =>   $request->event_ticket_price,
+            'event_total_seat'        =>   $request->event_total_seat,
+            'event_created_datetime'        =>   date('Y-m-d')
         );
 
         Event::create($form_data);
 
-        return redirect('Event/index')->with('success', 'Data Added successfully.');
+        return redirect('events')->with('success', 'Data Added successfully.');
     }
 
     /**
@@ -90,36 +104,39 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image_name = $request->hidden_image;
-        $image = $request->file('image');
-        if($image != '')
-        {
-//            $request->validate([
-//                'first_name'    =>  'required',
-//                'last_name'     =>  'required',
-//                'image'         =>  'image|max:2048'
-//            ]);
+        $request->validate([
+            'event_title'    =>  'required',
+            'event_venue'     =>  'required',
+            'event_flyer_location'    =>  'required',
+            'event_flyer_type'     =>  'required',
+//            'event_starting_date'    =>  'required',
+//            'event_starting_time'     =>  'required',
+//            'event_ending_date'    =>  'required',
+//            'event_ending_time'     =>  'required',
+            'event_ticket_price'    =>  'required',
+            'event_total_seat'     =>  'required'
 
-//            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-//            $image->move(public_path('images'), $image_name);
-        }
-        else
-        {
-//            $request->validate([
-//                'first_name'    =>  'required',
-//                'last_name'     =>  'required'
-//            ]);
-        }
+        ]);
+
 
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $image_name
+            'event_title'       =>   $request->event_title,
+            'event_details'       =>   $request->event_details,
+            'event_venue'        =>   $request->event_venue,
+            'event_flyer_location'        =>   $request->event_flyer_location,
+            'event_flyer_type'        =>   $request->event_flyer_type,
+            'event_starting_date'        =>   $request->event_starting_date,
+            'event_starting_time'        =>   $request->event_starting_time,
+            'event_ending_date'        =>   $request->event_ending_date,
+            'event_ending_time'        =>   $request->event_ending_time,
+            'event_ticket_price'        =>   $request->event_ticket_price,
+            'event_total_seat'        =>   $request->event_total_seat,
+            'event_created_datetime'        =>   date('Y-m-d')
         );
 
         Event::whereId($id)->update($form_data);
 
-        return redirect('Event/index')->with('success', 'Data is successfully updated');
+        return redirect('events')->with('success', 'Data is successfully updated');
     }
 
     /**

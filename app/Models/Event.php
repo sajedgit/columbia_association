@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 NAME : Sajed Ahmed
 EMAIL ADDRESS: sajedaiub@gmail.com
@@ -10,10 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-	
+	public $timestamps=false;
 	   protected $fillable = [
       'event_title','event_details','event_venue','event_flyer_location','event_flyer_type','event_starting_date','event_starting_time','event_ending_date','event_ending_time','event_ticket_price','event_total_seat','event_active','event_created_datetime','event_edited_datetime'
     ];
 }
 
-	
