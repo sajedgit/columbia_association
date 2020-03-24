@@ -13,7 +13,7 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $data = Event::orderBy('id', 'desc')->paginate(5); 
+        $data = Event::orderBy('id', 'desc')->paginate(5);
         return view('Event/index', compact('data'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -36,11 +36,11 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'first_name'    =>  'required',
-            'last_name'     =>  'required',
-            'image'         =>  'required|image|max:2048'
-        ]);
+//        $request->validate([
+//            'first_name'    =>  'required',
+//            'last_name'     =>  'required',
+//            'image'         =>  'required|image|max:2048'
+//        ]);
 
         $image = $request->file('image');
 
@@ -94,21 +94,21 @@ class EventsController extends Controller
         $image = $request->file('image');
         if($image != '')
         {
-            $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required',
-                'image'         =>  'image|max:2048'
-            ]);
+//            $request->validate([
+//                'first_name'    =>  'required',
+//                'last_name'     =>  'required',
+//                'image'         =>  'image|max:2048'
+//            ]);
 
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_name);
+//            $image_name = rand() . '.' . $image->getClientOriginalExtension();
+//            $image->move(public_path('images'), $image_name);
         }
         else
         {
-            $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required'
-            ]);
+//            $request->validate([
+//                'first_name'    =>  'required',
+//                'last_name'     =>  'required'
+//            ]);
         }
 
         $form_data = array(
@@ -116,7 +116,7 @@ class EventsController extends Controller
             'last_name'        =>   $request->last_name,
             'image'            =>   $image_name
         );
-  
+
         Event::whereId($id)->update($form_data);
 
         return redirect('Event/index')->with('success', 'Data is successfully updated');
@@ -137,5 +137,4 @@ class EventsController extends Controller
     }
 }
 
-	
-	
+

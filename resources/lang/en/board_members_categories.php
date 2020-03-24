@@ -11,20 +11,20 @@ return [
     |
     */
 
-    'page_name' => 'BoardMembersCategory',
-	'page_title' => 'board_members_categories',
+    'page_name' => 'Board Members Category ',
+	'page_title' => 'Board Members Category ',
 	'welcome_msg' => '',
-	'create' => 'Create BoardMembersCategory',
-	'view' => 'View BoardMembersCategory',
-	'delete' => 'Delete BoardMembersCategory',
-	'update' => 'Update BoardMembersCategory',
+	'create' => 'Create Board Members Category',
+	'view' => 'View Board Members Category',
+	'delete' => 'Delete Board MembersCategory',
+	'update' => 'Update Board Members Category',
 	'enter_msg' => 'Enter',
 	'submit_btn_msg' => 'Submit',
 	'update_btn_msg' => 'Update',
 	'id' => 'id',
-	'board_members_category_name' => 'board_members_category_name',
-	'board_members_category_position' => 'board_members_category_position',
-	'board_members_category_active' => 'board_members_category_active',
-	
+	'board_members_category_name' => 'Category Name',
+	'board_members_category_position' => 'Category Position',
+	'board_members_category_active' => 'Category Status',
+
 
 ];
