@@ -1,4 +1,4 @@
-	
+
 
 @extends('parent')
 
@@ -38,10 +38,10 @@
 						 <th>{{ __('board_members.board_members_image_location') }}</th>
 						 <th>{{ __('board_members.board_member_designation') }}</th>
 						 <th>{{ __('board_members.board_members_email_address') }}</th>
-						 <th>{{ __('board_members.board_members_position') }}</th>
+
 						 <th>{{ __('board_members.board_members_active') }}</th>
-						
-                      <th>Action</th> 
+
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -52,51 +52,50 @@
 						 <th>{{ __('board_members.board_members_image_location') }}</th>
 						 <th>{{ __('board_members.board_member_designation') }}</th>
 						 <th>{{ __('board_members.board_members_email_address') }}</th>
-						 <th>{{ __('board_members.board_members_position') }}</th>
+
 						 <th>{{ __('board_members.board_members_active') }}</th>
-						
-                      <th>Action</th> 
+
+                      <th>Action</th>
                     </tr>
                   </tfoot>
                   <tbody>
 				   @foreach($data as $row)
                     <tr>
-                      
-					    <td>{{ $row->ref_board_members_category_id }}</td>
+
+					    <td>{{ $row->board_members_category_name }}</td>
 						 <td>{{ $row->board_members_first_name }}</td>
 						 <td>{{ $row->board_members_last_name }}</td>
-						 <td>{{ $row->board_members_image_location }}</td>
+						 <td><img src="{{ URL::to('/') }}/images/{{ $row->board_members_image_location }}" class="img-thumbnail" width="75" /></td>
 						 <td>{{ $row->board_member_designation }}</td>
 						 <td>{{ $row->board_members_email_address }}</td>
-						 <td>{{ $row->board_members_position }}</td>
+
 						 <td>{{ $row->board_members_active }}</td>
-						
-					   
-                       <td class="text-center"> 
-					  {{ Form::open([ 'method'  => 'delete', 'route' => [ 'board_members.destroy', $row->id ] ]) }} 
-					  
+
+
+                       <td class="text-center">
+					  {{ Form::open([ 'method'  => 'delete', 'route' => [ 'board_members.destroy', $row->id ] ]) }}
+
 							<a href="{{ route('board_members.show', $row->id) }}" class="btn btn-primary">Show</a>
 							<a href="{{ route('board_members.edit', $row->id) }}" class="btn btn-warning">Edit</a>
 							@csrf
 							@method('DELETE')
 							<button type="submit"  onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">Delete</button>
 					  {{ Form::close() }}
-					   
-					   </td> 
-					   
+
+					   </td>
+
                     </tr>
 					@endforeach
-                   
+
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-		  
+
 		 </div>
         <!-- /.container-fluid -->
 
 
-{!! $data->links() !!}
 @endsection
 

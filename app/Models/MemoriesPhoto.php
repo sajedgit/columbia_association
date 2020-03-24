@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 NAME : Sajed Ahmed
 EMAIL ADDRESS: sajedaiub@gmail.com
@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class MemoriesPhoto extends Model
 {
-	
+
+    public $timestamps=false;
 	   protected $fillable = [
       'ref_memories_id','memories_photo_location','memories_photo_uploaded_date_time','memories_photo_active'
     ];
 }
 
-	

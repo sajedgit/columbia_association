@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\BoardMember;
+use App\Models\BoardMembersCategory;
 use Illuminate\Http\Request;
+use DB;
 
 class BoardMembersController extends Controller
 {
@@ -13,9 +15,16 @@ class BoardMembersController extends Controller
      */
     public function index()
     {
-        $data = BoardMember::orderBy('id', 'desc')->paginate(5); 
-        return view('BoardMember/index', compact('data'))
-                ->with('i', (request()->input('page', 1) - 1) * 5);
+
+
+        $data = DB::table('board_members')
+            ->join('board_members_categories', 'board_members_categories.id', '=', 'board_members.ref_board_members_category_id')
+
+            ->select('board_members.*', 'board_members_categories.board_members_category_name')
+            ->get();
+
+        //$data = BoardMember::orderBy('id', 'desc')->paginate(5);
+        return view('BoardMember/index', compact('data'));
     }
 
     /**
@@ -25,7 +34,9 @@ class BoardMembersController extends Controller
      */
     public function create()
     {
-        return view('BoardMember/create');
+        $items = BoardMembersCategory::pluck('board_members_category_name', 'id');
+        $status_items=array('Select'=>'Select','0'=>'Active','1'=>'Inactive');
+        return view('BoardMember/create', compact('items','status_items'));
     }
 
     /**
@@ -37,24 +48,32 @@ class BoardMembersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name'    =>  'required',
-            'last_name'     =>  'required',
-            'image'         =>  'required|image|max:2048'
+            'ref_board_members_category_id'    =>  'required',
+            'board_members_first_name'     =>  'required',
+            'board_members_last_name'     =>  'required',
+            'board_members_image_location'     =>  'required|image|max:2048',
+            'board_members_email_address'     =>  'required|email',
+            'board_members_first_name'     =>  'required'
         ]);
 
-        $image = $request->file('image');
+        $image = $request->file('board_members_image_location');
 
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $new_name);
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $new_name
+            'ref_board_members_category_id'       =>   $request->ref_board_members_category_id,
+            'board_members_first_name'        =>   $request->board_members_first_name,
+            'board_members_last_name'        =>   $request->board_members_last_name,
+            'board_members_image_location'        =>  $new_name,
+            'board_member_designation'        =>   $request->board_member_designation,
+            'board_members_email_address'        =>   $request->board_members_email_address,
+            'board_members_active'        =>   $request->board_members_active,
+
         );
 
         BoardMember::create($form_data);
 
-        return redirect('BoardMember/index')->with('success', 'Data Added successfully.');
+        return redirect('board_members')->with('success', 'Data Added successfully.');
     }
 
     /**
@@ -77,8 +96,11 @@ class BoardMembersController extends Controller
      */
     public function edit($id)
     {
+        //$board_members_categories = DB::table('board_members_categories')->get();
+        $status_items=array('0'=>'Active','1'=>'Inactive');
+        $items = BoardMembersCategory::pluck('board_members_category_name', 'id');
         $data = BoardMember::findOrFail($id);
-        return view('BoardMember/edit', compact('data'));
+        return view('BoardMember/edit', compact('data','items','status_items'));
     }
 
     /**
@@ -91,13 +113,16 @@ class BoardMembersController extends Controller
     public function update(Request $request, $id)
     {
         $image_name = $request->hidden_image;
-        $image = $request->file('image');
+        $image = $request->file('board_members_image_location');
         if($image != '')
         {
             $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required',
-                'image'         =>  'image|max:2048'
+                'ref_board_members_category_id'    =>  'required',
+                'board_members_first_name'     =>  'required',
+                'board_members_last_name'     =>  'required',
+                'board_members_image_location'     =>  'required|image|max:2048',
+                'board_members_email_address'     =>  'required|email',
+                'board_members_first_name'     =>  'required'
             ]);
 
             $image_name = rand() . '.' . $image->getClientOriginalExtension();
@@ -106,20 +131,28 @@ class BoardMembersController extends Controller
         else
         {
             $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required'
+                'ref_board_members_category_id'    =>  'required',
+                'board_members_first_name'     =>  'required',
+                'board_members_last_name'     =>  'required',
+                'board_members_email_address'     =>  'required|email',
+                'board_members_first_name'     =>  'required'
             ]);
         }
 
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $image_name
+            'ref_board_members_category_id'       =>   $request->ref_board_members_category_id,
+            'board_members_first_name'        =>   $request->board_members_first_name,
+            'board_members_last_name'        =>   $request->board_members_last_name,
+            'board_members_image_location'        =>  $image_name,
+            'board_member_designation'        =>   $request->board_member_designation,
+            'board_members_email_address'        =>   $request->board_members_email_address,
+            'board_members_active'        =>   $request->board_members_active,
+
         );
-  
+
         BoardMember::whereId($id)->update($form_data);
 
-        return redirect('BoardMember/index')->with('success', 'Data is successfully updated');
+        return redirect('board_members')->with('success', 'Data is successfully updated');
     }
 
     /**
@@ -133,9 +166,8 @@ class BoardMembersController extends Controller
         $data = BoardMember::findOrFail($id);
         $data->delete();
 
-        return redirect('BoardMember/index')->with('success', 'Data is successfully deleted');
+        return redirect('board_members')->with('success', 'Data is successfully deleted');
     }
 }
 
-	
-	
+

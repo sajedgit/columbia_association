@@ -20,6 +20,8 @@ return [
     'delete' => 'Delete Board Member',
     'update' => 'Update Board Member',
     'enter_msg' => 'Enter',
+    'edit_msg' => 'Edit',
+    'select_msg' => 'Select',
     'submit_btn_msg' => 'Submit',
     'update_btn_msg' => 'Update',
     'id' => 'id',

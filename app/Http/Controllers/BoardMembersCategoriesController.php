@@ -13,7 +13,8 @@ class BoardMembersCategoriesController extends Controller
      */
     public function index()
     {
-        $data = BoardMembersCategory::orderBy('id', 'desc')->paginate(5); 
+
+        $data = BoardMembersCategory::orderBy('id', 'desc')->paginate(5);
         return view('BoardMembersCategory/index', compact('data'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -116,7 +117,7 @@ class BoardMembersCategoriesController extends Controller
             'last_name'        =>   $request->last_name,
             'image'            =>   $image_name
         );
-  
+
         BoardMembersCategory::whereId($id)->update($form_data);
 
         return redirect('BoardMembersCategory/index')->with('success', 'Data is successfully updated');
@@ -137,5 +138,4 @@ class BoardMembersCategoriesController extends Controller
     }
 }
 
-	
-	
+
