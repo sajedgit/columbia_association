@@ -20,6 +20,14 @@
    <!-- Custom styles for this page -->
   <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
+    <!-- For datetime picker-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" href="http://www.jonthornton.com/jquery-timepicker/jquery.timepicker.css">
+
+
+
+
 </head>
 
 <body id="page-top">
@@ -277,6 +285,33 @@
 
   <!-- Page level custom scripts -->
   <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
+  <!-- For datetime picker-->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+  <script src="http://www.jonthornton.com/jquery-timepicker/jquery.timepicker.js"></script>
+
+
+  <script>
+      $( function() {
+          $( "#datepicker1" ).datepicker({ dateFormat: 'yy-mm-dd' });
+          $( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd' });
+          $( "#datepicker3" ).datepicker({ dateFormat: 'yy-mm-dd' });
+          $( "#datepicker4" ).datepicker({ dateFormat: 'yy-mm-dd' });
+
+
+
+          $('#basicExample').timepicker({ 'timeFormat': 'H:i:s' });
+          $('#timepicker1').timepicker({ 'timeFormat': 'H:i:s' });
+          $('#timepicker2').timepicker({ 'timeFormat': 'H:i:s' });
+          $('#timepicker3').timepicker({ 'timeFormat': 'H:i:s' });
+          $('#timepicker4').timepicker({ 'timeFormat': 'H:i:s' });
+      } );
+
+
+
+  </script>
 
 </body>
 
