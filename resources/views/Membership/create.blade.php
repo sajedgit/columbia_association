@@ -55,7 +55,7 @@
             {{ Form::label('membership_expired_date', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_expired_date')),array('class'=>'control-label')) }}
         </div>
         <div class="col-sm-8">
-            {{ Form::text('membership_expired_date', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('memberships.membership_expired_date'))) }}
+            {{ Form::text('membership_expired_date', $value = null ,array('id'=>'datepicker1','class' => 'form-control','placeholder'=>Lang::get('memberships.membership_expired_date'))) }}
         </div>
     </div>
 
