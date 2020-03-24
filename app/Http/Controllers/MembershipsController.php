@@ -13,7 +13,7 @@ class MembershipsController extends Controller
      */
     public function index()
     {
-        $data = Membership::orderBy('id', 'desc')->paginate(5); 
+        $data = Membership::orderBy('id', 'desc')->paginate(5);
         return view('Membership/index', compact('data'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -37,24 +37,25 @@ class MembershipsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name'    =>  'required',
-            'last_name'     =>  'required',
-            'image'         =>  'required|image|max:2048'
+            'membership_username'    =>  'required',
+            'membership_password_value'     =>  'required',
+            'membership_status'     =>  'required',
+            'membership_expired_date'         =>  'required'
         ]);
 
-        $image = $request->file('image');
 
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $new_name
+            'membership_username'       =>   $request->membership_username,
+            'membership_password_value'        =>   $request->membership_password_value,
+            'membership_status'        =>   $request->membership_status,
+            'membership_expired_date'        =>   $request->membership_expired_date,
+            'membership_creating_datetime'        =>   date("Y-m-d")
         );
 
         Membership::create($form_data);
 
-        return redirect('Membership/index')->with('success', 'Data Added successfully.');
+        return redirect('memberships')->with('success', 'Data Added successfully.');
     }
 
     /**
@@ -90,36 +91,26 @@ class MembershipsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image_name = $request->hidden_image;
-        $image = $request->file('image');
-        if($image != '')
-        {
-            $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required',
-                'image'         =>  'image|max:2048'
-            ]);
 
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_name);
-        }
-        else
-        {
             $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required'
+                'membership_username'    =>  'required',
+                'membership_password_value'     =>  'required',
+                'membership_status'     =>  'required',
+                'membership_expired_date'         =>  'required'
             ]);
-        }
 
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $image_name
+            'membership_username'       =>   $request->membership_username,
+            'membership_password_value'        =>   $request->membership_password_value,
+            'membership_status'        =>   $request->membership_status,
+            'membership_expired_date'        =>   $request->membership_expired_date
         );
-  
+
+
+
         Membership::whereId($id)->update($form_data);
 
-        return redirect('Membership/index')->with('success', 'Data is successfully updated');
+        return redirect('memberships')->with('success', 'Data is successfully updated');
     }
 
     /**
@@ -133,9 +124,8 @@ class MembershipsController extends Controller
         $data = Membership::findOrFail($id);
         $data->delete();
 
-        return redirect('Membership/index')->with('success', 'Data is successfully deleted');
+        return redirect('memberships')->with('success', 'Data is successfully deleted');
     }
 }
 
-	
-	
+

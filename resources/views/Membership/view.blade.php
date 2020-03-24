@@ -11,7 +11,7 @@
   <a href="{{ route('memberships.index') }}" class="btn btn-default">Back</a>
  </div>
  <br />
- 
+
  <table class="table table-striped">
         <thead >
         <tr class="info">
@@ -24,33 +24,24 @@
 		<tr>
 			<td>{{ __('memberships.membership_username') }}
  			<td>{{ $data->membership_username }} </td>
- 
+
 		</tr>
 		<tr>
 			<td>{{ __('memberships.membership_password_value') }}
  			<td>{{ $data->membership_password_value }} </td>
- 
+
 		</tr>
 		<tr>
 			<td>{{ __('memberships.membership_status') }}
  			<td>{{ $data->membership_status }} </td>
- 
+
 		</tr>
 		<tr>
 			<td>{{ __('memberships.membership_expired_date') }}
  			<td>{{ $data->membership_expired_date }} </td>
- 
+
 		</tr>
-		<tr>
-			<td>{{ __('memberships.membership_creating_datetime') }}
- 			<td>{{ $data->membership_creating_datetime }} </td>
- 
-		</tr>
-		<tr>
-			<td>{{ __('memberships.membership_editing_datetime') }}
- 			<td>{{ $data->membership_editing_datetime }} </td>
- 
-		</tr>
+
 		</tbody>
 </table>
 
