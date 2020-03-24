@@ -12,21 +12,22 @@ return [
     */
 
     'page_name' => 'Memory',
-	'page_title' => 'memories',
+	'page_title' => 'Memory',
 	'welcome_msg' => '',
 	'create' => 'Create Memory',
 	'view' => 'View Memory',
 	'delete' => 'Delete Memory',
 	'update' => 'Update Memory',
 	'enter_msg' => 'Enter',
+	'edit_msg' => 'Edit',
 	'submit_btn_msg' => 'Submit',
 	'update_btn_msg' => 'Update',
 	'id' => 'id',
-	'memories_name' => 'memories_name',
-	'memories_details' => 'memories_details',
-	'memories_created_date_time' => 'memories_created_date_time',
-	'memories_editing_datetime' => 'memories_editing_datetime',
-	'memories_active' => 'memories_active',
-	
+	'memories_name' => 'Memory Name',
+	'memories_details' => 'Details',
+	'memories_created_date_time' => 'Memory Created Date Time',
+	'memories_editing_datetime' => 'Memory Ending Date Time',
+	'memories_active' => 'Status',
+
 
 ];

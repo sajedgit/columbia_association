@@ -37,24 +37,21 @@ class MemoriesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name'    =>  'required',
-            'last_name'     =>  'required',
-            'image'         =>  'required|image|max:2048'
+            'memories_name'    =>  'required'
         ]);
 
-        $image = $request->file('image');
 
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $new_name
+            'memories_name'       =>   $request->memories_name,
+            'memories_details'        =>   $request->memories_details,
+            'memories_created_date_time'            =>   date("Y-m-d"),
+            'memories_active'            =>    $request->memories_active,
         );
 
         Memory::create($form_data);
 
-        return redirect('Memory/index')->with('success', 'Data Added successfully.');
+        return redirect('memories')->with('success', 'Data Added successfully.');
     }
 
     /**
@@ -90,36 +87,20 @@ class MemoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image_name = $request->hidden_image;
-        $image = $request->file('image');
-        if($image != '')
-        {
-            $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required',
-                'image'         =>  'image|max:2048'
-            ]);
-
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_name);
-        }
-        else
-        {
-            $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required'
-            ]);
-        }
+        $request->validate([
+            'memories_name'    =>  'required'
+        ]);
 
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $image_name
+            'memories_name'       =>   $request->memories_name,
+            'memories_details'        =>   $request->memories_details,
+            'memories_created_date_time'            =>   date("Y-m-d"),
+            'memories_active'            =>    $request->memories_active,
         );
 
         Memory::whereId($id)->update($form_data);
 
-        return redirect('Memory/index')->with('success', 'Data is successfully updated');
+        return redirect('memories')->with('success', 'Data is successfully updated');
     }
 
     /**
@@ -133,7 +114,7 @@ class MemoriesController extends Controller
         $data = Memory::findOrFail($id);
         $data->delete();
 
-        return redirect('Memory/index')->with('success', 'Data is successfully deleted');
+        return redirect('memories')->with('success', 'Data is successfully deleted');
     }
 }
 

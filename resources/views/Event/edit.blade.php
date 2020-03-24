@@ -32,7 +32,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_title', (Lang::get('events.enter_msg').' '.Lang::get('events.event_title')),array('class'=>'control-label')) }}
+				{{ Form::label('event_title', (Lang::get('events.edit_msg').' '.Lang::get('events.event_title')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_title', $value = $data->event_title ,array('class' => 'form-control')) }}
@@ -41,7 +41,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_details', (Lang::get('events.enter_msg').' '.Lang::get('events.event_details')),array('class'=>'control-label')) }}
+				{{ Form::label('event_details', (Lang::get('events.edit_msg').' '.Lang::get('events.event_details')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_details', $value = $data->event_details ,array('class' => 'form-control')) }}
@@ -50,7 +50,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_venue', (Lang::get('events.enter_msg').' '.Lang::get('events.event_venue')),array('class'=>'control-label')) }}
+				{{ Form::label('event_venue', (Lang::get('events.edit_msg').' '.Lang::get('events.event_venue')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_venue', $value = $data->event_venue ,array('class' => 'form-control')) }}
@@ -59,7 +59,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_flyer_location', (Lang::get('events.enter_msg').' '.Lang::get('events.event_flyer_location')),array('class'=>'control-label')) }}
+				{{ Form::label('event_flyer_location', (Lang::get('events.edit_msg').' '.Lang::get('events.event_flyer_location')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_flyer_location', $value = $data->event_flyer_location ,array('class' => 'form-control')) }}
@@ -68,7 +68,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_flyer_type', (Lang::get('events.enter_msg').' '.Lang::get('events.event_flyer_type')),array('class'=>'control-label')) }}
+				{{ Form::label('event_flyer_type', (Lang::get('events.edit_msg').' '.Lang::get('events.event_flyer_type')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_flyer_type', $value = $data->event_flyer_type ,array('class' => 'form-control')) }}
@@ -77,7 +77,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_starting_date', (Lang::get('events.enter_msg').' '.Lang::get('events.event_starting_date')),array('class'=>'control-label')) }}
+				{{ Form::label('event_starting_date', (Lang::get('events.edit_msg').' '.Lang::get('events.event_starting_date')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_starting_date', $value = $data->event_starting_date ,array('id'=>'datepicker1','class' => 'form-control')) }}
@@ -86,7 +86,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_starting_time', (Lang::get('events.enter_msg').' '.Lang::get('events.event_starting_time')),array('class'=>'control-label')) }}
+				{{ Form::label('event_starting_time', (Lang::get('events.edit_msg').' '.Lang::get('events.event_starting_time')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_starting_time', $value = $data->event_starting_time ,array('id'=>'timepicker1','class' => 'form-control')) }}
@@ -95,7 +95,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_ending_date', (Lang::get('events.enter_msg').' '.Lang::get('events.event_ending_date')),array('class'=>'control-label')) }}
+				{{ Form::label('event_ending_date', (Lang::get('events.edit_msg').' '.Lang::get('events.event_ending_date')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_ending_date', $value = $data->event_ending_date ,array('id'=>'datepicker2','class' => 'form-control')) }}
@@ -104,7 +104,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_ending_time', (Lang::get('events.enter_msg').' '.Lang::get('events.event_ending_time')),array('class'=>'control-label')) }}
+				{{ Form::label('event_ending_time', (Lang::get('events.edit_msg').' '.Lang::get('events.event_ending_time')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_ending_time', $value = $data->event_ending_time ,array('id'=>'timepicker2','class' => 'form-control')) }}
@@ -113,7 +113,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_ticket_price', (Lang::get('events.enter_msg').' '.Lang::get('events.event_ticket_price')),array('class'=>'control-label')) }}
+				{{ Form::label('event_ticket_price', (Lang::get('events.edit_msg').' '.Lang::get('events.event_ticket_price')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_ticket_price', $value = $data->event_ticket_price ,array('class' => 'form-control')) }}
@@ -122,7 +122,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_total_seat', (Lang::get('events.enter_msg').' '.Lang::get('events.event_total_seat')),array('class'=>'control-label')) }}
+				{{ Form::label('event_total_seat', (Lang::get('events.edit_msg').' '.Lang::get('events.event_total_seat')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_total_seat', $value = $data->event_total_seat ,array('class' => 'form-control')) }}
@@ -131,7 +131,7 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('event_active', (Lang::get('events.enter_msg').' '.Lang::get('events.event_active')),array('class'=>'control-label')) }}
+				{{ Form::label('event_active', (Lang::get('events.edit_msg').' '.Lang::get('events.event_active')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 						{{ Form::text('event_active', $value = $data->event_active ,array('class' => 'form-control')) }}

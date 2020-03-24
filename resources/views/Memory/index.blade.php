@@ -1,4 +1,4 @@
-	
+
 
 @extends('parent')
 
@@ -34,56 +34,50 @@
                     <tr>
                         <th>{{ __('memories.memories_name') }}</th>
 						 <th>{{ __('memories.memories_details') }}</th>
-						 <th>{{ __('memories.memories_created_date_time') }}</th>
-						 <th>{{ __('memories.memories_editing_datetime') }}</th>
 						 <th>{{ __('memories.memories_active') }}</th>
-						
-                      <th>Action</th> 
+
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                        <th>{{ __('memories.memories_name') }}</th>
 						 <th>{{ __('memories.memories_details') }}</th>
-						 <th>{{ __('memories.memories_created_date_time') }}</th>
-						 <th>{{ __('memories.memories_editing_datetime') }}</th>
 						 <th>{{ __('memories.memories_active') }}</th>
-						
-                      <th>Action</th> 
+
+                      <th>Action</th>
                     </tr>
                   </tfoot>
                   <tbody>
 				   @foreach($data as $row)
                     <tr>
-                      
+
 					    <td>{{ $row->memories_name }}</td>
 						 <td>{{ $row->memories_details }}</td>
-						 <td>{{ $row->memories_created_date_time }}</td>
-						 <td>{{ $row->memories_editing_datetime }}</td>
 						 <td>{{ $row->memories_active }}</td>
-						
-					   
-                       <td class="text-center"> 
-					  {{ Form::open([ 'method'  => 'delete', 'route' => [ 'memories.destroy', $row->id ] ]) }} 
-					  
+
+
+                       <td class="text-center">
+					  {{ Form::open([ 'method'  => 'delete', 'route' => [ 'memories.destroy', $row->id ] ]) }}
+
 							<a href="{{ route('memories.show', $row->id) }}" class="btn btn-primary">Show</a>
 							<a href="{{ route('memories.edit', $row->id) }}" class="btn btn-warning">Edit</a>
 							@csrf
 							@method('DELETE')
 							<button type="submit"  onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">Delete</button>
 					  {{ Form::close() }}
-					   
-					   </td> 
-					   
+
+					   </td>
+
                     </tr>
 					@endforeach
-                   
+
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-		  
+
 		 </div>
         <!-- /.container-fluid -->
 
