@@ -34,3 +34,7 @@ Route::get('/', function () {
 	Route::resource('messages','MessagesController');
 	Route::resource('organize_infos','OrganizeInfosController');
 	Route::resource('sponsors','SponsorsController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
