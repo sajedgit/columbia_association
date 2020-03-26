@@ -32,20 +32,20 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>{{ __('memberships.membership_username') }}</th>
-						 <th>{{ __('memberships.membership_password_value') }}</th>
-						 <th>{{ __('memberships.membership_status') }}</th>
-						 <th>{{ __('memberships.membership_expired_date') }}</th>
+                        <th>{{ __('memberships.name') }}</th>
+						 <th>{{ __('memberships.username') }}</th>
+						 <th>{{ __('memberships.email') }}</th>
+						 <th>{{ __('memberships.active') }}</th>
 
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                       <th>{{ __('memberships.membership_username') }}</th>
-						 <th>{{ __('memberships.membership_password_value') }}</th>
-						 <th>{{ __('memberships.membership_status') }}</th>
-						 <th>{{ __('memberships.membership_expired_date') }}</th>
+                       <th>{{ __('memberships.name') }}</th>
+						 <th>{{ __('memberships.username') }}</th>
+						 <th>{{ __('memberships.email') }}</th>
+						 <th>{{ __('memberships.active') }}</th>
 
                       <th>Action</th>
                     </tr>
@@ -54,10 +54,10 @@
 				   @foreach($data as $row)
                     <tr>
 
-					    <td>{{ $row->membership_username }}</td>
-						 <td>{{ $row->membership_password_value }}</td>
-						 <td>{{ $row->membership_status }}</td>
-						 <td>{{ $row->membership_expired_date }}</td>
+					    <td>{{ $row->name }}</td>
+						 <td>{{ $row->username }}</td>
+						 <td>{{ $row->email }}</td>
+						 <td>{{ $row->active }}</td>
 
 
                        <td class="text-center">

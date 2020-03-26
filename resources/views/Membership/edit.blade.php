@@ -32,39 +32,58 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('membership_username', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.membership_username')),array('class'=>'control-label')) }}
+				{{ Form::label('name', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.name')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
-						{{ Form::text('membership_username', $value = $data->membership_username ,array('class' => 'form-control')) }}
+						{{ Form::text('name', $value = $data->name ,array('class' => 'form-control')) }}
+					</div>
+				</div>
+				
+				<div class="form-group row">
+				<div class="col-sm-4 mb-3 mb-sm-0">
+				{{ Form::label('username', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.username')),array('class'=>'control-label')) }}
+				</div>
+				<div class="col-sm-8">
+						{{ Form::text('username', $value = $data->username ,array('class' => 'form-control')) }}
 					</div>
 				</div>
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('membership_password_value', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.membership_password_value')),array('class'=>'control-label')) }}
+				{{ Form::label('passcode', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.passcode')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 
-                        <input type="password" name="membership_password_value" value="<?php echo $data->membership_password_value; ?>" class="form-control">
+                        <input type="password" name="passcode" value="<?php echo $data->passcode; ?>" class="form-control">
+
+					</div>
+				</div>
+				<div class="form-group row">
+				<div class="col-sm-4 mb-3 mb-sm-0">
+				{{ Form::label('passcode_confirmation', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.passcode_confirmation')),array('class'=>'control-label')) }}
+				</div>
+					<div class="col-sm-8">
+
+                        <input type="password" name="passcode_confirmation" value="<?php echo $data->passcode; ?>" class="form-control">
 
 					</div>
 				</div>
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('membership_status', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.membership_status')),array('class'=>'control-label')) }}
+				{{ Form::label('email', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.email')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
-						{{ Form::text('membership_status', $value = $data->membership_status ,array('class' => 'form-control')) }}
+						{{ Form::text('email', $value = $data->email ,array('class' => 'form-control')) }}
 					</div>
 				</div>
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('membership_expired_date', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.membership_expired_date')),array('class'=>'control-label')) }}
+				{{ Form::label('active', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.active')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
-						{{ Form::text('membership_expired_date', $value = $data->membership_expired_date ,array('id'=>'datepicker1','class' => 'form-control')) }}
+						{{ Form::text('active', $value = $data->active ,array('class' => 'form-control')) }}
 					</div>
 				</div>
 

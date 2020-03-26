@@ -22,23 +22,23 @@
         </thead>
         <tbody>
 		<tr>
-			<td>{{ __('memberships.membership_username') }}
- 			<td>{{ $data->membership_username }} </td>
+			<td>{{ __('memberships.name') }}
+ 			<td>{{ $data->name }} </td>
 
 		</tr>
 		<tr>
-			<td>{{ __('memberships.membership_password_value') }}
- 			<td>{{ $data->membership_password_value }} </td>
+			<td>{{ __('memberships.username') }}
+ 			<td>{{ $data->username }} </td>
 
 		</tr>
 		<tr>
-			<td>{{ __('memberships.membership_status') }}
- 			<td>{{ $data->membership_status }} </td>
+			<td>{{ __('memberships.email') }}
+ 			<td>{{ $data->email }} </td>
 
 		</tr>
 		<tr>
-			<td>{{ __('memberships.membership_expired_date') }}
- 			<td>{{ $data->membership_expired_date }} </td>
+			<td>{{ __('memberships.active') }}
+ 			<td>{{ $data->active }} </td>
 
 		</tr>
 

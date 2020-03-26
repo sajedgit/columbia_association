@@ -15,7 +15,8 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'customusers',
+        //'passwords' => 'customusers',
+        'passwords' => 'memberships',
     ],
 
     /*
@@ -39,7 +40,7 @@ return [
         'web' => [
             'driver' => 'session',
            // 'provider' => 'users',
-            'provider' => 'customusers',
+            'provider' => 'memberships',
         ],
 
         'api' => [
@@ -72,9 +73,9 @@ return [
             'model' => App\User::class,
         ],
 		
-		'customusers' => [
+		'memberships' => [
             'driver' => 'eloquent',
-            'model' => App\CustomUser::class,
+            'model' => App\Membership::class,
         ],
 
         // 'users' => [
@@ -107,7 +108,7 @@ return [
         ],
 		
 		  'customusers' => [
-            'provider' => 'customusers',
+            'provider' => 'memberships',
             'table' => 'password_resets',
             'expire' => 60,
         ],

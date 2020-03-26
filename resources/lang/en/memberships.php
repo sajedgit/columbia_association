@@ -8,7 +8,7 @@ return [
     |
     | The following language lines are the default lines which match reasons
     | that are given by the Membership.
-    |
+    | 'name','username','email', 'passcode','active'
     */
 
     'page_name' => 'Membership',
@@ -22,13 +22,19 @@ return [
 	'edit_msg' => 'Edit',
 	'submit_btn_msg' => 'Submit',
 	'update_btn_msg' => 'Update',
+	
+	
+	'passcode_confirmation' => 'Password Confirmation',
+	
+	
 	'id' => 'id',
-	'membership_username' => 'Username',
-	'membership_password_value' => 'Password',
-	'membership_status' => 'Membership Status',
-	'membership_expired_date' => 'Membership Expired Date',
-	'membership_creating_datetime' => ' ',
-	'membership_editing_datetime' => ' ',
+	'name' => 'Full Name',
+	'username' => 'Username',
+	'email' => 'Email',
+	'passcode' => 'Password',
+	'active' => 'Status',
+	'created_at' => 'Created Date',
+	'updated_at' => 'Updated Date',
 
 
 ];

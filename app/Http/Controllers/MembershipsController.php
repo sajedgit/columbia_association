@@ -36,21 +36,25 @@ class MembershipsController extends Controller
      */
     public function store(Request $request)
     {
+		
         $request->validate([
-            'membership_username'    =>  'required',
-            'membership_password_value'     =>  'required',
-            'membership_status'     =>  'required',
-            'membership_expired_date'         =>  'required'
+            'name'    =>  'required',
+            'username'     =>  'required',
+            'passcode'     =>  'min:6|required',
+			'passcode_confirmation' => 'min:6|same:passcode',	
+            'email'     =>  'required',
+            'active'         =>  'required'
         ]);
 
 
-
         $form_data = array(
-            'membership_username'       =>   $request->membership_username,
-            'membership_password_value'        =>   $request->membership_password_value,
-            'membership_status'        =>   $request->membership_status,
-            'membership_expired_date'        =>   $request->membership_expired_date,
-            'membership_creating_datetime'        =>   date("Y-m-d")
+            'name'       =>   $request->name,
+            'username'        =>   $request->username,
+            'passcode'        =>   $request->passcode,
+            'email'        =>   $request->email,
+            'active'        =>   $request->active,
+            'created_at'        =>   date("Y-m-d"),
+            'updated_at'        =>   date("Y-m-d")
         );
 
         Membership::create($form_data);
@@ -92,18 +96,26 @@ class MembershipsController extends Controller
     public function update(Request $request, $id)
     {
 
-            $request->validate([
-                'membership_username'    =>  'required',
-                'membership_password_value'     =>  'required',
-                'membership_status'     =>  'required',
-                'membership_expired_date'         =>  'required'
-            ]);
+		 $request->validate([
+			'name'    =>  'required',
+			'username'     =>  'required',
+			'passcode'     =>  'min:6|required',
+			'passcode_confirmation' => 'min:6|same:passcode',
+			'email'     =>  'required',
+			'active'         =>  'required'
+		]);
+		
+		$messages = [
+				'passcode_confirmation.same' => 'Password Confirmation should match the Password',
+			];
 
         $form_data = array(
-            'membership_username'       =>   $request->membership_username,
-            'membership_password_value'        =>   $request->membership_password_value,
-            'membership_status'        =>   $request->membership_status,
-            'membership_expired_date'        =>   $request->membership_expired_date
+            'name'       =>   $request->name,
+            'username'        =>   $request->username,
+            'passcode'        =>   $request->passcode,
+            'email'        =>   $request->email,
+            'active'        =>   $request->active, 
+            'updated_at'        =>   date("Y-m-d")
         );
 
 

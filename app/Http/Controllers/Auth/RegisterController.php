@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\CustomUser;
+use App\Membership;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -54,7 +54,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Customuser::create([
+        return Membership::create([
             'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],

@@ -28,34 +28,56 @@
 
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
-            {{ Form::label('membership_username', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_username')),array('class'=>'control-label')) }}
+            {{ Form::label('name', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.name')),array('class'=>'control-label')) }}
         </div>
         <div class="col-sm-8">
-            {{ Form::text('membership_username', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('memberships.membership_username'))) }}
+            {{ Form::text('name', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('memberships.name'))) }}
         </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
-            {{ Form::label('membership_password_value', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_password_value')),array('class'=>'control-label')) }}
+            {{ Form::label('username', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.username')),array('class'=>'control-label')) }}
         </div>
         <div class="col-sm-8">
-            {{ Form::password('membership_password_value' ,array('class' => 'form-control','placeholder'=>Lang::get('memberships.membership_password_value'))) }}
+            {{ Form::text('username' , $value = null,array('class' => 'form-control','placeholder'=>Lang::get('memberships.username'))) }}
+        </div>
+    </div>
+	
+	<div class="form-group row">
+				<div class="col-sm-4 mb-3 mb-sm-0">
+				{{ Form::label('passcode', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.passcode')),array('class'=>'control-label')) }}
+				</div>
+				<div class="col-sm-8">
+
+					<input type="password" name="passcode" value="{{ __('memberships.passcode') }}" class="form-control">
+
+				</div>
+	</div>
+	<div class="form-group row">
+				<div class="col-sm-4 mb-3 mb-sm-0">
+				{{ Form::label('passcode_confirmation', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.passcode_confirmation')),array('class'=>'control-label')) }}
+				</div>
+				<div class="col-sm-8">
+
+					<input type="password" name="passcode_confirmation" value="{{ __('memberships.passcode_confirmation') }}" class="form-control">
+
+				</div>
+	</div>
+	
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3 mb-sm-0">
+            {{ Form::label('email', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.email')),array('class'=>'control-label')) }}
+        </div>
+        <div class="col-sm-8">
+            {{ Form::text('email', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('memberships.email'))) }}
         </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
-            {{ Form::label('membership_status', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_status')),array('class'=>'control-label')) }}
+            {{ Form::label('active', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.active')),array('class'=>'control-label')) }}
         </div>
         <div class="col-sm-8">
-            {{ Form::text('membership_status', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('memberships.membership_status'))) }}
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-4 mb-3 mb-sm-0">
-            {{ Form::label('membership_expired_date', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.membership_expired_date')),array('class'=>'control-label')) }}
-        </div>
-        <div class="col-sm-8">
-            {{ Form::text('membership_expired_date', $value = null ,array('id'=>'datepicker1','class' => 'form-control','placeholder'=>Lang::get('memberships.membership_expired_date'))) }}
+            {{ Form::text('active', $value = null ,array('id'=>'','class' => 'form-control','placeholder'=>Lang::get('memberships.active'))) }}
         </div>
     </div>
 
