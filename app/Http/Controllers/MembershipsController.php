@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class MembershipsController extends Controller
 {
+	
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+	
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +56,7 @@ class MembershipsController extends Controller
         $form_data = array(
             'name'       =>   $request->name,
             'username'        =>   $request->username,
-            'passcode'        =>   $request->passcode,
+            'passcode'        =>   bcrypt($request->passcode),
             'email'        =>   $request->email,
             'active'        =>   $request->active,
             'created_at'        =>   date("Y-m-d"),
@@ -112,7 +118,7 @@ class MembershipsController extends Controller
         $form_data = array(
             'name'       =>   $request->name,
             'username'        =>   $request->username,
-            'passcode'        =>   $request->passcode,
+            'passcode'        =>   bcrypt($request->passcode),
             'email'        =>   $request->email,
             'active'        =>   $request->active, 
             'updated_at'        =>   date("Y-m-d")
