@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 class Membership extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens,Notifiable;
 
     protected $table = 'memberships';
 
@@ -17,7 +18,7 @@ class Membership extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','username','email', 'passcode','active'
+        'name','username','email', 'password','active'
     ];
 
     /**
@@ -26,12 +27,12 @@ class Membership extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'passcode', 'remember_token',
+        'password', 'remember_token',
     ];
 
 
     public function getAuthPassword()
     {
-      return $this->passcode;
+      return $this->password;
     }
 }
