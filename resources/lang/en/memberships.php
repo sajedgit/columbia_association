@@ -25,6 +25,7 @@ return [
 	
 	
 	'passcode_confirmation' => 'Password Confirmation',
+	'password_confirmation' => 'Password Confirmation',
 	
 	
 	'id' => 'id',
@@ -32,6 +33,7 @@ return [
 	'username' => 'Username',
 	'email' => 'Email',
 	'passcode' => 'Password',
+	'password' => 'Password',
 	'active' => 'Status',
 	'created_at' => 'Created Date',
 	'updated_at' => 'Updated Date',
