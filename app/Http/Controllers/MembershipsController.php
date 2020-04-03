@@ -46,8 +46,8 @@ class MembershipsController extends Controller
         $request->validate([
             'name'    =>  'required',
             'username'     =>  'required',
-            'password'     =>  'min:6|required',
-			'password_confirmation' => 'min:6|same:password',	
+            'passcode'     =>  'min:6|required',
+			'passcode_confirmation' => 'min:6|same:passcode',	
             'email'     =>  'required',
             'active'         =>  'required'
         ]);
@@ -56,7 +56,7 @@ class MembershipsController extends Controller
         $form_data = array(
             'name'       =>   $request->name,
             'username'        =>   $request->username,
-            'password'        =>   bcrypt($request->password),
+            'passcode'        =>   bcrypt($request->passcode),
             'email'        =>   $request->email,
             'active'        =>   $request->active,
             'created_at'        =>   date("Y-m-d"),
@@ -105,20 +105,20 @@ class MembershipsController extends Controller
 		 $request->validate([
 			'name'    =>  'required',
 			'username'     =>  'required',
-			'password'     =>  'min:6|required',
-			'password_confirmation' => 'min:6|same:password',
+			'passcode'     =>  'min:6|required',
+			'passcode_confirmation' => 'min:6|same:passcode',
 			'email'     =>  'required',
 			'active'         =>  'required'
 		]);
 		
 		$messages = [
-				'password_confirmation.same' => 'Password Confirmation should match the Password',
+				'passcode_confirmation.same' => 'Password Confirmation should match the Password',
 			];
 
         $form_data = array(
             'name'       =>   $request->name,
             'username'        =>   $request->username,
-            'password'        =>   bcrypt($request->password),
+            'passcode'        =>   bcrypt($request->passcode),
             'email'        =>   $request->email,
             'active'        =>   $request->active, 
             'updated_at'        =>   date("Y-m-d")

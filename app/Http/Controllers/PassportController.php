@@ -6,9 +6,8 @@ use App\Membership;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller; 
-use App\User; 
-use Illuminate\Support\Facades\Auth; 
-use Validator;
+
+
  
 class PassportController extends Controller
 {
@@ -107,6 +106,12 @@ class PassportController extends Controller
 		
 		$user = Auth::user(); 
         return response()->json(['success' => $user], $this-> successStatus); 
+    } 
+
+	public function aaa()
+    {
+            $membership = Membership::orderBy('id', 'desc')->get();
+            return response()->json($membership);
     }
 	
 	

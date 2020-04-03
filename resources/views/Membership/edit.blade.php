@@ -50,21 +50,21 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('password', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.password')),array('class'=>'control-label')) }}
+				{{ Form::label('passcode', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.passcode')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 
-                        <input type="password" name="password" value="<?php echo $data->password; ?>" class="form-control">
+                        <input type="password" name="passcode" value="<?php echo $data->passcode; ?>" class="form-control">
 
 					</div>
 				</div>
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-				{{ Form::label('password_confirmation', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.password_confirmation')),array('class'=>'control-label')) }}
+				{{ Form::label('passcode_confirmation', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.passcode_confirmation')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 
-                        <input type="password" name="password_confirmation" value="<?php echo $data->password; ?>" class="form-control">
+                        <input type="password" name="passcode_confirmation" value="<?php echo $data->passcode; ?>" class="form-control">
 
 					</div>
 				</div>

@@ -13,7 +13,7 @@ class Membership extends Model
 
     public $timestamps = false;
 	   protected $fillable = [
-      'name','username','password','email','active','remember_token','created_at','updated_at'
+      'name','username','passcode','email','active','remember_token','created_at','updated_at'
     ];
 	
 	
@@ -21,7 +21,7 @@ class Membership extends Model
 	public function attributes()
 	{
 		return [
-			'password_confirmation' => 'Password Confirmation',
+			'passcode_confirmation' => 'Password Confirmation',
 		];
 	}
 }

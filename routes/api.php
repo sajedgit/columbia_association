@@ -14,16 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/* Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+}); */
 
 
 Route::post('login', 'PassportController@login');
 Route::post('register', 'PassportController@register');
  
 Route::middleware('auth:api')->group(function () {
-    Route::get('user', 'PassportController@details');
+    Route::post('users', 'PassportController@details');
+    Route::post('aaa', 'PassportController@aaa');
  
     Route::resource('products', 'ProductController');
 });
+
+
