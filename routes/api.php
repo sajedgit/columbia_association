@@ -23,7 +23,14 @@ Route::post('login', 'PassportController@login');
 Route::post('register', 'PassportController@register');
  
 Route::middleware('auth:api')->group(function () {
-    Route::get('user', 'PassportController@details');
+    Route::get('member_details', 'PassportController@details');
  
     Route::resource('products', 'ProductController');
+    Route::resource('member', 'api\MembershipsController');
+});
+
+
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('config:cache');
+    return 'DONE'; //Return anything
 });

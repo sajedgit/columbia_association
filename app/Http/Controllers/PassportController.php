@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
  
 use App\Membership;
+use App\Models\MemberDevice;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller; 
@@ -53,6 +54,7 @@ class PassportController extends Controller
 		
 		$input = $request->all(); 
         $input['password'] = bcrypt($input['password']); 
+        $input['user_type_id'] = 2; 
         $input['active'] = 0; 
         $user = Membership::create($input); 
         $success['token'] =  $user->createToken('MyApp')-> accessToken; 
@@ -73,19 +75,21 @@ class PassportController extends Controller
     {
         $credentials = [
             'email' => $request->email,
-            'password' =>  $request->password
+            'password' =>  $request->password,
         ];
         
-	   /*  if (auth()->attempt($credentials)) {
-            $token = auth()->user()->createToken('MyApp')->accessToken;
-            return response()->json(['token' => $token], 200);
-        } else {
-            return response()->json(['error' => 'UnAuthorised'], 401);
-        }  */
-		//die();
-		// print_r(Auth::attempt($credentials));die();
+	  
 	    if(Auth::attempt($credentials)){ 
             $user = Auth::user(); 
+			
+				$member_devices = MemberDevice::create([
+					'ref_member_device_membership_id' => $user->id,
+					'member_device_os_type' => $request->member_device_os_type,
+					'member_device_token_id' => $user->createToken('MyApp')-> accessToken,
+					'member_device_unique_id' => $request->member_device_unique_id
+					
+				]);
+			
             $success['token'] =  $user->createToken('MyApp')-> accessToken; 
             return response()->json(['success' => $success], $this-> successStatus); 
         } 

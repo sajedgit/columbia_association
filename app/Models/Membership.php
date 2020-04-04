@@ -13,10 +13,10 @@ class Membership extends Model
 
     public $timestamps = false;
 	   protected $fillable = [
-      'name','username','password','email','active','remember_token','created_at','updated_at'
+      'user_type_id', 'name','username','password','email','active','remember_token','created_at','updated_at'
     ];
 	
-	
+	protected $hidden = ['password', 'remember_token'];
 	
 	public function attributes()
 	{

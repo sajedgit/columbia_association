@@ -54,7 +54,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+		$user_type_id=(isset($data['user_type_id']))?$data['user_type_id']:2;
         return Membership::create([
+            'user_type_id' => $user_type_id,
             'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],
