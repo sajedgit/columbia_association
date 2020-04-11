@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\api;
-use App\Models\Membership;
+use App\Models\BoardMember;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 
-class MembershipsController extends Controller
+class BoardMembersController extends Controller
 {
 	  public function index()
         {
-            $results = Membership::orderBy('id', 'desc')->get();
+            $results = BoardMember::orderBy('id', 'desc')->get();
             //return response()->json(['success' => $results]);
 			return response()->json([
             'success' => true,
@@ -20,20 +20,19 @@ class MembershipsController extends Controller
         public function store(Request $request)
         {
 			 $validator = Validator::make($request->all(), [ 
-				'name' => 'required|min:3',
-				'username' => 'required|min:6|unique:memberships',
-				'email' => 'required|email|unique:memberships',
-				'password' => 'required|min:6', 
+				'ref_board_members_category_id' => 'required',
+				'board_members_first_name' => 'required',
+				'board_members_last_name' => 'required',
+				'board_member_designation' => 'required',
+				'board_members_email_address' => 'required',
+				'board_members_position' => 'required',
 			]);
 			
 			if ($validator->fails()) { 
 				return response()->json(['error'=>$validator->errors()], 401);            
 			}
-			$input = $request->all(); 
-			$input['password'] = bcrypt($input['password']); 
-			$input['user_type_id'] = 2; 
-			$input['active'] = 0; 
-			$result = Membership::create($input);
+			$input = $request->all();  
+			$result = BoardMember::create($input);
 		 
 			 if ($result)
 				return response()->json([
@@ -51,7 +50,7 @@ class MembershipsController extends Controller
         }
         public function show($id)
         {
-            $result = Membership::find($id); 
+            $result = BoardMember::find($id); 
 			if (!$result)
 				{
 					return response()->json([
@@ -69,7 +68,7 @@ class MembershipsController extends Controller
 		
         public function update(Request $request, $id)
         {
-         $result = Membership::find($id);			
+         $result = BoardMember::find($id);			
 			 if (!$result) 
 			 {
 				return response()->json([
@@ -98,7 +97,7 @@ class MembershipsController extends Controller
 		
         public function destroy($id)
         {
-           $result = Membership::find($id);
+           $result = BoardMember::find($id);
  
 			if (!$result) {
 				return response()->json([
@@ -119,5 +118,11 @@ class MembershipsController extends Controller
 			}
         }
 }
+
+
+
+
+
+
 
 

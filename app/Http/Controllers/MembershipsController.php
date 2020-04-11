@@ -31,7 +31,8 @@ class MembershipsController extends Controller
      */
     public function create()
     {
-        return view('Membership/create');
+        $status_items=array('Select'=>'Select','1'=>'Active','0'=>'Inactive');
+        return view('Membership/create', compact('status_items'));
     }
 
     /**
@@ -58,6 +59,7 @@ class MembershipsController extends Controller
             'username'        =>   $request->username,
             'password'        =>   bcrypt($request->password),
             'email'        =>   $request->email,
+            'user_type_id'        =>  2,
             'active'        =>   $request->active,
             'created_at'        =>   date("Y-m-d"),
             'updated_at'        =>   date("Y-m-d")
@@ -89,7 +91,8 @@ class MembershipsController extends Controller
     public function edit($id)
     {
         $data = Membership::findOrFail($id);
-        return view('Membership/edit', compact('data'));
+        $status_items=array('Select'=>'Select','1'=>'Active','0'=>'Inactive');
+        return view('Membership/edit', compact('data','status_items'));
     }
 
     /**
@@ -120,6 +123,7 @@ class MembershipsController extends Controller
             'username'        =>   $request->username,
             'password'        =>   bcrypt($request->password),
             'email'        =>   $request->email,
+            'user_type_id'        =>  2,
             'active'        =>   $request->active, 
             'updated_at'        =>   date("Y-m-d")
         );

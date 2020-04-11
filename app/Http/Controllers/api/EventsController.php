@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\api;
-use App\Models\Membership;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 
-class MembershipsController extends Controller
+class EventsController extends Controller
 {
 	  public function index()
         {
-            $results = Membership::orderBy('id', 'desc')->get();
+            $results = Event::orderBy('id', 'desc')->get();
             //return response()->json(['success' => $results]);
 			return response()->json([
             'success' => true,
@@ -20,20 +20,23 @@ class MembershipsController extends Controller
         public function store(Request $request)
         {
 			 $validator = Validator::make($request->all(), [ 
-				'name' => 'required|min:3',
-				'username' => 'required|min:6|unique:memberships',
-				'email' => 'required|email|unique:memberships',
-				'password' => 'required|min:6', 
+				'event_title' => 'required',
+				'event_details' => 'required',
+				'event_venue' => 'required',
+				'event_ticket_price' => 'required',
+				'event_total_seat' => 'required',
+				'event_flyer_type' => 'required',
+				'event_flyer_location' => 'required',
+				'event_starting_date' => 'required',
+				'event_ending_date' => 'required',
 			]);
 			
 			if ($validator->fails()) { 
 				return response()->json(['error'=>$validator->errors()], 401);            
 			}
-			$input = $request->all(); 
-			$input['password'] = bcrypt($input['password']); 
-			$input['user_type_id'] = 2; 
+			$input = $request->all();  
 			$input['active'] = 0; 
-			$result = Membership::create($input);
+			$result = Event::create($input);
 		 
 			 if ($result)
 				return response()->json([
@@ -51,7 +54,7 @@ class MembershipsController extends Controller
         }
         public function show($id)
         {
-            $result = Membership::find($id); 
+            $result = Event::find($id); 
 			if (!$result)
 				{
 					return response()->json([
@@ -69,7 +72,7 @@ class MembershipsController extends Controller
 		
         public function update(Request $request, $id)
         {
-         $result = Membership::find($id);			
+         $result = Event::find($id);			
 			 if (!$result) 
 			 {
 				return response()->json([
@@ -98,7 +101,7 @@ class MembershipsController extends Controller
 		
         public function destroy($id)
         {
-           $result = Membership::find($id);
+           $result = Event::find($id);
  
 			if (!$result) {
 				return response()->json([
@@ -119,5 +122,11 @@ class MembershipsController extends Controller
 			}
         }
 }
+
+
+
+
+
+
 
 

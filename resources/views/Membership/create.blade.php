@@ -77,7 +77,7 @@
             {{ Form::label('active', (Lang::get('memberships.enter_msg').' '.Lang::get('memberships.active')),array('class'=>'control-label')) }}
         </div>
         <div class="col-sm-8">
-            {{ Form::text('active', $value = null ,array('id'=>'','class' => 'form-control','placeholder'=>Lang::get('memberships.active'))) }}
+            {!! Form::select('active', $status_items,'Select', ['class' => 'form-control']) !!}
         </div>
     </div>
 

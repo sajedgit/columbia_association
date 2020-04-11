@@ -41,7 +41,7 @@ class BoardMembersController extends Controller
     public function create()
     {
         $items = BoardMembersCategory::pluck('board_members_category_name', 'id');
-        $status_items=array('Select'=>'Select','0'=>'Active','1'=>'Inactive');
+        $status_items=array('Select'=>'Select','1'=>'Active','0'=>'Inactive');
         return view('BoardMember/create', compact('items','status_items'));
     }
 
@@ -103,7 +103,7 @@ class BoardMembersController extends Controller
     public function edit($id)
     {
         //$board_members_categories = DB::table('board_members_categories')->get();
-        $status_items=array('0'=>'Active','1'=>'Inactive');
+        $status_items=array('1'=>'Active','0'=>'Inactive');
         $items = BoardMembersCategory::pluck('board_members_category_name', 'id');
         $data = BoardMember::findOrFail($id);
         return view('BoardMember/edit', compact('data','items','status_items'));

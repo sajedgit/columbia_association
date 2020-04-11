@@ -27,6 +27,10 @@ Route::middleware('auth:api')->group(function () {
  
     Route::resource('products', 'ProductController');
     Route::resource('member', 'api\MembershipsController');
+    Route::resource('memberships', 'api\MembershipsController');
+    Route::resource('board_members_categories', 'api\BoardMembersCategoriesController');
+    Route::resource('board_members', 'api\BoardMembersController');
+    Route::resource('events', 'api\EventsController');
 });
 
 

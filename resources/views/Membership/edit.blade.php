@@ -54,7 +54,7 @@
 				</div>
 					<div class="col-sm-8">
 
-                        <input type="password" name="password" value="<?php echo $data->password; ?>" class="form-control">
+                        <input type="password" name="password" value="<?php //echo $data->password;?>" class="form-control">
 
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 				</div>
 					<div class="col-sm-8">
 
-                        <input type="password" name="password_confirmation" value="<?php echo $data->password; ?>" class="form-control">
+                        <input type="password" name="password_confirmation" value="<?php //echo $data->password;?>" class="form-control">
 
 					</div>
 				</div>
@@ -83,7 +83,8 @@
 				{{ Form::label('active', (Lang::get('memberships.edit_msg').' '.Lang::get('memberships.active')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
-						{{ Form::text('active', $value = $data->active ,array('class' => 'form-control')) }}
+				
+						{!! Form::select('active', $status_items, $data->active, ['class' => 'form-control']) !!}
 					</div>
 				</div>
 

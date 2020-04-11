@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +52,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        return parent::render($request, $exception);
+	  if ($exception instanceof NotFoundHttpException)
+		{
+		return response()->json(['error'=>'not_found','error_message'=>'Please check the URL you submitted'],404);
+		}
+	
+      if($exception instanceof ModelNotFoundException)
+	  {
+        //return redirect("/error_page", 401)->with('error', $e->getMessage());
+		//return response()->json(['error'=>'not_found','error_message'=>$e->getMessage()],401);
+      }
+	
+      return parent::render($request, $exception);
     }
 }
