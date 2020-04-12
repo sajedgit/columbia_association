@@ -19,7 +19,7 @@ class EventsController extends Controller
         }
         public function store(Request $request)
         {
-			 $validator = Validator::make($request->all(), [ 
+			 $validator = Validator::make($request->all(), [
 				'event_title' => 'required',
 				'event_details' => 'required',
 				'event_venue' => 'required',
@@ -30,14 +30,15 @@ class EventsController extends Controller
 				'event_starting_date' => 'required',
 				'event_ending_date' => 'required',
 			]);
-			
-			if ($validator->fails()) { 
-				return response()->json(['error'=>$validator->errors()], 401);            
+
+			if ($validator->fails()) {
+				return response()->json(['error'=>$validator->errors()], 401);
 			}
-			$input = $request->all();  
-			$input['active'] = 0; 
+			$input = $request->all();
+			$input['active'] = 0;
+			$input['event_created_datetime'] = date("Y-m-d");
 			$result = Event::create($input);
-		 
+
 			 if ($result)
 				return response()->json([
 					'success' => true,
@@ -48,13 +49,13 @@ class EventsController extends Controller
 					'success' => false,
 					'message' => 'Item could not be added'
 				], 500);
-				
+
             return response()->json($result, 201);
-			
+
         }
         public function show($id)
         {
-            $result = Event::find($id); 
+            $result = Event::find($id);
 			if (!$result)
 				{
 					return response()->json([
@@ -62,28 +63,28 @@ class EventsController extends Controller
 						'message' => 'Item with id ' . $id . ' not found'
 					], 400);
 				}
- 
+
 			return response()->json([
 				'success' => true,
 				'data' => $result
 			], 400);
-		
+
         }
-		
+
         public function update(Request $request, $id)
         {
-         $result = Event::find($id);			
-			 if (!$result) 
+         $result = Event::find($id);
+			 if (!$result)
 			 {
 				return response()->json([
 				'success' => false,
 				'message' => 'Item with id ' . $id . ' not found'
 				], 400);
 			 }
-		
-			
-			$result->update($request->all()); 
-			
+
+
+			$result->update($request->all());
+
 			if ($result)
 				return response()->json([
 					'success' => true,
@@ -94,22 +95,22 @@ class EventsController extends Controller
 					'success' => false,
 					'message' => 'Item could not be updated'
 				], 500);
-		
-        }
-		
 
-		
+        }
+
+
+
         public function destroy($id)
         {
            $result = Event::find($id);
- 
+
 			if (!$result) {
 				return response()->json([
 					'success' => false,
 					'message' => 'Item with id ' . $id . ' not found'
 				], 400);
 			}
-	 
+
 			if ($result->delete()) {
 				return response()->json([
 					'success' => true
