@@ -25,7 +25,7 @@ class BoardMembersCategoriesController extends Controller
 			]);
 			
 			if ($validator->fails()) { 
-				return response()->json(['error'=>$validator->errors()], 401);            
+				return response()->json(['error'=>$validator->errors()]);            
 			}
 			$input = $request->all();   
 			$result = BoardMembersCategory::create($input);
@@ -39,7 +39,7 @@ class BoardMembersCategoriesController extends Controller
 				return response()->json([
 					'success' => false,
 					'message' => 'Item could not be added'
-				], 500);
+				]);
 				
             return response()->json($result, 201);
 			
@@ -52,13 +52,13 @@ class BoardMembersCategoriesController extends Controller
 					return response()->json([
 						'success' => false,
 						'message' => 'Item with id ' . $id . ' not found'
-					], 400);
+					]);
 				}
  
 			return response()->json([
 				'success' => true,
 				'data' => $result
-			], 400);
+			]);
 		
         }
 		
@@ -70,7 +70,7 @@ class BoardMembersCategoriesController extends Controller
 				return response()->json([
 				'success' => false,
 				'message' => 'Item with id ' . $id . ' not found'
-				], 400);
+				]);
 			 }
 		
 			
@@ -85,7 +85,7 @@ class BoardMembersCategoriesController extends Controller
 				return response()->json([
 					'success' => false,
 					'message' => 'Item could not be updated'
-				], 500);
+				]);
 		
         }
 		
@@ -99,7 +99,7 @@ class BoardMembersCategoriesController extends Controller
 				return response()->json([
 					'success' => false,
 					'message' => 'Item with id ' . $id . ' not found'
-				], 400);
+				]);
 			}
 	 
 			if ($result->delete()) {
@@ -110,7 +110,7 @@ class BoardMembersCategoriesController extends Controller
 				return response()->json([
 					'success' => false,
 					'message' => 'Item could not be deleted'
-				], 500);
+				]);
 			}
         }
 }

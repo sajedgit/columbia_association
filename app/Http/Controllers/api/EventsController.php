@@ -32,7 +32,7 @@ class EventsController extends Controller
 			]);
 
 			if ($validator->fails()) {
-				return response()->json(['error'=>$validator->errors()], 401);
+				return response()->json(['error'=>$validator->errors()]);
 			}
 			$input = $request->all();
 			$input['active'] = 0;
@@ -48,7 +48,7 @@ class EventsController extends Controller
 				return response()->json([
 					'success' => false,
 					'message' => 'Item could not be added'
-				], 500);
+				]);
 
             return response()->json($result, 201);
 
@@ -61,13 +61,13 @@ class EventsController extends Controller
 					return response()->json([
 						'success' => false,
 						'message' => 'Item with id ' . $id . ' not found'
-					], 400);
+					]);
 				}
 
 			return response()->json([
 				'success' => true,
 				'data' => $result
-			], 400);
+			]);
 
         }
 
@@ -79,7 +79,7 @@ class EventsController extends Controller
 				return response()->json([
 				'success' => false,
 				'message' => 'Item with id ' . $id . ' not found'
-				], 400);
+				]);
 			 }
 
 
@@ -94,7 +94,7 @@ class EventsController extends Controller
 				return response()->json([
 					'success' => false,
 					'message' => 'Item could not be updated'
-				], 500);
+				]);
 
         }
 
@@ -108,7 +108,7 @@ class EventsController extends Controller
 				return response()->json([
 					'success' => false,
 					'message' => 'Item with id ' . $id . ' not found'
-				], 400);
+				]);
 			}
 
 			if ($result->delete()) {
@@ -119,7 +119,7 @@ class EventsController extends Controller
 				return response()->json([
 					'success' => false,
 					'message' => 'Item could not be deleted'
-				], 500);
+				]);
 			}
         }
 }
