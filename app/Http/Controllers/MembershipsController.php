@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 class MembershipsController extends Controller
 {
-	
+
 	public function __construct()
     {
         $this->middleware('auth');
     }
-	
+
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +19,11 @@ class MembershipsController extends Controller
      */
     public function index()
     {
-        $data = Membership::orderBy('id', 'desc')->paginate(5);
-        return view('Membership/index', compact('data'))
-                ->with('i', (request()->input('page', 1) - 1) * 5);
+        $data = Membership::where('user_type_id', '<>',1)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('Membership/index', compact('data'));
     }
 
     /**
@@ -43,12 +45,12 @@ class MembershipsController extends Controller
      */
     public function store(Request $request)
     {
-		
+
         $request->validate([
             'name'    =>  'required',
             'username'     =>  'required',
             'password'     =>  'min:6|required',
-			'password_confirmation' => 'min:6|same:password',	
+			'password_confirmation' => 'min:6|same:password',
             'email'     =>  'required',
             'active'         =>  'required'
         ]);
@@ -113,7 +115,7 @@ class MembershipsController extends Controller
 			'email'     =>  'required',
 			'active'         =>  'required'
 		]);
-		
+
 		$messages = [
 				'password_confirmation.same' => 'Password Confirmation should match the Password',
 			];
@@ -124,7 +126,7 @@ class MembershipsController extends Controller
             'password'        =>   bcrypt($request->password),
             'email'        =>   $request->email,
             'user_type_id'        =>  2,
-            'active'        =>   $request->active, 
+            'active'        =>   $request->active,
             'updated_at'        =>   date("Y-m-d")
         );
 

@@ -33,7 +33,6 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('events', 'api\EventsController');
 });
 
-Route::resource('events', 'api\EventsController');
 
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('config:cache');

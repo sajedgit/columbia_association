@@ -85,6 +85,6 @@
         <!-- /.container-fluid -->
 
 
-{!! $data->links() !!}
+
 @endsection
 
