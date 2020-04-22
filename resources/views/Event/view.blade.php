@@ -38,7 +38,7 @@
 		</tr>
 		<tr>
 			<td>{{ __('events.event_flyer_location') }}
-            <td><img   src="{{ asset('/images/'.$data->event_flyer_location) }}"></td>
+            <td><img   src="{{ asset($data->event_flyer_location) }}"></td>
 
 		</tr>
 		<tr>

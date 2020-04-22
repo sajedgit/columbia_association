@@ -63,7 +63,7 @@
 
         <div class="col-sm-8">
             {{ Form::file('event_flyer_location', array('class' => 'form-control')) }}
-            <img src="{{ URL::to('/') }}/images/{{ $data->event_flyer_location }}" class="img-thumbnail" width="100"/>
+            <img src="{{ asset($data->event_flyer_location) }}" class="img-thumbnail" width="100"/>
             <input type="hidden" name="hidden_image" value="{{ $data->event_flyer_location }}"/>
 
         </div>
