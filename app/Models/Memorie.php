@@ -13,8 +13,14 @@ class Memorie extends Model
     public $timestamps=false;
 
     protected $fillable = [
-      'memories_name','memories_details','memories_created_date_time','memories_editing_datetime','memories_active'
+      'memories_name','memories_details','memories_thumb','memories_created_date_time','memories_editing_datetime','memories_active'
     ];
+
+    public function getMemoriesThumbAttribute()
+    {
+        return  "images/".$this->attributes['memories_thumb'];
+    }
+
 }
 
 

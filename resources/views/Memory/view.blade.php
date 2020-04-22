@@ -11,7 +11,7 @@
   <a href="{{ route('memories.index') }}" class="btn btn-default">Back</a>
  </div>
  <br />
- 
+
  <table class="table table-striped">
         <thead >
         <tr class="info">
@@ -24,27 +24,34 @@
 		<tr>
 			<td>{{ __('memories.memories_name') }}
  			<td>{{ $data->memories_name }} </td>
- 
+
 		</tr>
 		<tr>
 			<td>{{ __('memories.memories_details') }}
  			<td>{{ $data->memories_details }} </td>
- 
+
 		</tr>
+
+        <tr>
+            <td>{{ __('memories.memories_thumb') }}
+            <td><img  src="{{ asset($data->memories_thumb) }}"> </td>
+
+        </tr>
+
 		<tr>
 			<td>{{ __('memories.memories_created_date_time') }}
  			<td>{{ $data->memories_created_date_time }} </td>
- 
+
 		</tr>
 		<tr>
 			<td>{{ __('memories.memories_editing_datetime') }}
  			<td>{{ $data->memories_editing_datetime }} </td>
- 
+
 		</tr>
 		<tr>
 			<td>{{ __('memories.memories_active') }}
  			<td>{{ $data->memories_active }} </td>
- 
+
 		</tr>
 		</tbody>
 </table>

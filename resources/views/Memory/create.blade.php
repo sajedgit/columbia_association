@@ -21,7 +21,7 @@
     </div>
 
 
-    {{ Form::open([ 'method'  => 'post','class'  => 'col-sm-6', 'route' => [ 'memories.store' ]  ]) }}
+    {{ Form::open([ 'method'  => 'post','class'  => 'col-sm-6','files'=>'true', 'route' => [ 'memories.store' ]  ]) }}
 
     @csrf
 
@@ -43,13 +43,21 @@
         </div>
     </div>
 
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3 mb-sm-0">
+            {{ Form::label('memories_thumb', (Lang::get('memories.upload_msg').' '.Lang::get('memories.memories_thumb')),array('class'=>'control-label')) }}
+        </div>
+        <div class="col-sm-8">
+          {{ Form::file('memories_thumb',array('class'=>'form-control')) }}
+        </div>
+    </div>
 
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
             {{ Form::label('memories_active', (Lang::get('memories.enter_msg').' '.Lang::get('memories.memories_active')),array('class'=>'control-label')) }}
         </div>
         <div class="col-sm-8">
-            {{ Form::text('memories_active', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('memories.memories_active'))) }}
+            {!! Form::select('memories_active', $status_items,'Select', ['class' => 'form-control']) !!}
         </div>
     </div>
 

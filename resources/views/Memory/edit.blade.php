@@ -22,7 +22,7 @@
     <br/>
 
 
-    {{ Form::open([ 'method'  => 'post','class'  => 'col-sm-6', 'route' => [ 'memories.update', $data->id ] ]) }}
+    {{ Form::open([ 'method'  => 'post','class'  => 'col-sm-6','files'=>'true', 'route' => [ 'memories.update', $data->id ] ]) }}
 
     @csrf
     @method('PATCH')
@@ -48,6 +48,18 @@
     </div>
 
 
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3 mb-sm-0">
+            {{ Form::label('memories_thumb', (Lang::get('memories.upload_msg').' '.Lang::get('memories.memories_thumb')),array('class'=>'control-label')) }}
+        </div>
+
+        <div class="col-sm-8">
+            {{ Form::file('memories_thumb', array('class' => 'form-control')) }}
+            <img src="{{ asset($data->memories_thumb) }}" class="img-thumbnail" width="100" />
+            <input type="hidden" name="hidden_image" value="{{ $data->memories_thumb }}" />
+
+        </div>
+    </div>
 
 
     <div class="form-group row">

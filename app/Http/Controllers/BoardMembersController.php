@@ -8,12 +8,12 @@ use DB;
 
 class BoardMembersController extends Controller
 {
-	
+
 	public function __construct()
     {
         $this->middleware('auth');
     }
-	
+
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +57,7 @@ class BoardMembersController extends Controller
             'ref_board_members_category_id'    =>  'required',
             'board_members_first_name'     =>  'required',
             'board_members_last_name'     =>  'required',
-            'board_members_image_location'     =>  'required|image|max:2048',
+            'board_members_image_location'     => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'board_members_email_address'     =>  'required|email',
             'board_members_first_name'     =>  'required'
         ]);
@@ -126,7 +126,7 @@ class BoardMembersController extends Controller
                 'ref_board_members_category_id'    =>  'required',
                 'board_members_first_name'     =>  'required',
                 'board_members_last_name'     =>  'required',
-                'board_members_image_location'     =>  'required|image|max:2048',
+                'board_members_image_location'     =>  'required|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'board_members_email_address'     =>  'required|email',
                 'board_members_first_name'     =>  'required'
             ]);
