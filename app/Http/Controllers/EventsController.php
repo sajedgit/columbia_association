@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
-	
+
 	public function __construct()
     {
         $this->middleware('auth');
     }
-	
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +31,8 @@ class EventsController extends Controller
      */
     public function create()
     {
-        return view('Event/create');
+        $status_items=$this->getStatusItem();
+        return view('Event/create', compact('status_items'));
     }
 
     /**
@@ -45,27 +46,27 @@ class EventsController extends Controller
         $request->validate([
             'event_title'    =>  'required',
             'event_venue'     =>  'required',
-            'event_flyer_location'    =>  'required',
-            'event_flyer_type'     =>  'required',
-//            'event_starting_date'    =>  'required',
-//            'event_starting_time'     =>  'required',
-//            'event_ending_date'    =>  'required',
-//            'event_ending_time'     =>  'required',
+            'event_flyer_location'    =>  'required|image|max:2048',
             'event_ticket_price'    =>  'required',
             'event_total_seat'     =>  'required'
 
         ]);
 
+        $image = $request->file('event_flyer_location');
+
+        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $new_name);
+        $event_flyer_type="image";
 
         $form_data = array(
             'event_title'       =>   $request->event_title,
             'event_details'       =>   $request->event_details,
             'event_venue'        =>   $request->event_venue,
-            'event_flyer_location'        =>   $request->event_flyer_location,
-            'event_flyer_type'        =>   $request->event_flyer_type,
+            'event_flyer_location'        =>   $new_name,
+            'event_flyer_type'        =>   $event_flyer_type,
             'event_starting_date'        =>   $request->event_starting_date,
             'event_starting_time'        =>   $request->event_starting_time,
-            'event_ending_date'        =>   $request->event_ending_date,
+            'event_ending_date'        =>   $request->event_starting_date,
             'event_ending_time'        =>   $request->event_ending_time,
             'event_ticket_price'        =>   $request->event_ticket_price,
             'event_total_seat'        =>   $request->event_total_seat,
@@ -98,7 +99,8 @@ class EventsController extends Controller
     public function edit($id)
     {
         $data = Event::findOrFail($id);
-        return view('Event/edit', compact('data'));
+        $status_items=$this->getStatusItem();
+        return view('Event/edit', compact('data','status_items'));
     }
 
     /**
@@ -110,30 +112,46 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'event_title'    =>  'required',
-            'event_venue'     =>  'required',
-            'event_flyer_location'    =>  'required',
-            'event_flyer_type'     =>  'required',
-//            'event_starting_date'    =>  'required',
-//            'event_starting_time'     =>  'required',
-//            'event_ending_date'    =>  'required',
-//            'event_ending_time'     =>  'required',
-            'event_ticket_price'    =>  'required',
-            'event_total_seat'     =>  'required'
+        $image_name = $request->hidden_image;
+        $image = $request->file('event_flyer_location');
+        $event_flyer_type="image";
+        if($image != '')
+        {
+            $request->validate([
+                'event_title'    =>  'required',
+                'event_venue'     =>  'required',
+                'event_flyer_location'    =>  'required|image|max:2048',
+                'event_ticket_price'    =>  'required',
+                'event_total_seat'     =>  'required'
 
-        ]);
+            ]);
+
+            $image_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $image_name);
+
+        }
+        else
+        {
+            $request->validate([
+                'event_title'    =>  'required',
+                'event_venue'     =>  'required',
+                'event_ticket_price'    =>  'required',
+                'event_total_seat'     =>  'required'
+
+            ]);
+        }
+
 
 
         $form_data = array(
             'event_title'       =>   $request->event_title,
             'event_details'       =>   $request->event_details,
             'event_venue'        =>   $request->event_venue,
-            'event_flyer_location'        =>   $request->event_flyer_location,
-            'event_flyer_type'        =>   $request->event_flyer_type,
+            'event_flyer_location'        =>   $image_name,
+            'event_flyer_type'        =>   $event_flyer_type,
             'event_starting_date'        =>   $request->event_starting_date,
             'event_starting_time'        =>   $request->event_starting_time,
-            'event_ending_date'        =>   $request->event_ending_date,
+            'event_ending_date'        =>   $request->event_starting_date,
             'event_ending_time'        =>   $request->event_ending_time,
             'event_ticket_price'        =>   $request->event_ticket_price,
             'event_total_seat'        =>   $request->event_total_seat,

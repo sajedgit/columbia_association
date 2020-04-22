@@ -21,7 +21,7 @@
     </div>
 
 
-    {{ Form::open([ 'method'  => 'post','class'  => 'col-sm-6', 'route' => [ 'events.store' ]  ]) }}
+    {{ Form::open([ 'method'  => 'post','class'  => 'col-sm-6','files'=>'true', 'route' => [ 'events.store' ]  ]) }}
 
     @csrf
 
@@ -52,20 +52,13 @@
     </div>
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
-            {{ Form::label('event_flyer_location', (Lang::get('events.enter_msg').' '.Lang::get('events.event_flyer_location')),array('class'=>'control-label')) }}
+            {{ Form::label('event_flyer_location', (' Upload '.Lang::get('events.event_flyer_location')),array('class'=>'control-label')) }}
         </div>
         <div class="col-sm-8">
-            {{ Form::text('event_flyer_location', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('events.event_flyer_location'))) }}
+            {{ Form::file('event_flyer_location', array('class' => 'form-control')) }}
         </div>
     </div>
-    <div class="form-group row">
-        <div class="col-sm-4 mb-3 mb-sm-0">
-            {{ Form::label('event_flyer_type', (Lang::get('events.enter_msg').' '.Lang::get('events.event_flyer_type')),array('class'=>'control-label')) }}
-        </div>
-        <div class="col-sm-8">
-            {{ Form::text('event_flyer_type', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('events.event_flyer_type'))) }}
-        </div>
-    </div>
+
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
             {{ Form::label('event_starting_date', (Lang::get('events.enter_msg').' '.Lang::get('events.event_starting_date')),array('class'=>'control-label')) }}
@@ -82,14 +75,7 @@
             {{ Form::text('event_starting_time', $value = null ,array('id'=>'timepicker1','class' => 'form-control','placeholder'=>Lang::get('events.event_starting_time'))) }}
         </div>
     </div>
-    <div class="form-group row">
-        <div class="col-sm-4 mb-3 mb-sm-0">
-            {{ Form::label('event_ending_date', (Lang::get('events.enter_msg').' '.Lang::get('events.event_ending_date')),array('class'=>'control-label')) }}
-        </div>
-        <div class="col-sm-8">
-            {{ Form::text('event_ending_date', $value = null ,array('id'=>'datepicker2','class' => 'form-control','placeholder'=>Lang::get('events.event_ending_date'))) }}
-        </div>
-    </div>
+
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
             {{ Form::label('event_ending_time', (Lang::get('events.enter_msg').' '.Lang::get('events.event_ending_time')),array('class'=>'control-label')) }}
@@ -119,7 +105,7 @@
             {{ Form::label('event_active', (Lang::get('events.enter_msg').' '.Lang::get('events.event_active')),array('class'=>'control-label')) }}
         </div>
         <div class="col-sm-8">
-            {{ Form::text('event_active', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('events.event_active'))) }}
+            {!! Form::select('event_active', $status_items,'Select', ['class' => 'form-control']) !!}
         </div>
     </div>
 

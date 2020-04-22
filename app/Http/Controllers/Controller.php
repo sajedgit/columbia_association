@@ -10,4 +10,12 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected  function getStatusItem()
+    {
+        $status_items=array('Select'=>'Select','1'=>'Active','0'=>'Inactive');
+        return $status_items;
+
+    }
+
 }
