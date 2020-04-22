@@ -11,7 +11,14 @@ class EventsController extends Controller
 {
     public function index()
     {
-        $results = Event::orderBy('id', 'desc')->get();
+//        $results = Event::orderBy('id', 'desc')->get();
+//        $collection = collect($results);
+//        $results = $collection->groupBy('event_starting_date');
+
+        $results = Event::with('event_ticket_buyers','event_ticket_payments')
+            ->orderBy('id', 'desc')
+            ->get();
+
         $collection = collect($results);
         $results = $collection->groupBy('event_starting_date');
 

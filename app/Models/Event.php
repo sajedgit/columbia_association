@@ -18,7 +18,15 @@ class Event extends Model
 		protected $hidden = ['password', 'remember_token', 'event_ending_date'];
 
 
+    public function event_ticket_buyers()
+    {
+        return $this->hasMany('App\Models\EventTicketBuyer','ref_event_id');
+    }
 
+    public function event_ticket_payments()
+    {
+        return $this->hasMany('App\Models\EventTicketPayment','ref_event_id');
+    }
 
     public function getEventFlyerLocationAttribute()
     {
