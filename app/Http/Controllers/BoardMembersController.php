@@ -25,7 +25,6 @@ class BoardMembersController extends Controller
 
         $data = DB::table('board_members')
             ->join('board_members_categories', 'board_members_categories.id', '=', 'board_members.ref_board_members_category_id')
-
             ->select('board_members.*', 'board_members_categories.board_members_category_name')
             ->get();
 

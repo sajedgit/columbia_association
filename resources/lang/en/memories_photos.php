@@ -23,7 +23,7 @@ return [
 	'submit_btn_msg' => 'Submit',
 	'update_btn_msg' => 'Update',
 	'id' => 'id',
-	'ref_memories_id' => 'memories_id',
+	'ref_memories_id' => 'Memory Name',
 	'memories_photo_location' => 'photo location',
 	'memories_photo_uploaded_date_time' => '',
 	'memories_photo_active' => 'Status',

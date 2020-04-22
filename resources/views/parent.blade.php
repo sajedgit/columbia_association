@@ -202,10 +202,10 @@
 						<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
 					</li>
 				@endif
-				
-				
+
+
 			 @else
-			
+
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
@@ -226,8 +226,8 @@
               </div>
             </li>
 			@endguest
-			
-			
+
+
 
           </ul>
 
@@ -281,11 +281,11 @@
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
           <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" >Logout</a>
-		  
+
 		   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 				@csrf
 			</form>
-		  
+
         </div>
       </div>
     </div>
@@ -311,9 +311,7 @@
   <!-- For datetime picker-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
   <script src="http://www.jonthornton.com/jquery-timepicker/jquery.timepicker.js"></script>
-
 
   <script>
       $( function() {
@@ -322,8 +320,6 @@
           $( "#datepicker3" ).datepicker({ dateFormat: 'yy-mm-dd' });
           $( "#datepicker4" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
-
-
           $('#basicExample').timepicker({ 'timeFormat': 'H:i:s' });
           $('#timepicker1').timepicker({ 'timeFormat': 'H:i:s' });
           $('#timepicker2').timepicker({ 'timeFormat': 'H:i:s' });
@@ -331,9 +327,38 @@
           $('#timepicker4').timepicker({ 'timeFormat': 'H:i:s' });
       } );
 
-
-
   </script>
+
+
+
+  <script src="http://malsup.github.com/jquery.form.js"></script>
+  <script>
+      $(document).ready(function(){
+          $('form').ajaxForm({
+              beforeSend:function(){
+                  $('#success').empty();
+                  $('.progress-bar').text('0%');
+                  $('.progress-bar').css('width', '0%');
+              },
+              uploadProgress:function(event, position, total, percentComplete){
+                  $('.progress-bar').text(percentComplete + '0%');
+                  $('.progress-bar').css('width', percentComplete + '0%');
+              },
+              success:function(data)
+              {
+                  if(data.success)
+                  {
+                      $('#success').html('<div class="text-success text-center col-md-12"><h3 class="text-center">'+data.success+'</h3></div>');
+                      $('#success').append(data.image);
+                      $('.progress-bar').text('Uploaded');
+                      $('.progress-bar').css('width', '100%');
+                  }
+              }
+          });
+      });
+  </script>
+
+
 
 </body>
 

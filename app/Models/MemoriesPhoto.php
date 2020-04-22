@@ -15,5 +15,10 @@ class MemoriesPhoto extends Model
 	   protected $fillable = [
       'ref_memories_id','memories_photo_location','memories_photo_uploaded_date_time','memories_photo_active'
     ];
+
+    public function getMemoriesPhotoLocationAttribute()
+    {
+        return  "images/memory/".$this->attributes['memories_photo_location'];
+    }
 }
 

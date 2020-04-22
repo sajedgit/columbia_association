@@ -1,17 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\MemoriesPhoto;
+use App\Models\Memorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MemoriesPhotosController extends Controller
 {
-	
-	public function __construct()
+
+    public function __construct()
     {
         $this->middleware('auth');
     }
-	
+
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +22,13 @@ class MemoriesPhotosController extends Controller
      */
     public function index()
     {
-        $data = MemoriesPhoto::orderBy('id', 'desc')->paginate(5); 
-        return view('MemoriesPhoto/index', compact('data'))
-                ->with('i', (request()->input('page', 1) - 1) * 5);
+
+        $data = DB::table('memories_photos')
+            ->join('memories', 'memories.id', '=', 'memories_photos.ref_memories_id')
+            ->select('memories_photos.*', 'memories.memories_name')
+            ->get();
+
+        return view('MemoriesPhoto/index', compact('data'));
     }
 
     /**
@@ -31,54 +38,71 @@ class MemoriesPhotosController extends Controller
      */
     public function create()
     {
-        return view('MemoriesPhoto/create');
+        $items = Memorie::pluck('memories_name', 'id');
+        $items->prepend('Please Select', '');
+        return view('MemoriesPhoto/create', compact('items'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'first_name'    =>  'required',
-            'last_name'     =>  'required',
-            'image'         =>  'required|image|max:2048'
-        ]);
+        $image_code = '';
+        $images = $request->file('file');
+        $ref_memories_id = $request->ref_memories_id;
 
-        $image = $request->file('image');
+        foreach ($images as $image) {
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/memory'), $new_name);
+            $image_code .= '<div class="col-md-3" style="margin-bottom:24px;"><img src="/images/memory/' . $new_name . '" class="img-thumbnail" /></div>';
+            $this->image_upload($ref_memories_id,$new_name);
+        }
 
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
-        $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $new_name
+        $output = array(
+            'success' => 'Images uploaded successfully',
+            'image' => $image_code
         );
 
-        MemoriesPhoto::create($form_data);
-
-        return redirect('MemoriesPhoto/index')->with('success', 'Data Added successfully.');
+        return response()->json($output);
     }
+
+    public function image_upload($ref_memories_id,$new_name)
+    {
+        $form_data = array(
+            'ref_memories_id' => $ref_memories_id,
+            'memories_photo_location' => $new_name,
+            'memories_photo_uploaded_date_time' => date('Y-m-d'),
+            'memories_photo_active' => 1
+        );
+        MemoriesPhoto::create($form_data);
+    }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $data = MemoriesPhoto::findOrFail($id);
+//        $data = DB::table('memories_photos')
+//            ->join('memories', 'memories.id', '=', 'memories_photos.ref_memories_id')
+//            ->select('memories_photos.*', 'memories.memories_name')
+//            ->where('memories_photos.id',$id)
+//            ->get();
         return view('MemoriesPhoto/view', compact('data'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -90,39 +114,36 @@ class MemoriesPhotosController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $image_name = $request->hidden_image;
         $image = $request->file('image');
-        if($image != '')
-        {
+        if ($image != '') {
             $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required',
-                'image'         =>  'image|max:2048'
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'image' => 'image|max:2048'
             ]);
 
             $image_name = rand() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $image_name);
-        }
-        else
-        {
+        } else {
             $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required'
+                'first_name' => 'required',
+                'last_name' => 'required'
             ]);
         }
 
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $image_name
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'image' => $image_name
         );
-  
+
         MemoriesPhoto::whereId($id)->update($form_data);
 
         return redirect('MemoriesPhoto/index')->with('success', 'Data is successfully updated');
@@ -131,7 +152,7 @@ class MemoriesPhotosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -143,5 +164,4 @@ class MemoriesPhotosController extends Controller
     }
 }
 
-	
-	
+
