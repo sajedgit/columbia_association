@@ -1,17 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Memory;
+use App\Models\Memorie;
 use Illuminate\Http\Request;
 
-class MemoriesController extends Controller
+class MemorisController extends Controller
 {
-	
+
 	public function __construct()
     {
         $this->middleware('auth');
     }
-	
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +19,7 @@ class MemoriesController extends Controller
      */
     public function index()
     {
-        $data = Memory::orderBy('id', 'desc')->paginate(5);
+        $data = Memorie::orderBy('id', 'desc')->paginate(5);
         return view('Memory/index', compact('data'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -55,7 +55,7 @@ class MemoriesController extends Controller
             'memories_active'            =>    $request->memories_active,
         );
 
-        Memory::create($form_data);
+        Memorie::create($form_data);
 
         return redirect('memories')->with('success', 'Data Added successfully.');
     }
@@ -68,7 +68,7 @@ class MemoriesController extends Controller
      */
     public function show($id)
     {
-        $data = Memory::findOrFail($id);
+        $data = Memorie::findOrFail($id);
         return view('Memory/view', compact('data'));
     }
 
@@ -80,7 +80,7 @@ class MemoriesController extends Controller
      */
     public function edit($id)
     {
-        $data = Memory::findOrFail($id);
+        $data = Memorie::findOrFail($id);
         return view('Memory/edit', compact('data'));
     }
 
@@ -104,7 +104,7 @@ class MemoriesController extends Controller
             'memories_active'            =>    $request->memories_active,
         );
 
-        Memory::whereId($id)->update($form_data);
+        Memorie::whereId($id)->update($form_data);
 
         return redirect('memories')->with('success', 'Data is successfully updated');
     }
@@ -117,7 +117,7 @@ class MemoriesController extends Controller
      */
     public function destroy($id)
     {
-        $data = Memory::findOrFail($id);
+        $data = Memorie::findOrFail($id);
         $data->delete();
 
         return redirect('memories')->with('success', 'Data is successfully deleted');

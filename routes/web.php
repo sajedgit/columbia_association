@@ -29,7 +29,7 @@ Route::get('/', function () {
 	Route::resource('member_personal_infos','MemberPersonalInfosController');
 	Route::resource('membership_payments','MembershipPaymentsController');
 	Route::resource('memberships','MembershipsController');
-	Route::resource('memories','MemoriesController');
+	Route::resource('memories','MemorisController');
 	Route::resource('memories_photos','MemoriesPhotosController');
 	Route::resource('messages','MessagesController');
 	Route::resource('organize_infos','OrganizeInfosController');
