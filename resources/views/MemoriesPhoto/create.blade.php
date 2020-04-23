@@ -75,3 +75,36 @@
 
 @endsection
 
+
+@push('scripts')
+
+
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('form').ajaxForm({
+                beforeSend:function(){
+                    $('#success').empty();
+                    $('.progress-bar').text('0%');
+                    $('.progress-bar').css('width', '0%');
+                },
+                uploadProgress:function(event, position, total, percentComplete){
+                    $('.progress-bar').text(percentComplete + '0%');
+                    $('.progress-bar').css('width', percentComplete + '0%');
+                },
+                success:function(data)
+                {
+                    if(data.success)
+                    {
+                        $('#success').html('<div class="text-success text-center col-md-12"><h3 class="text-center">'+data.success+'</h3></div>');
+                        $('#success').append(data.image);
+                        $('.progress-bar').text('Uploaded');
+                        $('.progress-bar').css('width', '100%');
+                    }
+                }
+            });
+        });
+    </script>
+@endpush
+
+
