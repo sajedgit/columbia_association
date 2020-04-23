@@ -6,6 +6,7 @@ use App\Models\MemoriesPhoto;
 use App\Models\Memorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use URL;
 
 class MemoriesPhotosController extends Controller
 {
@@ -54,11 +55,12 @@ class MemoriesPhotosController extends Controller
         $image_code = '';
         $images = $request->file('file');
         $ref_memories_id = $request->ref_memories_id;
+		$img_src=URL::to('/public/images/memory/');
 
         foreach ($images as $image) {
             $new_name = rand() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/memory'), $new_name);
-            $image_code .= '<div class="col-md-3" style="margin-bottom:24px;"><img src="/images/memory/' . $new_name . '" class="img-thumbnail" /></div>';
+            $image_code .= '<div class="col-md-3" style="margin-bottom:24px;"><img src=" '.$img_src.'/'.$new_name . '" class="img-thumbnail" /></div>';
             $this->image_upload($ref_memories_id,$new_name);
         }
 
