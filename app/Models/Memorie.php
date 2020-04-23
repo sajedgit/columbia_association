@@ -21,6 +21,11 @@ class Memorie extends Model
         return  "images/".$this->attributes['memories_thumb'];
     }
 
+    public function memory_photo()
+    {
+        return $this->hasMany('App\Models\MemoriesPhoto','ref_memories_id');
+    }
+
 }
 
 
