@@ -33,9 +33,7 @@
                   <thead>
                     <tr>
                         <th>{{ __('messages.message_details') }}</th>
-						 <th>{{ __('messages.message_active') }}</th>
-						 <th>{{ __('messages.message_created_datetime') }}</th>
-						 <th>{{ __('messages.message_edited_datetime') }}</th>
+
 						
                       <th>Action</th> 
                     </tr>
@@ -43,9 +41,7 @@
                   <tfoot>
                     <tr>
                        <th>{{ __('messages.message_details') }}</th>
-						 <th>{{ __('messages.message_active') }}</th>
-						 <th>{{ __('messages.message_created_datetime') }}</th>
-						 <th>{{ __('messages.message_edited_datetime') }}</th>
+
 						
                       <th>Action</th> 
                     </tr>
@@ -55,9 +51,7 @@
                     <tr>
                       
 					    <td>{{ $row->message_details }}</td>
-						 <td>{{ $row->message_active }}</td>
-						 <td>{{ $row->message_created_datetime }}</td>
-						 <td>{{ $row->message_edited_datetime }}</td>
+
 						
 					   
                        <td class="text-center"> 

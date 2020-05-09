@@ -26,21 +26,7 @@
  			<td>{{ $data->message_details }} </td>
  
 		</tr>
-		<tr>
-			<td>{{ __('messages.message_active') }}
- 			<td>{{ $data->message_active }} </td>
- 
-		</tr>
-		<tr>
-			<td>{{ __('messages.message_created_datetime') }}
- 			<td>{{ $data->message_created_datetime }} </td>
- 
-		</tr>
-		<tr>
-			<td>{{ __('messages.message_edited_datetime') }}
- 			<td>{{ $data->message_edited_datetime }} </td>
- 
-		</tr>
+
 		</tbody>
 </table>
 

@@ -22,10 +22,10 @@ return [
 	'submit_btn_msg' => 'Submit',
 	'update_btn_msg' => 'Update',
 	'id' => 'id',
-	'message_details' => 'message_details',
-	'message_active' => 'message_active',
-	'message_created_datetime' => 'message_created_datetime',
-	'message_edited_datetime' => 'message_edited_datetime',
+	'message_details' => 'Message Details',
+	'message_active' => 'Message Active',
+	'message_created_datetime' => 'Message Create Time',
+	'message_edited_datetime' => 'Message Edited Time',
 	
 
 ];

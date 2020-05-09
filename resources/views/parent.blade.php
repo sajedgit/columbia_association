@@ -128,6 +128,20 @@
         </div>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages_msg" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-user-tie"></i>
+          <span>Messages</span>
+        </a>
+        <div id="collapsePages_msg" class="collapse {{ (request()->is('messages*')) ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Messages:</h6>
+            <a class="collapse-item" href="{{ route('messages.index') }}">View All  Messages</a>
+            <a class="collapse-item" href="{{ route('messages.create') }}">Add New  Messages</a>
+          </div>
+        </div>
+      </li>
+
 
 
       <!-- Divider -->

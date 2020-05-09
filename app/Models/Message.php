@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 NAME : Sajed Ahmed
 EMAIL ADDRESS: sajedaiub@gmail.com
@@ -10,9 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-	
-	   protected $fillable = [
-      'message_details','message_active','message_created_datetime','message_edited_datetime'
+    public $timestamps = false;
+
+    protected $fillable = [
+        'message_details', 'message_active', 'message_created_datetime', 'message_edited_datetime'
     ];
 }
 
