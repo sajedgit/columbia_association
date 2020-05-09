@@ -30,9 +30,10 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('board_members', 'api\BoardMembersController');
     Route::resource('events', 'api\EventsController');
     Route::resource('memories','api\MemorisController');
+    Route::resource('sponsors', 'api\SponsorsController');
 });
 
-
+Route::resource('messages', 'api\MessagesController');
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('config:cache');
     return 'DONE'; //Return anything
