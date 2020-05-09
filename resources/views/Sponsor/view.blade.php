@@ -48,24 +48,11 @@
 		</tr>
 		<tr>
 			<td>{{ __('sponsors.sponsor_logo_photo') }}
- 			<td>{{ $data->sponsor_logo_photo }} </td>
+ 			<td> <img src="{{ asset('/public/images/sponsor/'.$data->sponsor_logo_photo) }}" > </td>
  
 		</tr>
-		<tr>
-			<td>{{ __('sponsors.sponsor_position') }}
- 			<td>{{ $data->sponsor_position }} </td>
- 
-		</tr>
-		<tr>
-			<td>{{ __('sponsors.sponsor_created_datetime') }}
- 			<td>{{ $data->sponsor_created_datetime }} </td>
- 
-		</tr>
-		<tr>
-			<td>{{ __('sponsors.sponsor_edited_date_time') }}
- 			<td>{{ $data->sponsor_edited_date_time }} </td>
- 
-		</tr>
+
+
 		</tbody>
 </table>
 

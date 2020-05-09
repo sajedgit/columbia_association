@@ -66,10 +66,10 @@
                 @foreach($memories_photo as $item)
                     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="{{ $data[0]->memories_name }}"
-                           data-image="{{ asset('/public/'.$item->memories_photo_location) }}"
+                           data-image="{{ asset($item->memories_photo_location) }}"
                            data-target="#image-gallery">
                             <img class="img-thumbnail"
-                                 src="{{ asset('/public/'.$item->memories_photo_location) }}"
+                                 src="{{ asset($item->memories_photo_location) }}"
                                  alt="{{ $data[0]->memories_name }}">
                         </a>
                     </div>

@@ -32,9 +32,6 @@ Route::resource('memberships', 'MembershipsController');
 Route::resource('memories', 'MemorisController');
 Route::get('memories_photos_add', 'MemoriesPhotosController@add');
 Route::resource('memories_photos', 'MemoriesPhotosController');
-
-
-
 Route::resource('messages', 'MessagesController');
 Route::resource('organize_infos', 'OrganizeInfosController');
 Route::resource('sponsors', 'SponsorsController');

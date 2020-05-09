@@ -16,9 +16,9 @@ class MemoriesPhoto extends Model
       'ref_memories_id','memories_photo_location','memories_photo_uploaded_date_time','memories_photo_active'
     ];
 
-    public function getMemoriesPhotoLocationAttribute()
-    {
-        return  "images/memory/".$this->attributes['memories_photo_location'];
-    }
+//    public function getMemoriesPhotoLocationAttribute()
+//    {
+//        return  "images/memory/".$this->attributes['memories_photo_location'];
+//    }
 }
 

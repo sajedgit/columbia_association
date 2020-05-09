@@ -16,10 +16,10 @@ class Memorie extends Model
       'memories_name','memories_details','memories_thumb','memories_created_date_time','memories_editing_datetime','memories_active'
     ];
 
-    public function getMemoriesThumbAttribute()
-    {
-        return  "images/".$this->attributes['memories_thumb'];
-    }
+//    public function getMemoriesThumbAttribute()
+//    {
+//        //return  "public/images/memory/".$this->attributes['memories_thumb'];
+//    }
 
     public function memory_photo()
     {

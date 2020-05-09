@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Memorie;
 use Illuminate\Http\Request;
+use File;
 
 class MemorisController extends Controller
 {
@@ -51,8 +52,8 @@ class MemorisController extends Controller
         ]);
 
         $image = $request->file('memories_thumb');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+        $new_name ='public/images/memory/'. rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images/memory'), $new_name);
 
         $form_data = array(
             'memories_name' => $request->memories_name,
@@ -106,6 +107,7 @@ class MemorisController extends Controller
     public function update(Request $request, $id)
     {
         $image_name = $request->hidden_image;
+        $image_old = $request->hidden_image;
         $image = $request->file('memories_thumb');
 
         if ($image != '') {
@@ -115,8 +117,9 @@ class MemorisController extends Controller
                 'memories_thumb' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
 
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_name);
+            $image_name ='public/images/memory/'. rand() . '.' . $image->getClientOriginalExtension();
+            $file_uplaod=$image->move(public_path('images/memory'), $image_name);
+
 
         } else {
 
@@ -148,6 +151,8 @@ class MemorisController extends Controller
     {
         $data = Memorie::findOrFail($id);
         $data->delete();
+
+
 
         return redirect('memories')->with('success', 'Data is successfully deleted');
     }

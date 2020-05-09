@@ -1,17 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use File;
 
 class SponsorsController extends Controller
 {
-	
-	public function __construct()
+
+    public function __construct()
     {
         $this->middleware('auth');
     }
-	
+
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +21,9 @@ class SponsorsController extends Controller
      */
     public function index()
     {
-        $data = Sponsor::orderBy('id', 'desc')->paginate(5); 
+        $data = Sponsor::orderBy('id', 'desc')->paginate(5);
         return view('Sponsor/index', compact('data'))
-                ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -37,36 +39,43 @@ class SponsorsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
-            'first_name'    =>  'required',
-            'last_name'     =>  'required',
-            'image'         =>  'required|image|max:2048'
+            'sponsor_name' => 'required',
+            'sponsor_details' => 'required',
+            'sponsor_address' => 'required',
+            'sponsor_email' => 'required|email',
+            'sponsor_website' => 'required|active_url',
+            'sponsor_logo_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $image = $request->file('image');
-
+        $image = $request->file('sponsor_logo_photo');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
+        $image->move(public_path('images/sponsor'), $new_name);
+
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $new_name
+            'sponsor_name' => $request->sponsor_name,
+            'sponsor_details' => $request->sponsor_details,
+            'sponsor_address' => $request->sponsor_address,
+            'sponsor_email' => $request->sponsor_email,
+            'sponsor_website' => $request->sponsor_website,
+            'sponsor_logo_photo' => $new_name,
+            'sponsor_created_datetime' => date("Y-m-d H:i:s")
         );
 
         Sponsor::create($form_data);
 
-        return redirect('Sponsor/index')->with('success', 'Data Added successfully.');
+        return redirect('sponsors')->with('success', 'Data Added successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -78,7 +87,7 @@ class SponsorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -90,56 +99,74 @@ class SponsorsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $image_name = $request->hidden_image;
-        $image = $request->file('image');
-        if($image != '')
-        {
+        $image_old = $request->hidden_image;
+        $image = $request->file('sponsor_logo_photo');
+
+        if ($image != '') {
+
             $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required',
-                'image'         =>  'image|max:2048'
+                'sponsor_name' => 'required',
+                'sponsor_details' => 'required',
+                'sponsor_address' => 'required',
+                'sponsor_email' => 'required|email',
+                'sponsor_website' => 'required|active_url'
             ]);
 
             $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_name);
-        }
-        else
-        {
+            $file_uplaod=$image->move(public_path('images/sponsor'), $image_name);
+            if($file_uplaod)
+              File::delete(public_path('images/sponsor/'.$image_old));
+            else
+                echo "Error in file uploading";
+
+
+
+        } else {
+
             $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required'
+                'sponsor_name' => 'required',
+                'sponsor_details' => 'required',
+                'sponsor_address' => 'required',
+                'sponsor_email' => 'required|email',
+                'sponsor_website' => 'required|active_url'
             ]);
         }
 
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $image_name
+            'sponsor_name' => $request->sponsor_name,
+            'sponsor_details' => $request->sponsor_details,
+            'sponsor_address' => $request->sponsor_address,
+            'sponsor_email' => $request->sponsor_email,
+            'sponsor_website' => $request->sponsor_website,
+            'sponsor_logo_photo' => $image_name,
+            'sponsor_edited_date_time' => date("Y-m-d H:i:s")
         );
-  
+
         Sponsor::whereId($id)->update($form_data);
 
-        return redirect('Sponsor/index')->with('success', 'Data is successfully updated');
+        return redirect('sponsors')->with('success', 'Data is successfully updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $data = Sponsor::findOrFail($id);
         $data->delete();
+        File::delete(public_path('images/sponsor/'.$data->sponsor_logo_photo));
 
-        return redirect('Sponsor/index')->with('success', 'Data is successfully deleted');
+        return redirect('sponsors')->with('success', 'Data is successfully deleted');
     }
 }
 

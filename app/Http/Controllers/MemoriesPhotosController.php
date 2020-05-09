@@ -64,10 +64,10 @@ class MemoriesPhotosController extends Controller
         $image_code = '';
         $images = $request->file('file');
         $ref_memories_id = $request->ref_memories_id;
-		$img_src=URL::to('/public/images/memory/');
+		$img_src=URL::to('/');
 
         foreach ($images as $image) {
-            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $new_name ='public/images/memory/'. rand() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/memory'), $new_name);
             $image_code .= '<div class="col-md-3" style="margin-bottom:24px;"><img src=" '.$img_src.'/'.$new_name . '" class="img-thumbnail" /></div>';
             $this->image_upload($ref_memories_id,$new_name);
@@ -140,8 +140,8 @@ class MemoriesPhotosController extends Controller
                 'image' => 'image|max:2048'
             ]);
 
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_name);
+            $image_name ='public/images/memory/'.  rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/memory'), $image_name);
         } else {
             $request->validate([
                 'first_name' => 'required',
@@ -171,7 +171,7 @@ class MemoriesPhotosController extends Controller
         $data = MemoriesPhoto::findOrFail($id);
         $data->delete();
 
-        return redirect('MemoriesPhoto/index')->with('success', 'Data is successfully deleted');
+        return redirect('memories_photos')->with('success', 'Data is successfully deleted');
     }
 }
 

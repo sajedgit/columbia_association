@@ -62,14 +62,7 @@
     </div>
 
 
-    <div class="form-group row">
-        <div class="col-sm-4 mb-3 mb-sm-0">
-            {{ Form::label('memories_active', (Lang::get('memories.enter_msg').' '.Lang::get('memories.memories_active')),array('class'=>'control-label')) }}
-        </div>
-        <div class="col-sm-8">
-            {{ Form::text('memories_active', $value = $data->memories_active ,array('class' => 'form-control')) }}
-        </div>
-    </div>
+
 
 
     <br/>

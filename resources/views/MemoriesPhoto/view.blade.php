@@ -23,7 +23,7 @@
         <tbody>
 		<tr>
 			<td>{{ __('memories_photos.ref_memories_id') }}
- 			<td>{{ $data->memories_name }} </td>
+ 			<td>{{ $data->ref_memories_id }} </td>
 
 		</tr>
 		<tr>
@@ -31,16 +31,7 @@
  			<td><img width="200" src="{{ asset($data->memories_photo_location) }} "> </td>
 
 		</tr>
-		<tr>
-			<td>{{ __('memories_photos.memories_photo_uploaded_date_time') }}
- 			<td>{{ $data->memories_photo_uploaded_date_time }} </td>
 
-		</tr>
-		<tr>
-			<td>{{ __('memories_photos.memories_photo_active') }}
- 			<td>{{ $data->memories_photo_active }} </td>
-
-		</tr>
 		</tbody>
 </table>
 

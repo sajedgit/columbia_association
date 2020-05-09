@@ -50,7 +50,7 @@
                             <tr>
 
                                 <td>{{ $row->memories_name }}</td>
-                                <td> <img width="100" src="{{ asset("images/memory/".$row->memories_photo_location) }}"> </td>
+                                <td> <img width="100" src="{{ asset($row->memories_photo_location) }}"> </td>
 
 
                        <td class=" text-center">
