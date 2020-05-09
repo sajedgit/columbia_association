@@ -106,6 +106,7 @@
             <h6 class="collapse-header">Memories:</h6>
             <a class="collapse-item" href="{{ route('memories.index') }}">View All Memories</a>
             <a class="collapse-item" href="{{ route('memories.create') }}">Add New Memories</a>
+            <a class="collapse-item" href="{{ route('memories_photos.create') }}">Add Photo For Memories</a>
           </div>
         </div>
       </li>
