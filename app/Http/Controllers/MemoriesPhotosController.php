@@ -44,6 +44,15 @@ class MemoriesPhotosController extends Controller
         return view('MemoriesPhoto/create', compact('items'));
     }
 
+    public function add(Request $request)
+    {
+        $memory_id = $request->memory_id;
+        $items = Memorie::pluck('memories_name', 'id');
+        //$items->prepend('Please Select', '');
+        return view('MemoriesPhoto/add', compact('items','memory_id'));
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *

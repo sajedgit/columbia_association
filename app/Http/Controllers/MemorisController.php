@@ -46,7 +46,7 @@ class MemorisController extends Controller
     {
 
         $request->validate([
-            'memories_name' => 'required',
+            'memories_name' => 'required|unique:memories',
             'memories_thumb' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -75,8 +75,13 @@ class MemorisController extends Controller
      */
     public function show($id)
     {
-        $data = Memorie::findOrFail($id);
-        return view('Memory/view', compact('data'));
+        //$data = Memorie::findOrFail($id);
+        $data = Memorie::with('memory_photo')
+            ->where('id',$id)
+            ->get();
+        //return response()->json(['success' => true, 'data' => $data]);die();
+        $memories_photo=$data[0]->memory_photo;
+        return view('Memory/view', compact('data','memories_photo'));
     }
 
     /**
@@ -106,7 +111,7 @@ class MemorisController extends Controller
         if ($image != '') {
 
             $request->validate([
-                'memories_name' => 'required',
+                'memories_name' => 'required|unique:memories,memories_name,'.$id,
                 'memories_thumb' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
 
@@ -116,7 +121,7 @@ class MemorisController extends Controller
         } else {
 
             $request->validate([
-                'memories_name' => 'required'
+                'memories_name' => 'required|unique:memories,memories_name,'.$id
             ]);
         }
 
