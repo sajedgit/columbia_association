@@ -55,6 +55,7 @@ class PassportController extends Controller
             'member_zip_code' => 'required',
             'member_tax_reg_no' => 'required',
             'member_command_code' => 'required',
+            'member_command_name' => 'required',
             'member_rank' => 'required',
             'member_shield' => 'required',
             'member_appointment_date' => 'required|date',
@@ -125,6 +126,7 @@ class PassportController extends Controller
             $job_data = array(
                 'ref_member_job_info_membership_id' => $user->id,
                 'member_command_code'      =>  $request->member_command_code,
+                'member_command_name'      =>  $request->member_command_name,
                 'member_rank'              =>   $request->member_rank,
                 'member_shield'            =>   $request->member_shield,
                 'member_appointment_date'  =>  $request->member_appointment_date,
@@ -132,7 +134,7 @@ class PassportController extends Controller
                 'member_boro'              =>  $request->member_boro,
                 'member_benificiary'       => $request->member_benificiary,
                 'member_reference_no'      => $request->member_reference_no,
-                'member_retired'           => $request->member_retired,
+                'member_retired'           => $request->member_retired, 
                 'member_job_info_creating_datetime' =>   date("Y-m-d"),
                 'member_job_info_editing_datetime'  =>   date("Y-m-d")
             );
