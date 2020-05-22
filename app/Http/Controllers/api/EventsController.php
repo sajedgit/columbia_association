@@ -19,8 +19,8 @@ class EventsController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        $collection = collect($results);
-        $results = $collection->groupBy('event_starting_date');
+       // $collection = collect($results);
+       // $results = $collection->groupBy('event_starting_date');
 
         return response()->json([
             'success' => true,
