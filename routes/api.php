@@ -35,6 +35,9 @@ Route::middleware('auth:api')->group(function () {
 });
 
 
+Route::resource('vote', 'api\VoteDetailsController');
+Route::get('insert_vote', 'api\VoteDetailsController@insert_vote');
+
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('config:cache');
     return 'DONE'; //Return anything
