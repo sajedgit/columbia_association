@@ -35,6 +35,7 @@ Route::resource('memories_photos', 'MemoriesPhotosController');
 Route::resource('messages', 'MessagesController');
 Route::resource('organize_infos', 'OrganizeInfosController');
 Route::resource('sponsors', 'SponsorsController');
+Route::resource('products', 'ProductsController');
 
 Auth::routes();
 

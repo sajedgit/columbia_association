@@ -158,6 +158,20 @@
         </div>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages_product" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-user-tie"></i>
+          <span>Shop</span>
+        </a>
+        <div id="collapsePages_product" class="collapse {{ (request()->is('products*')) ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Products:</h6>
+            <a class="collapse-item" href="{{ route('products.index') }}">View All  Products</a>
+            <a class="collapse-item" href="{{ route('products.create') }}">Add New  Product</a>
+          </div>
+        </div>
+      </li>
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
