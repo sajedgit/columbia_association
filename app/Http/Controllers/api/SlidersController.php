@@ -2,31 +2,28 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Models\Product;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use Illuminate\Support\Facades\DB;
 
 
-class ProductsController extends Controller
+class SlidersController extends Controller
 {
     public function index()
     {
 
         $result_data = array();
-        $results = Product::orderBy('id', 'desc')->get();
+        $results = Slider::orderBy('id', 'desc')->get();
 
         foreach ($results as $data):
 
             $arr= array(
-                "product_id"=>$data->id,
-                "product_name"=>$data->product_name,
-                "product_description"=>$data->product_description,
-                "price"=>$data->price,
-                "stock"=>$data->stock,
-               // "base_url"=>url('/'),
-                "photo"=>url('/')."/public/images/product/".$data->photo
+                "id"=>$data->id,
+                "name"=>$data->name,
+                "caption"=>$data->caption,
+                "photo"=>url('/')."/public/images/slider/".$data->photo
 
             );
             array_push($result_data,$arr);
@@ -40,11 +37,6 @@ class ProductsController extends Controller
 
 
     }
-
-
-
-
-
 
 
 

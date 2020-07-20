@@ -32,11 +32,15 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('memories','api\MemorisController');
     Route::resource('sponsors', 'api\SponsorsController');
     Route::resource('messages', 'api\MessagesController');
-    Route::post('vote', 'api\VoteDetailsController@index');
-    Route::post('insert_vote', 'api\VoteDetailsController@insert_vote');
+  //  Route::post('vote', 'api\VoteDetailsController@index');
+  //  Route::post('insert_vote', 'api\VoteDetailsController@insert_vote');
+    Route::post('shop', 'api\ProductsController@index');
+    Route::post('slider_photo', 'api\SlidersController@index');
 });
 
-Route::get('shop', 'api\ProductsController@index');
+//Route::get('shop', 'api\ProductsController@index');
+Route::get('vote', 'api\VoteDetailsController@index');
+Route::get('insert_vote', 'api\VoteDetailsController@insert_vote');
 
 
 Route::get('/clear-cache', function() {
