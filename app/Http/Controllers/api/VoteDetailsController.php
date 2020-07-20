@@ -54,6 +54,7 @@ class VoteDetailsController extends Controller
             $arr= array(
                 "position_id"=>$data->id,
                 "position_name"=>$data->position_name,
+                "no_of_candidate"=>$data->noc,
                 "candidate"=>$this->get_candidate($vot_id,$data->id)
 
             );
