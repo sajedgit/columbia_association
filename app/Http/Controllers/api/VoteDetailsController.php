@@ -96,39 +96,49 @@ class VoteDetailsController extends Controller
 
     function insert_vote()
     {
-//        $candidate_id2 = array(36, 37);
-//        $candidate_id1 = array(38);
-//        $position = array();
-//
-//        $position1 = array(
-//            "position_id" => 1,
-//            "no_of_candidate" => 1,
-//            "candidate_id" => $candidate_id1
-//
-//        );
-//        $position2 = array(
-//            "position_id" => 2,
-//            "no_of_candidate" => 2,
-//            "candidate_id" => $candidate_id2
-//
-//        );
-//        array_push($position, $position1, $position2);
-//        $arr = array(
-//            "vote_id" => 1,
-//            "voter_id" => 38,
-//            "vote" => $position
-//        );
-//        $arr = json_encode($arr);
-//        $decode_arr = json_decode($arr);
+     /*  $candidate_id2 = array(36, 37);
+       $candidate_id1 = array(38);
+       $position = array();
 
-//print_r($decode_arr);die();
+       $position1 = array(
+           "position_id" => 1,
+           "no_of_candidate" => 1,
+           "candidate_id" => $candidate_id1
 
+       );
+       $position2 = array(
+           "position_id" => 2,
+           "no_of_candidate" => 2,
+           "candidate_id" => $candidate_id2
+
+       );
+       array_push($position, $position1, $position2);
+       $arr = array(
+           "vote_id" => 1,
+           "voter_id" => 38,
+           "vote" => $position
+       );
+       $arr = json_encode($arr);
+       $decode_arr = json_decode($arr);
+
+print_r($arr);die();
+*/
 
         $vote_data=$_REQUEST['vote_data'];
         $decode_arr = json_decode($vote_data);
 
         $vote_id = $decode_arr->vote_id;
         $voter_id = $decode_arr->voter_id;
+		
+	   $check_if_vote_done = $this->check_if_vote_done($vote_id, $voter_id);
+			if ($check_if_vote_done > 0)
+			{
+				return response()->json([
+					'success' => false,
+					'data' => "Your have already gave your vote"
+				]);
+				die();
+			}
 
         foreach ($decode_arr->vote as $row):
             $position_id = $row->position_id;
@@ -142,15 +152,6 @@ class VoteDetailsController extends Controller
                     'voter_id' => $voter_id
                 );
                 $insert_vote_id = DB::table('vote_count')->insertGetId($values);
-                $check_if_vote_done = $this->check_if_vote_done($vote_id, $position_id, $candidates, $voter_id);
-                if ($check_if_vote_done > 0)
-                {
-                    return response()->json([
-                        'success' => false,
-                        'data' => "Your have already gave your vote"
-                    ]);
-                    die();
-                }
 
                 if ($insert_vote_id)
                     $success = 1;
@@ -176,12 +177,11 @@ class VoteDetailsController extends Controller
     }
 
 
-    function check_if_vote_done($vote_id, $position_id, $candidates, $voter_id)
+    function check_if_vote_done($vote_id,  $voter_id)
     {
 
         $results = DB::table('vote_count')
             ->where('vote_id', $vote_id)
-            ->where('vote_position_id', $position_id)
             ->where('voter_id', $voter_id)
             ->get();
 
