@@ -194,7 +194,7 @@ class PassportController extends Controller
 				]);
 			
             $success['token'] =  $user->createToken('MyApp')-> accessToken; 
-            return response()->json(['success'=>true,'data'=>$success], $this-> successStatus); 
+            return response()->json(['success'=>true,'user_id'=>$user->id,'data'=>$success], $this-> successStatus);
         } 
         else{ 
             return response()->json(['error'=>'Unauthorised'], 401); 
