@@ -6,7 +6,7 @@ EMAIL ADDRESS: sajedaiub@gmail.com
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;  
 
 class VoteCount extends Model
 {

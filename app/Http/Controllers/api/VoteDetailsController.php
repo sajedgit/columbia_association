@@ -18,7 +18,7 @@ class VoteDetailsController extends Controller
         $date_time_utc = new \DateTime($date_time_utc);
         $date_time_utc->modify('+6 hours');
 
-        return $date_time_utc;
+        return $date_time_utc;  
     }
 
     public function index()

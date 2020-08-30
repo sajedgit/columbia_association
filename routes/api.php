@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('login', 'PassportController@login');
-Route::post('register', 'PassportController@register');
+Route::post('register', 'PassportController@register');  
 
 Route::middleware('auth:api')->group(function () {
     Route::get('member_details', 'PassportController@details');
