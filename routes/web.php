@@ -18,7 +18,6 @@ Route::get('/', function () {
 });
 
 Route::resource('board_members', 'BoardMembersController');
-
 Route::resource('board_members_categories', 'BoardMembersCategoriesController');
 Route::resource('contact_us', 'ContactUsController');
 Route::resource('event_ticket_buyers', 'EventTicketBuyersController');
@@ -36,6 +35,9 @@ Route::resource('messages', 'MessagesController');
 Route::resource('organize_infos', 'OrganizeInfosController');
 Route::resource('sponsors', 'SponsorsController');
 Route::resource('products', 'ProductsController');
+Route::resource('votes', 'VotesController');
+Route::resource('votes_position', 'VotePositionsController');
+Route::resource('candidates', 'VoteCandidatesController');
 
 Auth::routes();
 

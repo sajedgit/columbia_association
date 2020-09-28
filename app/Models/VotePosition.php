@@ -12,8 +12,10 @@ class VotePosition extends Model
 {
     public $timestamps=false;
 
+    protected $table = 'vote_position';
+
     protected $fillable = [
-        'vote_id','position_name','sort_order','status'
+        'vote_id','position_name','noc','sort_order','status','member'
     ];
 
 

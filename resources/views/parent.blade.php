@@ -173,6 +173,26 @@
       </li>
 
 
+
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages_vote" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-user-tie"></i>
+          <span>Vote</span>
+        </a>
+        <div id="collapsePages_vote" class="collapse {{ (request()->is('votes*')) ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Vote:</h6>
+            <a class="collapse-item" href="{{ route('votes.index') }}">View All  Vote</a>
+            <a class="collapse-item" href="{{ route('votes.create') }}">Add New  Vote</a>
+            <h6 class="collapse-header">Vote Position:</h6>
+            <a class="collapse-item" href="{{ route('votes_position.index') }}">View All  Position</a>
+            <a class="collapse-item" href="{{ route('votes_position.create') }}">Add New  Position</a>
+          </div>
+        </div>
+      </li>
+
+
+
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 

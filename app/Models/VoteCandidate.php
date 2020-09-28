@@ -12,6 +12,8 @@ class VoteCandidate extends Model
 {
     public $timestamps=false;
 
+    protected $table = 'vote_candidate';
+
     protected $fillable = [
         'vote_id','vote_position_id','user_id','status'
     ];
