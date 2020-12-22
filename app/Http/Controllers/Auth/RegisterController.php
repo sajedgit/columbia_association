@@ -65,12 +65,12 @@ class RegisterController extends Controller
             'active' => 1,
         ]);
 
-        Mail::send('emails.welcome', $data, function($message) use ($data)
-        {
-            $message->from('no-reply@site.com', "Site name");
-            $message->subject("Welcome to site name");
-            $message->to($data['email']);
-        });
+       // Mail::send('emails.welcome', $data, function($message) use ($data)
+        // {
+            // $message->from('no-reply@site.com', "Site name");
+            // $message->subject("Welcome to site name");
+            // $message->to($data['email']);
+        // });
 
         return $members;
     }
