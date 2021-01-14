@@ -16,10 +16,16 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->user_type_id != 1)
+
+
+        if ($request->user() && $request->user()->user_type_id == 1)
         {
-            return new Response(view('unauthorized')->with('role', 'ADMIN'));
+            return $next($request);
         }
-        return $next($request);
+        else
+        {
+            return redirect('login');
+        }
+
     }
 }
