@@ -23,12 +23,14 @@
             <br />
 
 
-			{{ Form::open([ 'method'  => 'post','class'  => 'col-sm-6', 'route' => [ 'memberships.update', $data->id ] ]) }}
+			{{ Form::open([ 'method'  => 'post','class'  => 'col-sm-6', 'files'=>'true','route' => [ 'memberships.update', $data->id ] ]) }}
 
 				 @csrf
                 @method('PATCH')
 
 
+			<input type="hidden" name="profile" value="admin">
+			<input type="hidden" name="user_type_id" value="{{ $data->user_type_id }}">
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
@@ -77,6 +79,21 @@
 						{{ Form::text('email', $value = $data->email ,array('class' => 'form-control')) }}
 					</div>
 				</div>
+
+
+
+			<div class="form-group row">
+				<div class="col-sm-4 mb-3 mb-sm-0">
+					{{ Form::label('photo', (' Photo '),array('class'=>'control-label')) }}
+				</div>
+				<div class="col-sm-8">
+
+					{{ Form::file('photo', array('class' => 'form-control')) }}
+					<img src="{{ asset('public/images/member/'.$data->photo) }}" class="img-thumbnail" width="100"/>
+					<input type="hidden" name="hidden_image" value="{{ $data->photo }}"/>
+
+				</div>
+			</div>
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">

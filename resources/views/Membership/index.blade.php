@@ -35,6 +35,8 @@
                         <th>{{ __('memberships.name') }}</th>
 						 <th>{{ __('memberships.username') }}</th>
 						 <th>{{ __('memberships.email') }}</th>
+                         <th>User Type</th>
+                         <th>Photo</th>
 						 <th>{{ __('memberships.active') }}</th>
 
                       <th>Action</th>
@@ -45,6 +47,8 @@
                        <th>{{ __('memberships.name') }}</th>
 						 <th>{{ __('memberships.username') }}</th>
 						 <th>{{ __('memberships.email') }}</th>
+						 <th>User Type</th>
+                         <th>Photo</th>
 						 <th>{{ __('memberships.active') }}</th>
 
                       <th>Action</th>
@@ -57,7 +61,9 @@
 					    <td>{{ $row->name }}</td>
 						 <td>{{ $row->username }}</td>
 						 <td>{{ $row->email }}</td>
-						 <td>{{ $row->active }}</td>
+						 <td>{{ $row->ess_type }}</td>
+						 <td>  <img src="{{ asset('public/images/member/'.$row->photo) }}" class="img-thumbnail" width="50"/></td>
+						 <td> @if($row->active) Active @else Inactive @endif</td>
 
 
                        <td class="text-center">
