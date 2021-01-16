@@ -76,6 +76,22 @@
         </div>
       </li>
 
+
+      <!-- Nav Item - Ess Members Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseEss" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-user-tie"></i>
+          <span>Ess Members</span>
+        </a>
+        <div id="collapseEss" class="collapse {{ (request()->is('ess_members*')) ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Ess Members:</h6>
+            <a class="collapse-item" href="{{ route('ess_members.index') }}">View All Ess Members</a>
+            <a class="collapse-item" href="{{ route('ess_members.create') }}">Add New Ess Members</a>
+          </div>
+        </div>
+      </li>
+
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">

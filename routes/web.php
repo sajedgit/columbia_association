@@ -46,6 +46,7 @@ Route::group([ 'middleware' => 'admin_middleware'], function()
     Route::resource('votes', 'VotesController');
     Route::resource('votes_position', 'VotePositionsController');
     Route::resource('candidates', 'VoteCandidatesController');
+    Route::resource('ess_members', 'EssMembersController');
 });
 
 
@@ -53,10 +54,13 @@ Route::group([ 'middleware' => 'admin_middleware'], function()
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home', function () {
-    return view('welcome');
-});
+Route::get('/home', 'HomeController@welcome')->name('home');
+Route::get('/unauthorized', 'UnAuthorizedController@index')->name('unauthorized');
+
+
+//Route::get('/home', function () {
+//    return view('welcome');
+//});
 
 
 Route::get('/clear-cache', function () {

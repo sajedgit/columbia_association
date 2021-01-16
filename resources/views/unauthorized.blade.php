@@ -70,6 +70,7 @@
         <div class="title m-b-md">
             You cannot access this page! This is for only '{{$role}}'"
         </div>
+        <h3 class="text-center" style="color:#000;">Please <a href="{{ route("login") }}">Login </a> as Admin User for access this page</h3>
     </div>
 </div>
 </body>

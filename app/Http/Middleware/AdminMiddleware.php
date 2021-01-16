@@ -18,14 +18,25 @@ class AdminMiddleware
     {
 
 
-        if ($request->user() && $request->user()->user_type_id == 1)
+
+        if ($request->user())
         {
-            return $next($request);
+
+            if($request->user() && $request->user()->user_type_id == 1)
+            {
+                return $next($request);
+            }
+            else
+            {
+               return redirect('unauthorized');
+            }
         }
         else
         {
             return redirect('login');
         }
+
+
 
     }
 }
