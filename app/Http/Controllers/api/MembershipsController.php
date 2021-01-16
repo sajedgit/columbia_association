@@ -269,6 +269,12 @@ class MembershipsController extends Controller
         }
 
 
+    public function forgot_password(Request $request)
+    {
+      // echo  $email=$request->email;die();
+    }
+
+
 
 }
 

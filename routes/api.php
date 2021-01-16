@@ -26,6 +26,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('member_details', 'PassportController@details');
     Route::resource('member', 'api\MembershipsController');
     Route::resource('memberships', 'api\MembershipsController');
+    Route::post('forgot_password', 'api\MembershipsController@forgot_password');
     Route::resource('board_members_categories', 'api\BoardMembersCategoriesController');
     Route::resource('board_members', 'api\BoardMembersController');
     Route::resource('events', 'api\EventsController');
