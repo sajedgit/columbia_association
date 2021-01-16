@@ -1,8 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Membership;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use App\Mail\SendMessageMail;
+use Illuminate\Support\Facades\Mail;
 
 class MessagesController extends Controller
 {
@@ -48,14 +53,41 @@ class MessagesController extends Controller
 
 
         $form_data = array(
-            'message_details'       =>   $request->message_details,
+            'message_details'       =>  addslashes($request->message_details),
             'message_active'        =>   1,
             'message_created_datetime'   =>   date("Y-m-d H:i:s")
         );
 
-        Message::create($form_data);
+        $message=Message::create($form_data);
+        if($message)
+        {
+            $subject="News From Columbia ADMIN";
+            $msg=$request->message_details;
 
-        return redirect('messages')->with('success', 'Data Added successfully.');
+            $results = Membership::orderBy('id', 'desc')
+                ->where("active",1)
+                ->get();
+
+            $cc = "sajedaiub@gmail.com";
+            $bcc = "sajedaiub@gmail.com";
+
+            foreach ($results as $row)
+            {
+                $mail_to = $row->email;
+                $user_name = $row->name;
+                Mail::to($mail_to)
+                    ->cc($cc)
+                    ->bcc($bcc)
+                    ->send(new SendMessageMail($msg,$subject,$user_name));
+
+                //sleep(3);
+            }
+
+
+
+        }
+
+        return redirect('messages')->with('success', 'Message Send successfully.');
     }
 
     /**
@@ -98,7 +130,7 @@ class MessagesController extends Controller
 
 
         $form_data = array(
-            'message_details'       =>   $request->message_details,
+            'message_details'       =>    addslashes($request->message_details),
             'message_active'        =>   1,
             'message_edited_datetime'   =>   date("Y-m-d H:i:s")
         );
@@ -121,7 +153,70 @@ class MessagesController extends Controller
 
         return redirect('messages')->with('success', 'Data is successfully deleted');
     }
+
+
+    public function president()
+    {
+
+        $data = DB::table('msg_president')
+            ->select('*')
+            ->where("id",1)
+            ->get();
+        $data=$data[0];
+        $table="msg_president";
+        $url="president";
+        return view('Message/edit_p_vp_gs', compact('data','table','url'));
+    }
+
+
+    public function vice_president()
+    {
+        $data = DB::table('msg_vp')
+            ->select('*')
+            ->where("id",1)
+            ->get();
+        $data=$data[0];
+        $table="msg_vp";
+        $url="vice_president";
+        return view('Message/edit_p_vp_gs', compact('data','table','url'));
+    }
+
+
+    public function general_secretary()
+    {
+        $data = DB::table('msg_gs')
+            ->select('*')
+            ->where("id",1)
+            ->get();
+        $data=$data[0];
+        $table="msg_gs";
+        $url="general_secretary";
+        return view('Message/edit_p_vp_gs', compact('data','table','url'));
+    }
+
+
+
+
+    public function messages_update(Request $request)
+    {
+        $table_name=$request->table_name;
+        $url=$request->url;
+        $title=$request->title;
+        $description=$request->description;
+        $form_data = array(
+            'title'  => $title,
+            'description'  =>   $description,
+            'msg_date'   =>   date("Y-m-d")
+        );
+
+
+        $affected = DB::table($table_name)
+            ->where('id', 1)
+            ->update($form_data);
+
+        return redirect()->route($url)->with('success', 'Data is successfully updated');
+    }
 }
 
-	
+
 	

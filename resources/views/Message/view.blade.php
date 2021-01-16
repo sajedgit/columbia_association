@@ -23,7 +23,7 @@
         <tbody>
 		<tr>
 			<td>{{ __('messages.message_details') }}
- 			<td>{{ $data->message_details }} </td>
+ 			<td> <?php echo  $data->message_details ?> </td>
  
 		</tr>
 

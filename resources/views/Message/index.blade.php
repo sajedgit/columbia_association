@@ -50,7 +50,7 @@
 				   @foreach($data as $row)
                     <tr>
                       
-					    <td>{{ $row->message_details }}</td>
+					    <td><?php echo  $row->message_details ?></td>
 
 						
 					   
