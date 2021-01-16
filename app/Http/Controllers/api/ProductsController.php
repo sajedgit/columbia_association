@@ -79,7 +79,14 @@ class ProductsController extends Controller
         $buyer_first_name=$request->buyer_first_name;
         $buyer_last_name=$request->buyer_last_name;
 
-        $this->validate_date($product_id,$member_id,$order_id,$source,$payment_type,$details,$total_item,$total_price);
+        if(empty($product_id) || empty($member_id) || empty($order_id) || empty($source) || empty($payment_type) || empty($details)  || empty($total_item)  || empty($total_price) )
+        {
+
+            return response()->json([
+                'success' => false,
+                'message' => "Please provide these field: 'product_id, member_id, order_id, source, payment_type, details, total_item,total_price' "
+            ]);
+        }
 
         $payment_insert = DB::table('product_buyers')->insert(
             array(
@@ -171,16 +178,8 @@ class ProductsController extends Controller
     }
 
 
-    public function validate_date($product_id,$member_id,$order_id,$source,$payment_type,$details,$total_item,$total_price)
-    {
-        if(empty($product_id) || empty($member_id) || empty($order_id) || empty($source) || empty($payment_type) || empty($details)  || empty($total_item)  || empty($total_price) )
-        {
-            return response()->json([
-                'success' => false,
-                'message' => "Please provide these field: 'product_id, member_id, order_id, source, payment_type, details, total_item,total_price ' "
-            ]);
-        }
-    }
+
+
 
 
 
