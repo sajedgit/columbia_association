@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CreateEventMail;
 use App\Models\Event;
+use App\Models\Membership;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class EventsController extends Controller
 {
@@ -50,6 +54,7 @@ class EventsController extends Controller
                 'event_venue' => 'required',
                 'event_flyer_location' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'event_ticket_price' => 'required|numeric',
+                'event_ticket_price_children' => 'required|numeric',
                 'event_total_seat' => 'required|numeric'
             ],
             [
@@ -73,17 +78,58 @@ class EventsController extends Controller
             'event_flyer_type' => $event_flyer_type,
             'event_starting_date' => $request->event_starting_date,
             'event_starting_time' => $request->event_starting_time,
-            'event_ending_date' => $request->event_starting_date,
+            'event_ending_date' => $request->event_ending_date,
             'event_ending_time' => $request->event_ending_time,
             'event_ticket_price' => $request->event_ticket_price,
+            'event_ticket_price_children' => $request->event_ticket_price_children,
             'event_total_seat' => $request->event_total_seat,
             'event_created_datetime' => date('Y-m-d')
         );
 
-        Event::create($form_data);
+        $create_events= Event::create($form_data);
+        if($create_events->id)
+        {
+            $this->send_mail($form_data,"insert");
+
+        }
+
 
         return redirect('events')->with('success', 'Data Added successfully.');
     }
+
+
+    public function send_mail($data,$action)
+    {
+
+        if($action=="insert")
+          $subject="New Event (".$data['event_title'].") has been created";
+        else
+            $subject=" Event (".$data['event_title'].") has been updated";
+
+        $results = Membership::orderBy('id', 'desc')
+            ->where("active",1)
+            ->get();
+
+        $cc = "sajedaiub@gmail.com";
+        $bcc = "sajedaiub@gmail.com";
+//        $cc = "sajedaiub@gmail.com";
+//        $bcc = "sajedaiub@gmail.com";
+
+        foreach ($results as $row)
+        {
+            $mail_to = $row->email;
+           // $mail_to = "sajedaiub@gmail.com";
+            $user_name = $row->name;
+            Mail::to($mail_to)
+                ->cc($cc)
+                ->bcc($bcc)
+                ->send(new CreateEventMail($data,$subject,$user_name));
+
+            //sleep(1);
+        }
+
+    }
+
 
     /**
      * Display the specified resource.
@@ -129,6 +175,7 @@ class EventsController extends Controller
                     'event_venue' => 'required',
                     'event_flyer_location' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
                     'event_ticket_price' => 'required|numeric',
+                    'event_ticket_price_children' => 'required|numeric',
                     'event_total_seat' => 'required|numeric'
                 ],
                 [
@@ -146,6 +193,7 @@ class EventsController extends Controller
                 'event_title' => 'required',
                 'event_venue' => 'required',
                 'event_ticket_price' => 'required',
+                'event_ticket_price_children' => 'required',
                 'event_total_seat' => 'required'
 
             ]);
@@ -160,14 +208,21 @@ class EventsController extends Controller
             'event_flyer_type' => $event_flyer_type,
             'event_starting_date' => $request->event_starting_date,
             'event_starting_time' => $request->event_starting_time,
-            'event_ending_date' => $request->event_starting_date,
+            'event_ending_date' => $request->event_ending_date,
             'event_ending_time' => $request->event_ending_time,
             'event_ticket_price' => $request->event_ticket_price,
+            'event_ticket_price_children' => $request->event_ticket_price_children,
             'event_total_seat' => $request->event_total_seat,
             'event_created_datetime' => date('Y-m-d')
         );
 
-        Event::whereId($id)->update($form_data);
+        $update_events=Event::whereId($id)->update($form_data);
+
+        if($update_events)
+        {
+            $this->send_mail($form_data,"update");
+
+        }
 
         return redirect('events')->with('success', 'Data is successfully updated');
     }
@@ -183,7 +238,13 @@ class EventsController extends Controller
         $data = Event::findOrFail($id);
         $data->delete();
 
-        return redirect('Event/index')->with('success', 'Data is successfully deleted');
+        return redirect('events')->with('success', 'Data is successfully deleted');
+    }
+
+    public static function upcoming_events()
+    {
+        $upcoming_events = DB::select(DB::raw(" SELECT * from events where event_starting_date >= CURDATE() and event_active=1 order by event_starting_date asc   "));
+        return $upcoming_events;
     }
 }
 

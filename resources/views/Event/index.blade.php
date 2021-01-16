@@ -42,6 +42,7 @@
 {{--						 <th>{{ __('events.event_ending_date') }}</th>--}}
 {{--						 <th>{{ __('events.event_ending_time') }}</th>--}}
 						 <th>{{ __('events.event_ticket_price') }}</th>
+						 <th>{{ __('events.event_ticket_price_children') }}</th>
 						 <th>{{ __('events.event_total_seat') }}</th>
 						 <th>{{ __('events.event_active') }}</th>
 {{--						 <th>{{ __('events.event_created_datetime') }}</th>--}}
@@ -62,6 +63,7 @@
 {{--						 <th>{{ __('events.event_ending_date') }}</th>--}}
 {{--						 <th>{{ __('events.event_ending_time') }}</th>--}}
 						 <th>{{ __('events.event_ticket_price') }}</th>
+						 <th>{{ __('events.event_ticket_price_children') }}</th>
 						 <th>{{ __('events.event_total_seat') }}</th>
 						 <th>{{ __('events.event_active') }}</th>
 {{--						 <th>{{ __('events.event_created_datetime') }}</th>--}}
@@ -77,13 +79,14 @@
 					    <td>{{ $row->event_title }}</td>
 {{--						 <td>{{ $row->event_details }}</td>--}}
 						 <td>{{ $row->event_venue }}</td>
-						 <td><img width="50" src="{{ asset($row->event_flyer_location) }}"></td>
+						 <td><img width="50" src="{{ URL::to('/') }}/public/images/{{ $row->event_flyer_location }}"></td>
 {{--						 <td>{{ $row->event_flyer_type }}</td>--}}
 						 <td>{{ $row->event_starting_date }}</td>
 {{--						 <td>{{ $row->event_starting_time }}</td>--}}
 {{--						 <td>{{ $row->event_ending_date }}</td>--}}
 {{--						 <td>{{ $row->event_ending_time }}</td>--}}
 						 <td>{{ $row->event_ticket_price }}</td>
+						 <td>{{ $row->event_ticket_price_children }}</td>
 						 <td>{{ $row->event_total_seat }}</td>
 						 <td>{{ $row->event_active }}</td>
 {{--						 <td>{{ $row->event_created_datetime }}</td>--}}

@@ -34,7 +34,7 @@ class CreateEventMail extends Mailable
     public function build()
     {
         //return $this->view('emails.name');
-      return $this->from( "nypdbapa@gmail.com","BAPA")
+      return $this->from( "columbia@gmail.com","Columbia")
             ->subject($this->subject)
             ->view('emails.create_events');
     }

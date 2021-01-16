@@ -38,7 +38,7 @@
 		</tr>
 		<tr>
 			<td>{{ __('events.event_flyer_location') }}
-            <td><img   src="{{ asset($data->event_flyer_location) }}"></td>
+            <td><img   src="{{ URL::to('/') }}/public/images/{{ $data->event_flyer_location }}"></td>
 
 		</tr>
 		<tr>
@@ -65,6 +65,11 @@
 		<tr>
 			<td>{{ __('events.event_ticket_price') }}
  			<td>{{ $data->event_ticket_price }} </td>
+
+		</tr>
+		<tr>
+			<td>{{ __('events.event_ticket_price_children') }}
+ 			<td>{{ $data->event_ticket_price_children }} </td>
 
 		</tr>
 		<tr>
