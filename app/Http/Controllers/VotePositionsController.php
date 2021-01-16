@@ -71,7 +71,8 @@ class VotePositionsController extends Controller
             'position_name' => 'required',
             'noc' => 'required',
             'sort_order' => 'required',
-            'member' => "required|min:1|max:$noc",
+           // 'member' => "required|min:1|max:$noc",
+            'member' => "required",
         ]);
 
 
@@ -179,7 +180,8 @@ class VotePositionsController extends Controller
             'position_name' => 'required',
             'noc' => 'required',
             'sort_order' => 'required',
-             'member' => "required|min:1|max:$noc"
+            // 'member' => "required|min:1|max:$noc"
+             'member' => "required"
         ]);
 
 
