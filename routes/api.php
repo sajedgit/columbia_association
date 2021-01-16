@@ -33,7 +33,7 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('sponsors', 'api\SponsorsController');
     Route::resource('messages', 'api\MessagesController');
     Route::resource('shop', 'api\ProductsController');
-    Route::post('vote', 'api\VoteDetailsController@index'); //previous vote
+    Route::get('vote', 'api\VoteDetailsController@index'); //previous vote
     Route::post('vote/{id}', 'api\VoteDetailsController@check_user_vote'); //new vote (added by raju)
     Route::post('insert_vote', 'api\VoteDetailsController@insert_vote');
    // Route::post('shop', 'api\ProductsController@index');
