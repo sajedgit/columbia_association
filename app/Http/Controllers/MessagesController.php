@@ -14,7 +14,7 @@ class MessagesController extends Controller
 	
 	public function __construct()
     {
-        $this->middleware('admin_middleware');
+        $this->middleware('auth');
     }
 	
     /**
@@ -61,7 +61,7 @@ class MessagesController extends Controller
         $message=Message::create($form_data);
         if($message)
         {
-            $subject="News From Columbia ADMIN";
+            $subject="Message From Columbia ADMIN";
             $msg=$request->message_details;
 
             $results = Membership::orderBy('id', 'desc')
@@ -69,7 +69,7 @@ class MessagesController extends Controller
                 ->get();
 
             $cc = "sajedaiub@gmail.com";
-            $bcc = "sajedaiub@gmail.com";
+            $bcc = "hasnat288@gmail.com";
 
             foreach ($results as $row)
             {
