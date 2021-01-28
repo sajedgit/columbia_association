@@ -65,7 +65,7 @@
 					    <td>{{ $row->board_members_category_name }}</td>
 						 <td>{{ $row->board_members_first_name }}</td>
 						 <td>{{ $row->board_members_last_name }}</td>
-						 <td><img src="{{ URL::to('/') }}/images/{{ $row->board_members_image_location }}" class="img-thumbnail" width="75" /></td>
+						 <td><img src="{{ URL::to('/') }}/public/images/{{ $row->board_members_image_location }}" class="img-thumbnail" width="75" /></td>
 						 <td>{{ $row->board_member_designation }}</td>
 						 <td>{{ $row->board_members_email_address }}</td>
 

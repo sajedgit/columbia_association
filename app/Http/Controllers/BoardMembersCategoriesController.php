@@ -9,7 +9,7 @@ class BoardMembersCategoriesController extends Controller
 	
 	public function __construct()
     {
-        $this->middleware('admin_middleware');
+        $this->middleware('auth');
     }
 	
     /**
@@ -20,7 +20,8 @@ class BoardMembersCategoriesController extends Controller
     public function index()
     {
 
-        $data = BoardMembersCategory::orderBy('id', 'desc')->paginate(5);
+        $data = BoardMembersCategory::orderBy('board_members_category_position', 'asc')->paginate(5);
+
         return view('BoardMembersCategory/index', compact('data'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -44,24 +45,19 @@ class BoardMembersCategoriesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name'    =>  'required',
-            'last_name'     =>  'required',
-            'image'         =>  'required|image|max:2048'
+            'board_members_category_name'    =>  'required',
+            'board_members_category_position'     =>  'required'
         ]);
 
-        $image = $request->file('image');
 
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $new_name
+            'board_members_category_name'       =>   $request->board_members_category_name,
+            'board_members_category_position'        =>   $request->board_members_category_position
         );
 
         BoardMembersCategory::create($form_data);
 
-        return redirect('BoardMembersCategory/index')->with('success', 'Data Added successfully.');
+        return redirect('board_members_categories')->with('success', 'Data Added successfully.');
     }
 
     /**
@@ -97,36 +93,20 @@ class BoardMembersCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image_name = $request->hidden_image;
-        $image = $request->file('image');
-        if($image != '')
-        {
-            $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required',
-                'image'         =>  'image|max:2048'
-            ]);
+        $request->validate([
+            'board_members_category_name'    =>  'required',
+            'board_members_category_position'     =>  'required'
+        ]);
 
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_name);
-        }
-        else
-        {
-            $request->validate([
-                'first_name'    =>  'required',
-                'last_name'     =>  'required'
-            ]);
-        }
 
         $form_data = array(
-            'first_name'       =>   $request->first_name,
-            'last_name'        =>   $request->last_name,
-            'image'            =>   $image_name
+            'board_members_category_name'       =>   $request->board_members_category_name,
+            'board_members_category_position'        =>   $request->board_members_category_position
         );
 
         BoardMembersCategory::whereId($id)->update($form_data);
 
-        return redirect('BoardMembersCategory/index')->with('success', 'Data is successfully updated');
+        return redirect('board_members_categories')->with('success', 'Data is successfully updated');
     }
 
     /**
@@ -140,7 +120,7 @@ class BoardMembersCategoriesController extends Controller
         $data = BoardMembersCategory::findOrFail($id);
         $data->delete();
 
-        return redirect('BoardMembersCategory/index')->with('success', 'Data is successfully deleted');
+        return redirect('board_members_categories')->with('success', 'Data is successfully deleted');
     }
 }
 

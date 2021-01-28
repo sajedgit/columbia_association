@@ -43,6 +43,7 @@
             {{ Form::text('board_members_first_name', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('board_members.board_members_first_name'))) }}
         </div>
     </div>
+
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
             {{ Form::label('board_members_last_name', (Lang::get('board_members.enter_msg').' '.Lang::get('board_members.board_members_last_name')),array('class'=>'control-label')) }}
@@ -51,6 +52,19 @@
             {{ Form::text('board_members_last_name', $value = null ,array('class' => 'form-control','placeholder'=>Lang::get('board_members.board_members_last_name'))) }}
         </div>
     </div>
+
+
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3 mb-sm-0">
+            {{ Form::label('bio', (Lang::get('board_members.enter_msg').' Bio '),array('class'=>'control-label')) }}
+        </div>
+        <div class="col-sm-8">
+            {{ Form::textArea('bio', $value = null ,array('class' => 'form-control','placeholder'=>'Bio')) }}
+        </div>
+    </div>
+
+
+
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
             {{ Form::label('board_members_image_location', (Lang::get('board_members.select_msg').' '.Lang::get('board_members.board_members_image_location')),array('class'=>'control-label')) }}

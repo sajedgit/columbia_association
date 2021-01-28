@@ -60,11 +60,20 @@
 
 				<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
+				{{ Form::label('bio', (Lang::get('board_members.edit_msg').' Bio '),array('class'=>'control-label')) }}
+				</div>
+					<div class="col-sm-8">
+						{{ Form::textArea('bio', $value = $data->bio ,array('class' => 'form-control')) }}
+					</div>
+				</div>
+
+				<div class="form-group row">
+				<div class="col-sm-4 mb-3 mb-sm-0">
 				{{ Form::label('board_members_image_location', (Lang::get('board_members.edit_msg').' '.Lang::get('board_members.board_members_image_location')),array('class'=>'control-label')) }}
 				</div>
 					<div class="col-sm-8">
 					{{ Form::file('board_members_image_location', array('class' => 'form-control')) }}
-                       <img src="{{ URL::to('/') }}/images/{{ $data->board_members_image_location }}" class="img-thumbnail" width="100" />
+                       <img src="{{ URL::to('/') }}/public/images/{{ $data->board_members_image_location }}" class="img-thumbnail" width="100" />
                                               <input type="hidden" name="hidden_image" value="{{ $data->board_members_image_location }}" />
 
 					</div>

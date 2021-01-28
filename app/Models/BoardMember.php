@@ -13,7 +13,7 @@ class BoardMember extends Model
       public $timestamps=false;
 
 	   protected $fillable = [
-      'ref_board_members_category_id','board_members_first_name','board_members_last_name','board_members_image_location','board_member_designation','board_members_email_address','board_members_position','board_members_active'
+      'ref_board_members_category_id','board_members_first_name','board_members_last_name','bio','board_members_image_location','board_member_designation','board_members_email_address','board_members_position','board_members_active'
     ];
 	
 	/**

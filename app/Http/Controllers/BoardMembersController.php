@@ -11,7 +11,7 @@ class BoardMembersController extends Controller
 
 	public function __construct()
     {
-        $this->middleware('admin_middleware');
+        $this->middleware('auth');
     }
 
     /**
@@ -69,6 +69,7 @@ class BoardMembersController extends Controller
             'ref_board_members_category_id'       =>   $request->ref_board_members_category_id,
             'board_members_first_name'        =>   $request->board_members_first_name,
             'board_members_last_name'        =>   $request->board_members_last_name,
+            'bio'        =>   $request->bio,
             'board_members_image_location'        =>  $new_name,
             'board_member_designation'        =>   $request->board_member_designation,
             'board_members_email_address'        =>   $request->board_members_email_address,
@@ -148,6 +149,7 @@ class BoardMembersController extends Controller
             'ref_board_members_category_id'       =>   $request->ref_board_members_category_id,
             'board_members_first_name'        =>   $request->board_members_first_name,
             'board_members_last_name'        =>   $request->board_members_last_name,
+            'bio'        =>   $request->bio,
             'board_members_image_location'        =>  $image_name,
             'board_member_designation'        =>   $request->board_member_designation,
             'board_members_email_address'        =>   $request->board_members_email_address,

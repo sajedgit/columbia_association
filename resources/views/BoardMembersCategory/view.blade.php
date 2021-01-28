@@ -31,11 +31,11 @@
  			<td>{{ $data->board_members_category_position }} </td>
  
 		</tr>
-		<tr>
-			<td>{{ __('board_members_categories.board_members_category_active') }}
- 			<td>{{ $data->board_members_category_active }} </td>
- 
-		</tr>
+{{--		<tr>--}}
+{{--			<td>{{ __('board_members_categories.board_members_category_active') }}--}}
+{{-- 			<td>{{ $data->board_members_category_active }} </td>--}}
+{{-- --}}
+{{--		</tr>--}}
 		</tbody>
 </table>
 

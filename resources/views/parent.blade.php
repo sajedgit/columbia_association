@@ -25,7 +25,17 @@
 
     <link rel="stylesheet" href="http://www.jonthornton.com/jquery-timepicker/jquery.timepicker.css">
 
+  <style>
 
+    .sidebar .nav-item .collapse .collapse-inner .collapse-item, .sidebar .nav-item .collapsing .collapse-inner .collapse-item {
+
+      white-space: inherit;
+    }
+    .tox
+    {
+      display: none;
+    }
+  </style>
 
 
 </head>
@@ -39,7 +49,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo url('/'); ?>">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -51,7 +61,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo url('/'); ?>">
+        <a class="nav-link" href="<?php echo url('/home'); ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -129,7 +139,7 @@
 
 
 
-	   <!-- Nav Item - Board Members Collapse Menu -->
+      <!-- Nav Item - Board Members Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-user-tie"></i>
@@ -140,6 +150,9 @@
             <h6 class="collapse-header">Board Members:</h6>
             <a class="collapse-item" href="{{ route('board_members.index') }}">View All Board Members</a>
             <a class="collapse-item" href="{{ route('board_members.create') }}">Add New Board Members</a>
+            <h6 class="collapse-header">Board Members Category:</h6>
+            <a class="collapse-item" href="{{ route('board_members_categories.index') }}"> All Board Members Category</a>
+            <a class="collapse-item" href="{{ route('board_members_categories.create') }}">Add Board Members Category</a>
           </div>
         </div>
       </li>
