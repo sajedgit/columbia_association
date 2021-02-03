@@ -35,6 +35,7 @@ class PayPalPaymentController extends Controller
     public function paymentCancel()
     {
         dd('Your payment has been declend. The payment cancelation page goes here!');
+
     }
 
     public function paymentSuccess(Request $request)
