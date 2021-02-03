@@ -67,3 +67,12 @@ Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('config:cache');
     return 'DONE'; //Return anything
 });
+
+
+Route::get('handle-payment', 'PayPalPaymentController@handlePayment')->name('make.payment');
+Route::get('cancel-payment', 'PayPalPaymentController@paymentCancel')->name('cancel.payment');
+Route::get('payment-success', 'PayPalPaymentController@paymentSuccess')->name('success.payment');
+
+Route::get('/paypal', function () {
+    return view('paypal_payment_test');
+});
