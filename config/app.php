@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Columbia'),
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -163,7 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 		Collective\Html\HtmlServiceProvider::class,
 		Laravel\Passport\PassportServiceProvider::class,
-        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -231,7 +230,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 		'Form' => Collective\Html\FormFacade::class,
 		'Html' => Collective\Html\HtmlFacade::class,
-        'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
 
     ],
 
