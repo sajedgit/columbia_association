@@ -70,16 +70,20 @@ Route::get('/clear-cache', function () {
 
 Route::get('handle-payment', 'PayPalPaymentController@handlePayment')->name('make.payment');
 Route::get('cancel-payment', 'PayPalPaymentController@paymentCancel')->name('cancel.payment');
-Route::get('payment-success', 'PayPalPaymentController@paymentSuccess')->name('success.payment');
+Route::get('/payment_success/{details}', 'PayPalPaymentController@paymentSuccess')->name('payment_success');
 
 Route::get('product_payment', 'PayPalPaymentController@productPayment')->name('product.payment');
+
+Route::post('process_payment', 'PayPalPaymentController@processPayment')->name('process_payment');
+
+
 
 
 //Route::get('/test_payment', function () {
 //    return view('test_payment');
 //});
 
-
+/**/
 //Route::get('/composer_update', function () {
 //    $exitCode = Artisan::call('composer update');
 //    return 'DONE'; //Return anything

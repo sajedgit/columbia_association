@@ -78,6 +78,10 @@ class ProductsController extends Controller
         $total_price=$request->total_price;
         $buyer_first_name=$request->buyer_first_name;
         $buyer_last_name=$request->buyer_last_name;
+        $CORRELATIONID=$request->CORRELATIONID;
+        $PAYERID=$request->PAYERID;
+
+
 
         if(empty($product_id) || empty($member_id) || empty($order_id) || empty($source) || empty($payment_type) || empty($details)  || empty($total_item)  || empty($total_price) )
         {
@@ -93,6 +97,8 @@ class ProductsController extends Controller
                 'ref_product_id' => $product_id,
                 'ref_membership_id' => $member_id,
                 'order_id' => $order_id,
+                'CORRELATIONID' => $CORRELATIONID,
+                'PAYERID' => $PAYERID,
                 'source' => $source,
                 'buyer_first_name' => $buyer_first_name,
                 'buyer_last_name' => $buyer_last_name,
