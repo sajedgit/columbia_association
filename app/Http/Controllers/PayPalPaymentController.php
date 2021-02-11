@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Mail\SendEventMail;
 use App\Models\Event;
 use App\Models\Product;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\URL;
+
+use App\CustomFolder\PushNotificationClass;
 
 class PayPalPaymentController extends Controller
 {
@@ -88,6 +91,10 @@ class PayPalPaymentController extends Controller
 
     public function productPayment(Request $request)
     {
+//        $device_ids=json_encode(array("123546789","123456789"));
+//        $helper = new Helper();
+//        $helper->send_push_notification($device_ids,"title","this is test message","event",1);
+//        die();
         $user_id = $request->user_id;
         $item_id = $request->product_id;
         $quantity = $request->quantity;

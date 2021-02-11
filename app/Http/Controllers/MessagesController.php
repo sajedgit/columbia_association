@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Helper\Helper;
 use App\Membership;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -11,12 +13,12 @@ use Illuminate\Support\Facades\Mail;
 
 class MessagesController extends Controller
 {
-	
-	public function __construct()
+
+    public function __construct()
     {
         $this->middleware('auth');
     }
-	
+
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +26,9 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        $data = Message::orderBy('id', 'desc')->paginate(5); 
+        $data = Message::orderBy('id', 'desc')->paginate(5);
         return view('Message/index', compact('data'))
-                ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -42,37 +44,38 @@ class MessagesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
-            'message_details'    =>  'required'
+            'message_details' => 'required'
         ]);
 
 
         $form_data = array(
-            'message_details'       =>  addslashes($request->message_details),
-            'message_active'        =>   1,
-            'message_created_datetime'   =>   date("Y-m-d H:i:s")
+            'message_details' => addslashes($request->message_details),
+            'message_active' => 1,
+            'message_created_datetime' => date("Y-m-d H:i:s")
         );
 
-        $message=Message::create($form_data);
-        if($message)
-        {
-            $subject="Message From Columbia ADMIN";
-            $msg=$request->message_details;
+        $message = Message::create($form_data);
+
+        if ($message) {
+            $item_id = $message->id;
+            $user_ids = array();
+            $subject = "Message From Columbia ADMIN";
+            $msg = $request->message_details;
 
             $results = Membership::orderBy('id', 'desc')
-                ->where("active",1)
+                ->where("active", 1)
                 ->get();
 
             $cc = "sajedaiub@gmail.com";
             $bcc = "hasnat288@gmail.com";
 
-            foreach ($results as $row)
-            {
+            foreach ($results as $row) {
                 $mail_to = $row->email;
                 $user_name = $row->name;
                 Mail::to($mail_to)
@@ -81,19 +84,29 @@ class MessagesController extends Controller
                     ->send(new SendMessageMail($msg,$subject,$user_name));
 
                 //sleep(3);
+
+
+                array_push($user_ids, $row->id);
+
             }
 
-
+            // for push notification
+            $helper = new Helper();
+            $device_ids = $helper->get_device_id_array_by_user_id($user_ids);
+            $helper->send_push_notification($device_ids, $subject, $msg, "message", $item_id);
 
         }
 
-        return redirect('messages')->with('success', 'Message Send successfully.');
+        return redirect('messages')->with('success', 'Message Send  successfully.');
     }
+
+
+
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -105,7 +118,7 @@ class MessagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -117,24 +130,24 @@ class MessagesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
 
         $request->validate([
-            'message_details'    =>  'required'
+            'message_details' => 'required'
         ]);
 
 
         $form_data = array(
-            'message_details'       =>    addslashes($request->message_details),
-            'message_active'        =>   1,
-            'message_edited_datetime'   =>   date("Y-m-d H:i:s")
+            'message_details' => addslashes($request->message_details),
+            'message_active' => 1,
+            'message_edited_datetime' => date("Y-m-d H:i:s")
         );
-  
+
         Message::whereId($id)->update($form_data);
 
         return redirect('messages')->with('success', 'Data is successfully updated');
@@ -143,7 +156,7 @@ class MessagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -160,12 +173,12 @@ class MessagesController extends Controller
 
         $data = DB::table('msg_president')
             ->select('*')
-            ->where("id",1)
+            ->where("id", 1)
             ->get();
-        $data=$data[0];
-        $table="msg_president";
-        $url="president";
-        return view('Message/edit_p_vp_gs', compact('data','table','url'));
+        $data = $data[0];
+        $table = "msg_president";
+        $url = "president";
+        return view('Message/edit_p_vp_gs', compact('data', 'table', 'url'));
     }
 
 
@@ -173,12 +186,12 @@ class MessagesController extends Controller
     {
         $data = DB::table('msg_vp')
             ->select('*')
-            ->where("id",1)
+            ->where("id", 1)
             ->get();
-        $data=$data[0];
-        $table="msg_vp";
-        $url="vice_president";
-        return view('Message/edit_p_vp_gs', compact('data','table','url'));
+        $data = $data[0];
+        $table = "msg_vp";
+        $url = "vice_president";
+        return view('Message/edit_p_vp_gs', compact('data', 'table', 'url'));
     }
 
 
@@ -186,27 +199,25 @@ class MessagesController extends Controller
     {
         $data = DB::table('msg_gs')
             ->select('*')
-            ->where("id",1)
+            ->where("id", 1)
             ->get();
-        $data=$data[0];
-        $table="msg_gs";
-        $url="general_secretary";
-        return view('Message/edit_p_vp_gs', compact('data','table','url'));
+        $data = $data[0];
+        $table = "msg_gs";
+        $url = "general_secretary";
+        return view('Message/edit_p_vp_gs', compact('data', 'table', 'url'));
     }
-
-
 
 
     public function messages_update(Request $request)
     {
-        $table_name=$request->table_name;
-        $url=$request->url;
-        $title=$request->title;
-        $description=$request->description;
+        $table_name = $request->table_name;
+        $url = $request->url;
+        $title = $request->title;
+        $description = $request->description;
         $form_data = array(
-            'title'  => $title,
-            'description'  =>   $description,
-            'msg_date'   =>   date("Y-m-d")
+            'title' => $title,
+            'description' => $description,
+            'msg_date' => date("Y-m-d")
         );
 
 
