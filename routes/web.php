@@ -47,6 +47,7 @@ Route::group([ 'middleware' => 'admin_middleware'], function()
     Route::resource('votes_position', 'VotePositionsController');
     Route::resource('candidates', 'VoteCandidatesController');
     Route::resource('ess_members', 'EssMembersController');
+    Route::resource('settings', 'SettingsController');
 });
 
 
