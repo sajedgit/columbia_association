@@ -66,16 +66,16 @@ Route::get('/unauthorized', 'UnAuthorizedController@index')->name('unauthorized'
 
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('config:cache');
-    return 'DONE'; //Return anything
+    return '<br/><br/><br/><h1 align="center">Cache clear completed</h1>'; //Return anything
 });
 
 Route::get('handle-payment', 'PayPalPaymentController@handlePayment')->name('make.payment');
 Route::get('cancel-payment', 'PayPalPaymentController@paymentCancel')->name('cancel.payment');
 Route::get('/payment_success/{details}', 'PayPalPaymentController@paymentSuccess')->name('payment_success');
-
 Route::get('product_payment', 'PayPalPaymentController@productPayment')->name('product.payment');
-
 Route::post('process_payment', 'PayPalPaymentController@processPayment')->name('process_payment');
+
+Route::get('event_payment', 'PayPalPaymentController@eventPayment')->name('event.payment');
 
 
 

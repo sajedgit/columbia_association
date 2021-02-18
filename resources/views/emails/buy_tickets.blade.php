@@ -1,5 +1,13 @@
 <div>
-    <p>Hi Mr/Mrs {{ $user_name }},<br/> Your purchase have been successfully done.</p>
+
+    @if($msg)
+        <p>Hi Mr/Mrs {{ $user_name }},<br/> {{ $msg }}   </p>
+    @else
+        <p>Hi Mr/Mrs {{ $user_name }},<br/>
+            Your purchase have been successfully done.
+        </p>
+    @endif
+
      @if($order_id)
      <p>Your order id is : {{ $order_id }}</p>
      @endif
