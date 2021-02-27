@@ -164,6 +164,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -232,7 +233,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
-        'Helper' => App\Helper\Helper::class
+        'Helper' => App\Helper\Helper::class,
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
 
     ],
 

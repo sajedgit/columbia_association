@@ -89,3 +89,17 @@ Route::get('event_payment', 'PayPalPaymentController@eventPayment')->name('event
 //    $exitCode = Artisan::call('composer update');
 //    return 'DONE'; //Return anything
 //});
+
+
+Route::get('detect', function () {
+    $agent = new \Jenssegers\Agent\Agent;
+
+    $result = $agent->isDesktop();
+
+    print_r($agent->platform());
+
+    if ($result)
+        return "Yes, This is Desktop.";
+    else
+        return "No, This is not Desktop.";
+});
