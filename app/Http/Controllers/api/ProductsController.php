@@ -51,18 +51,29 @@ class ProductsController extends Controller
     public function show($id)
     {
         $result = Product::find($id);
-        $result->photo = url('/')."/public/images/product/".$result->photo;
-        if (!$result) {
+        if($result)
+        {
+            $result->photo = url('/')."/public/images/product/".$result->photo;
+            if (!$result) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Item with id ' . $id . ' not found'
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'data' => $result
+            ]);
+        }
+        else
+        {
             return response()->json([
                 'success' => false,
-                'message' => 'Item with id ' . $id . ' not found'
+                'msg' => "There are no product in this id: $id"
             ]);
         }
 
-        return response()->json([
-            'success' => true,
-            'data' => $result
-        ]);
 
     }
 
