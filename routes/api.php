@@ -22,8 +22,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'PassportController@login');
 Route::post('register', 'PassportController@register');
 
+
 Route::post('password/forgot_password', 'api\AuthAPIController@forgotPassword');
 Route::post('password/reset', 'api\AuthAPIController@passwordReset'); /// not use yet
+
+Route::post('contact_us', 'api\ContactController@index');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('member_details', 'PassportController@details');
