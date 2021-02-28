@@ -35,6 +35,7 @@ class SettingsController extends Controller
 
 
         $form_data = array(
+            'admin_email'       =>   $request->admin_email,
             'url_ios'       =>   $request->url_ios,
             'url_android'       =>   $request->url_android,
             'api_key_ios'       =>   $request->api_key_ios,

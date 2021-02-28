@@ -34,6 +34,16 @@
 
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
+            {{ Form::label('admin_email', ('Admin Email '),array('class'=>'control-label')) }}
+        </div>
+        <div class="col-sm-8">
+            {{ Form::text('admin_email', $value = $data->admin_email ,array('class' => 'form-control')) }}
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3 mb-sm-0">
             {{ Form::label('url_ios', ('IOS URL '),array('class'=>'control-label')) }}
         </div>
         <div class="col-sm-8">
