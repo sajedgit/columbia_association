@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\api;
 
-
+use App\Mail\ContactUsMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -16,6 +18,7 @@ class ContactController extends Controller
 {
 
     public function index(Request $request){
+
         $input = $request->only('name','email','subject','msg');
         $validator = Validator::make($input, [
             'name' => "required",
@@ -28,10 +31,19 @@ class ContactController extends Controller
         }
 
 
-        //$email=$input["email"];
-        $message = "kjdlkfa sdfklasjdlf";
+        $name=$input["name"];
+        $email=$input["email"];
+        $subject=$input["subject"];
+        $msg=$input["msg"];
 
-        return response()->json($message);
+        $mail_to = $this->adminEmail();
+
+        Mail::to($mail_to)
+            ->send(new ContactUsMail($name,$email,$subject,$msg));
+
+        echo "mail send successfully";
+
+
     }
 
 }
