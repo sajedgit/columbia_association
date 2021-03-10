@@ -23,8 +23,8 @@ Route::post('login', 'PassportController@login');
 Route::post('register', 'PassportController@register');
 
 
-Route::post('password/forgot_password', 'api\AuthAPIController@forgotPassword');
-Route::post('password/reset', 'api\AuthAPIController@passwordReset'); /// not use yet
+Route::get('password/forgot_password', 'api\AuthAPIController@forgotPassword');
+//Route::post('password/reset', 'api\AuthAPIController@passwordReset'); /// not use yet
 
 Route::post('contact_us', 'api\ContactController@index');
 
@@ -54,6 +54,8 @@ Route::middleware('auth:api')->group(function () {
 
 
 Route::get('/clear-cache', function() {
-    $exitCode = Artisan::call('config:cache');
+    $exitCode1 = Artisan::call('config:cache');
+    $exitCode2 = Artisan::call('config:clear');
+    $exitCode3 = Artisan::call('cache:clear');
     return 'DONE'; //Return anything
 });

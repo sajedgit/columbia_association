@@ -65,7 +65,9 @@ Route::get('/unauthorized', 'UnAuthorizedController@index')->name('unauthorized'
 
 
 Route::get('/clear-cache', function () {
-    $exitCode = Artisan::call('config:cache');
+    $exitCode1 = Artisan::call('config:cache');
+    $exitCode2 = Artisan::call('config:clear');
+    $exitCode3 = Artisan::call('cache:clear');
     return '<br/><br/><br/><h1 align="center">Cache clear completed</h1>'; //Return anything
 });
 

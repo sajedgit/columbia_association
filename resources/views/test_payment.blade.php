@@ -161,6 +161,9 @@
 
         <div class="form-group">
 
+            <input type=hidden name=SOLUTIONTYPE value=Sole>
+            <input type=hidden name=LANDINGPAGE value=Billing>
+
             <input type="hidden" class="form-control" name="user_id" value="{{ $user_id }}" >
             <input type="hidden" class="form-control" name="item_id" value="{{ $item_id }}" >
             <input type="hidden" class="form-control" name="item_name" value="{{ $item_name }}" >

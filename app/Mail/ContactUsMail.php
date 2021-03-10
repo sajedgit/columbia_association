@@ -19,10 +19,10 @@ class ContactUsMail extends Mailable
      */
     public function __construct($name,$email,$subject,$msg)
     {
-        $this->name = $name;
-        $this->email = $email;
-        $this->subject = $subject;
-        $this->msg = $msg;
+        $this->name = trim($name);
+        $this->email = trim($email);
+        $this->subject = trim($subject);
+        $this->msg = trim($msg);
 
 
     }
@@ -36,8 +36,9 @@ class ContactUsMail extends Mailable
     {
         //return $this->view('emails.name');
 
-        return $this->from( $this->email,$this->email)
-            ->subject($this->subject."[ Contact Us ]")
+
+        return $this->from( $this->email,$this->name)
+            ->subject($this->subject."[From Columbia Contact Us Page]")
             ->view('emails.contact_us');
     }
 }
