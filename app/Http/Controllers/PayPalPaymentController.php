@@ -91,6 +91,45 @@ class PayPalPaymentController extends Controller
 
 
 
+
+    public function process_payment_membership(Request $request)
+    {
+        $user_id= $request->user_id;
+        $item_name= $request->item_name;
+        $price= $request->price;
+        $item_description= $request->item_description;
+        $quantity= $request->quantity;
+        $action= $request->action;
+        $details= $request->details;
+
+        $product = [];
+        $product['items'] = [
+            [
+                'name' => $item_name,
+                'price' => $price,
+                'desc' =>$item_description,
+                'qty' => $quantity
+            ]
+        ];
+
+        $product['invoice_id'] = $user_id."_".$action."_".time();
+        $product['invoice_description'] = "$action Order #{$product['invoice_id']} Bill";
+        $product['return_url'] = route('payment_success', [$details]);
+        $product['cancel_url'] = route('cancel.payment');
+        $product['total'] = $price * $quantity;
+
+        $paypalModule = new ExpressCheckout;
+
+        $res = $paypalModule->setExpressCheckout($product);
+        $res = $paypalModule->setExpressCheckout($product, true);
+
+       // print_r($res);die();
+
+        return redirect($res['paypal_link']);
+    }
+
+
+
     public function productPayment(Request $request)
     {
 

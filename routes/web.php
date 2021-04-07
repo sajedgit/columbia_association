@@ -76,6 +76,7 @@ Route::get('cancel-payment', 'PayPalPaymentController@paymentCancel')->name('can
 Route::get('/payment_success/{details}', 'PayPalPaymentController@paymentSuccess')->name('payment_success');
 Route::get('product_payment', 'PayPalPaymentController@productPayment')->name('product.payment');
 Route::post('process_payment', 'PayPalPaymentController@processPayment')->name('process_payment');
+Route::post('process_payment_membership', 'PayPalPaymentController@process_payment_membership')->name('process_payment_membership');
 
 Route::get('event_payment', 'PayPalPaymentController@eventPayment')->name('event.payment');
 

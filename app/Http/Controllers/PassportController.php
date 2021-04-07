@@ -1,24 +1,26 @@
 <?php
- 
+
 namespace App\Http\Controllers;
- 
+
 use App\Membership;
+use App\Models\EssMember;
 use App\Models\MembershipPayment;
 use App\Models\MemberJobInfo;
 use App\Models\MemberPersonalInfo;
 use App\Models\MemberDevice;
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller; 
-use App\User; 
-use Illuminate\Support\Facades\Auth; 
+use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use DB;
+use Illuminate\Support\Facades\URL;
 
 class PassportController extends Controller
 {
-	public $successStatus = 200;
-	
+    public $successStatus = 200;
+
     /**
      * Handles Registration Request
      *
@@ -27,22 +29,9 @@ class PassportController extends Controller
      */
     public function register(Request $request)
     {
-      /*   $this->validate($request, [
-            'name' => 'required|min:3',
-            'username' => 'required|min:6',
-            'email' => 'required|email|unique:memberships',
-            'password' => 'required|min:6',
-        ]); */
-        
-       /* ----------previous validation------------------- */
-       /* $validator = Validator::make($request->all(), [ 
-            'name' => 'required|min:3',
-            'username' => 'required|min:6|unique:memberships',
-            'email' => 'required|email|unique:memberships',
-            'password' => 'required|min:6', 
-        ]);*/
-		
-        $validator = Validator::make($request->all(), [ 
+        $forgot_password_url=URL::to('password/reset');
+
+        $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
             'username' => 'required|min:6|unique:memberships',
             'email' => 'required|email|unique:memberships',
@@ -64,110 +53,153 @@ class PassportController extends Controller
             'member_benificiary' => 'required',
             'member_reference_no' => 'required',
             'member_retired' => 'required',
-            'membership_payment_ess' => 'required', 
-        ]);
-		
-		if ($validator->fails()) { 
-            return response()->json(['success'=>false,'error'=>$validator->errors()], 401);            
+            'membership_payment_ess' => 'required',
+        ],
+        [
+            'email.unique' => "You are already a register user in this system. If you forgot your password then you can recover this from $forgot_password_url or Please contact with site admin."
+        ]
+
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error' => $validator->errors()], 401);
         }
- 
-        /* $user = Membership::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'active' => 0
-			
-        ]);
-        $token = $user->createToken('TutsForWeb')->accessToken;
-        return response()->json(['token' => $token], 200); */
-        
-    /* ----------previous insertion------------------- */
-	/*  $input = $request->all(); 
-        $input['password'] = bcrypt($input['password']); 
-        $input['user_type_id'] = 2; 
-        $input['active'] = 0; 
-        $user = Membership::create($input); 
-        $success['token'] =  $user->createToken('MyApp')-> accessToken; 
-        $success['name'] =  $user->name;
-        return response()->json(['success'=>true,'data'=>$success], $this-> successStatus); */
-        
+
+        $users_ess_type="Cash";
+        $users_ess_id=0;
+       if( $request->membership_payment_ess==1)
+       {
+           $form_data = array(
+               'type'       =>  $users_ess_type,
+               'name'        =>   $request->name,
+               'email'        =>   $request->email,
+               'created_at' => date('Y-m-d H:i:s'),
+               'active'        =>   1,
+
+           );
+
+           $create_ess_member=EssMember::create($form_data);
+           $users_ess_id=$create_ess_member->id;
+
+       }
+
+
+
         DB::beginTransaction();
 
         try {
 
+//            $login_data = array(
+//                'name' => $request->name,
+//                'username' => $request->username,
+//                'password' => bcrypt($request->password),
+//                'email' => $request->email,
+//                'user_type_id' => 2,
+//                'ess_type' =>$users_ess_type,
+//                'ess_id' => $users_ess_id,
+//                'active' => 1,
+//                'created_at' => date("Y-m-d"),
+//                'updated_at' => date("Y-m-d")
+//            );
             $login_data = array(
-                'name'            =>   $request->name,
-                'username'        =>   $request->username,
-                'password'        =>   bcrypt($request->password),
-                'email'           =>   $request->email,
-                'user_type_id'    =>   2,
-                'active'          =>   1,
-                'created_at'      =>   date("Y-m-d"),
-                'updated_at'      =>   date("Y-m-d")
+                'user_type_id'       => 2,
+                'ess_type'        =>   $users_ess_type,
+                'ess_id'        =>   $users_ess_id,
+                'name'        =>   $request->name,
+                'username'        =>  $request->username,
+                'password'        =>    bcrypt($request->password),
+                'email'        =>    $request->email,
+                'photo'        =>   "no_image.jpg",
+                'active'        =>  1,
+                'created_at' => date("Y-m-d"),
+                'updated_at' => date("Y-m-d")
+
             );
-    
+
             $user = Membership::create($login_data);
-    
+
             $personal_data = array(
                 'ref_member_personal_info_membership_id' => $user->id,
-                'member_first_name' =>   $request->member_first_name,
-                'member_last_name'  =>   $request->member_last_name,
-                'member_birth_date' =>   $request->member_birth_date,
-                'member_email_address' =>  $request->email,
-                'member_gender'     =>   $request->member_gender,
-                'member_address'    =>   $request->member_address,
-                'member_zip_code'   =>   $request->member_zip_code,
-                'member_tax_reg_no' =>   $request->member_tax_reg_no,
-                'member_personal_info_creating_datetime'        =>   date("Y-m-d"),
-                'member_personal_info_editing_datetime'        =>   date("Y-m-d")
+                'member_first_name' => $request->member_first_name,
+                'member_last_name' => $request->member_last_name,
+                'member_birth_date' => $request->member_birth_date,
+                'member_email_address' => $request->email,
+                'member_gender' => $request->member_gender,
+                'member_address' => $request->member_address,
+                'member_zip_code' => $request->member_zip_code,
+                'member_tax_reg_no' => $request->member_tax_reg_no,
+                'member_personal_info_creating_datetime' => date("Y-m-d"),
+                'member_personal_info_editing_datetime' => date("Y-m-d")
             );
-    
+
             $job_data = array(
                 'ref_member_job_info_membership_id' => $user->id,
-                'member_command_code'      =>  $request->member_command_code,
-                'member_command_name'      =>  $request->member_command_name,
-                'member_rank'              =>   $request->member_rank,
-                'member_shield'            =>   $request->member_shield,
-                'member_appointment_date'  =>  $request->member_appointment_date,
-                'member_promoted_date'     =>  $request->member_promoted_date,
-                'member_boro'              =>  $request->member_boro,
-                'member_benificiary'       => $request->member_benificiary,
-                'member_reference_no'      => $request->member_reference_no,
-                'member_retired'           => $request->member_retired, 
-                'member_job_info_creating_datetime' =>   date("Y-m-d"),
-                'member_job_info_editing_datetime'  =>   date("Y-m-d")
+                'member_command_code' => $request->member_command_code,
+                'member_command_name' => $request->member_command_name,
+                'member_rank' => $request->member_rank,
+                'member_shield' => $request->member_shield,
+                'member_appointment_date' => $request->member_appointment_date,
+                'member_promoted_date' => $request->member_promoted_date,
+                'member_boro' => $request->member_boro,
+                'member_benificiary' => $request->member_benificiary,
+                'member_reference_no' => $request->member_reference_no,
+                'member_retired' => $request->member_retired,
+                'member_job_info_creating_datetime' => date("Y-m-d"),
+                'member_job_info_editing_datetime' => date("Y-m-d")
             );
-    
+
             $payment_data = array(
                 'ref_membership_id' => $user->id,
-                'membership_payment_ess' =>   $request->membership_payment_ess,
+                'membership_payment_ess' => $request->membership_payment_ess,
                 'membership_payment_amount' => 0,
                 'membership_payment_datetime' => date("Y-m-d"),
-                'membership_payment_creating_datetime'  =>   date("Y-m-d"),
-                'membership_payment_editing_datetime'   =>   date("Y-m-d")
+                'membership_payment_creating_datetime' => date("Y-m-d"),
+                'membership_payment_editing_datetime' => date("Y-m-d")
             );
-            
-            
+
+
             MemberPersonalInfo::create($personal_data);
             MemberJobInfo::create($job_data);
             MembershipPayment::create($payment_data);
 
             DB::commit();
+          //  $this->membershipPayment($user->id);
 
-            $success['token'] =  $user->createToken('MyApp')-> accessToken; 
+            $success['token'] =  $user->createToken('MyApp')-> accessToken;
             $success['name'] =  $user->name;
-		    return response()->json(['success'=>true,'data'=>$success], $this-> successStatus); 
+		    return response()->json(['success'=>true,'data'=>$success], $this-> successStatus);
 
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['success'=>false,'error'=>$e], 401);            
+             return response()->json(['success'=>false,'error'=>$e], 401);
         }
-		
+
     }
-	
-	
- 
+
+
+    public function membershipPayment($user_id)
+    {
+        $quantity = 1;
+
+        if (empty($user_id)) {
+            return view('404');
+        }
+
+        $action = "buyMembership";
+
+
+        $item_name = "Buy Membership";
+        $item_description = "Buy Membership for One Year";
+        $price = 10;
+
+        $details = $user_id . "_" . $action;
+
+        //$this->processPayment($user_id,$product_id,$product_name,$product_description,$price,$quantity,$action);
+
+        return view('membership_payment', compact('user_id', 'item_name', 'item_description', 'price', 'quantity', 'action', 'details'));
+    }
+
+
     /**
      * Handles Login Request
      *
@@ -178,31 +210,42 @@ class PassportController extends Controller
     {
         $credentials = [
             'email' => $request->email,
-            'password' =>  $request->password,
+            'password' => $request->password,
         ];
-        
-	  
-	    if(Auth::attempt($credentials)){ 
-            $user = Auth::user(); 
-			
-				$member_devices = MemberDevice::create([
-					'ref_member_device_membership_id' => $user->id,
-					'member_device_os_type' => $request->member_device_os_type,
-					'member_device_token_id' => $user->createToken('MyApp')-> accessToken,
-					'member_device_unique_id' => $request->member_device_unique_id
-					
-				]);
-			
-            $success['token'] =  $user->createToken('MyApp')-> accessToken; 
-            return response()->json(['success'=>true,'user_id'=>$user->id,'data'=>$success], $this-> successStatus);
-        } 
-        else{ 
-            return response()->json(['error'=>'Unauthorised'], 401); 
-        }  
-		
-		
+
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            if (!$user->active)
+                return response()->json(['success' => false, 'error' => 'You are deactive by admin for some reason. Please contact with site admin']);
+
+            if ($user->ess_type !== "Online Payment" && $user->ess_type !== "Paid")
+                return response()->json(['success' => false, 'error' => 'Your subscription have to be renew. Please contact with site admin']);
+
+
+            $member_devices = MemberDevice::create([
+                'ref_member_device_membership_id' => $user->id,
+                'member_device_os_type' => $request->member_device_os_type,
+                'member_device_token_id' => $user->createToken('MyApp')->accessToken,
+                'member_device_unique_id' => $request->member_device_unique_id
+
+            ]);
+
+            $success['user_email'] = $user->email;
+            $success['user_id'] = $user->id;
+            $success['ess_type'] = $user->ess_type;
+            $success['ess_id'] = $user->ess_id;
+            $success['active'] = $user->active;
+            $success['token'] = $user->createToken('MyApp')->accessToken;
+            return response()->json(['success' => true, 'user_id' => $user->id, 'data' => $success], $this->successStatus);
+        } else {
+            return response()->json(['success' => false, 'error' => 'Unauthorised access'], 401);
+        }
+
+
     }
- 
+
     /**
      * Returns Authenticated User Details
      *
@@ -210,11 +253,11 @@ class PassportController extends Controller
      */
     public function details()
     {
-       // return response()->json(['user' => auth()->user()], 200);
-		
-		$user = Auth::user(); 
-        return response()->json(['success' => true,'data' => $user], $this-> successStatus); 
+        // return response()->json(['user' => auth()->user()], 200);
+
+        $user = Auth::user();
+        return response()->json(['success' => true, 'data' => $user], $this->successStatus);
     }
-	
-	
+
+
 }

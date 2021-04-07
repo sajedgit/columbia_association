@@ -64,7 +64,8 @@ class MembershipsController extends Controller
                 ->orderBy('id', 'desc')
                 ->get();
 
-			if (!$result)
+            $get_resuslt=count($result);
+			if (!$get_resuslt)
 				{
 					return response()->json([
 						'success' => false,
