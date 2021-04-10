@@ -32,7 +32,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>{{ __('ess_members.type') }}</th>
+                        <th>{{ __('ess_members.payment_type') }}</th>
 						 <th>{{ __('ess_members.name') }}</th>
 						 <th>{{ __('ess_members.email') }}</th>
 
@@ -43,7 +43,7 @@
                   </thead>
                   <tfoot>
                     <tr>
-                       <th>{{ __('ess_members.type') }}</th>
+                       <th>{{ __('ess_members.payment_type') }}</th>
 						 <th>{{ __('ess_members.name') }}</th>
 						 <th>{{ __('ess_members.email') }}</th>
 
@@ -56,7 +56,7 @@
 				   @foreach($data as $row)
                     <tr>
 
-					    <td>{{ $row->ess_type }}</td>
+					    <td>{{ $row->payment_type }}</td>
 						 <td>{{ $row->name }}</td>
 						 <td>{{ $row->email }}</td>
 

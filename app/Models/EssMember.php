@@ -13,7 +13,7 @@ class EssMember extends Model
     public $timestamps=false;
 
     protected $fillable = [
-        'type','name','email','created_at','active'
+        'payment_type','name','email','created_at','active'
     ];
 
 

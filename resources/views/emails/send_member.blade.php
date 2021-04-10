@@ -1,6 +1,6 @@
 <div>
     <p>Hi Mr/Mrs {{ $data["name"] }},<br/> Your membership have been created successfully. You are now registered
-        {{ $data["ess_type"] }} member. You can now login  from Columbia Mobile App with below credentials.
+        {{ $data["payment_type"] }} member. You can now login  from Columbia Mobile App with below credentials.
         Just make sure your membership subscription is updated or not</p>
 
 

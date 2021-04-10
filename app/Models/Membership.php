@@ -8,12 +8,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Membership extends Model
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
+
+class Membership extends Authenticatable
 {
+    use HasApiTokens,Notifiable;
+
+    protected $table = 'memberships';
 
     public $timestamps = false;
     protected $fillable = [
-        'user_type_id',  'ess_type',  'ess_id', 'name','username','password','email','active','remember_token','created_at','updated_at'
+        'user_type_id',  'payment_type',  'ess_id', 'name','username','password','email','active','remember_token','created_at','updated_at','membership_status','membership_start_date','membership_end_date'
     ];
 
     protected $hidden = ['password', 'remember_token'];

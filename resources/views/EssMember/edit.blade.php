@@ -32,11 +32,11 @@
 
 			<div class="form-group row">
 				<div class="col-sm-4 mb-3 mb-sm-0">
-					{{ Form::label('type', (Lang::get('ess_members.edit_msg').' '.Lang::get('ess_members.type')),array('class'=>'control-label')) }}
+					{{ Form::label('payment_type', (Lang::get('ess_members.edit_msg').' '.Lang::get('ess_members.payment_type')),array('class'=>'control-label')) }}
 				</div>
 				<div class="col-sm-8">
 
-					{!! Form::select('type', $type, $data->ess_type, ['class' => 'form-control']) !!}
+					{!! Form::select('payment_type', $payment_type, $data->payment_type, ['class' => 'form-control']) !!}
 				</div>
 			</div>
 

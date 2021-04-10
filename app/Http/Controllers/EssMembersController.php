@@ -45,8 +45,8 @@ class EssMembersController extends Controller
     {
 
         $status_items=array(''=>'Select','1'=>'Active','0'=>'Inactive');
-        $type=array(''=>'Select','Cash'=>'Cash','Online Payment'=>'Online Payment');
-        return view('EssMember/create', compact('type','status_items'));
+        $payment_type=array(''=>'Select','Cash'=>'Cash','Online Payment'=>'Online Payment');
+        return view('EssMember/create', compact('payment_type','status_items'));
     }
 
     /**
@@ -58,7 +58,7 @@ class EssMembersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type'    =>  'required',
+            'payment_type'    =>  'required',
             'name'     =>  'required',
             'email'     =>  'required|email|unique:ess_members',
             'active'     =>  'required'
@@ -75,7 +75,7 @@ class EssMembersController extends Controller
         $password=$this->password_generate(8);
         $form_data = array(
             'user_type_id'       => 2,
-            'ess_type'        =>    $request->type,
+            'payment_type'        =>    $request->payment_type,
             'ess_id'        =>   1,
             'name'        =>   $request->name,
             'username'        =>   $request->name,
@@ -109,7 +109,7 @@ class EssMembersController extends Controller
         $password=$this->password_generate(8);
         $data = array(
             'user_type_id'       => 2,
-            'ess_type'        =>   $form_data["type"],
+            'payment_type'        =>   $form_data["payment_type"],
             'ess_id'        =>   $ess_id,
             'name'        =>   $form_data["name"],
             'username'        =>   $form_data["name"],
@@ -173,9 +173,9 @@ class EssMembersController extends Controller
     public function edit($id)
     {
         $status_items=array('1'=>'Active','0'=>'Inactive');
-        $type=array(''=>'Select','Cash'=>'Cash','Online Payment'=>'Online Payment');
+        $payment_type=array(''=>'Select','Cash'=>'Cash','Online Payment'=>'Online Payment');
         $data = Membership::findOrFail($id);
-        return view('EssMember/edit', compact('data','type','status_items'));
+        return view('EssMember/edit', compact('data','payment_type','status_items'));
     }
 
     /**
@@ -188,7 +188,7 @@ class EssMembersController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'type'    =>  'required',
+            'payment_type'    =>  'required',
             'name'     =>  'required',
             'email'     =>  'required|email',
             'active'     =>  'required'
@@ -196,7 +196,7 @@ class EssMembersController extends Controller
 
 
         $form_data = array(
-            'ess_type'        =>    $request->type,
+            'payment_type'        =>    $request->payment_type,
             'name'        =>   $request->name,
             'email'        =>    $request->email,
             'active'        =>  $request->active,
@@ -210,7 +210,7 @@ class EssMembersController extends Controller
 //        {
 //
 //            $data = array(
-//                'ess_type'        =>   $form_data["type"],
+//                'payment_type'        =>   $form_data["payment_type"],
 //                'name'        =>   $form_data["name"],
 //                'email'        =>   $form_data["email"],
 //                'active'        =>  $form_data["active"]

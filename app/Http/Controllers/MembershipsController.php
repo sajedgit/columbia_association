@@ -23,6 +23,8 @@ class MembershipsController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
+      //  print_r($data);die();
+
         return view('Membership/index', compact('data'));
     }
 

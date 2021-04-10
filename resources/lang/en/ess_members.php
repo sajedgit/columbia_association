@@ -25,7 +25,7 @@ return [
     'submit_btn_msg' => 'Submit',
     'update_btn_msg' => 'Update',
     'id' => 'id',
-    'type' => 'Member Type',
+    'payment_type' => 'Member Type',
     'name' => 'Full Name',
     'email' => 'Email',
     'created_at' => 'Created at',
