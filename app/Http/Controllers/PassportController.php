@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Membership;
+use App\Models\Membership;
 use App\Models\EssMember;
 use App\Models\MembershipPayment;
 use App\Models\MemberJobInfo;
@@ -168,7 +168,7 @@ class PassportController extends Controller
                 $login_data = array(
                     'user_type_id'       => 2,
                     'ess_type'        =>   "Cash",
-                    'ess_id'        =>   isset($create_ess_member->id)?$create_ess_member->id:555,
+                    'ess_id'        =>   $create_ess_member->id,
                     'name'        =>   $request->name,
                     'username'        =>  $request->username,
                     'password'        =>    bcrypt($request->password),
