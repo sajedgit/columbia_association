@@ -26,8 +26,8 @@ class EssMembersController extends Controller
     {
 
 
-        $data = DB::table('ess_members')
-            //->where("type","Others")
+        $data = DB::table('memberships')
+            ->where("ess_id",1)
             ->select('*')
             ->get();
        // print_r($data);die();
@@ -45,7 +45,7 @@ class EssMembersController extends Controller
     {
 
         $status_items=array(''=>'Select','1'=>'Active','0'=>'Inactive');
-        $type=array(''=>'Select','Paid'=>'Paid','Cash'=>'Cash','Online Payment'=>'Online Payment');
+        $type=array(''=>'Select','Cash'=>'Cash','Online Payment'=>'Online Payment');
         return view('EssMember/create', compact('type','status_items'));
     }
 
@@ -64,21 +64,39 @@ class EssMembersController extends Controller
             'active'     =>  'required'
         ]);
 
+//        $form_data = array(
+//            'ess_type'       =>   $request->type,
+//            'name'        =>   $request->name,
+//            'email'        =>   $request->email,
+//            'created_at' => date('Y-m-d H:i:s'),
+//            'active'        =>   $request->active,
+//
+//        );
+        $password=$this->password_generate(8);
         $form_data = array(
-            'type'       =>   $request->type,
+            'user_type_id'       => 2,
+            'ess_type'        =>    $request->type,
+            'ess_id'        =>   1,
             'name'        =>   $request->name,
-            'email'        =>   $request->email,
+            'username'        =>   $request->name,
+            'password'        =>    Hash::make($password),
+            'email'        =>    $request->email,
+            'photo'        =>   "no_image.jpg",
+            'active'        =>  $request->active,
             'created_at' => date('Y-m-d H:i:s'),
-            'active'        =>   $request->active,
 
         );
 
-        $create_ess_member=EssMember::create($form_data);
+        $create_ess_member=Membership::create($form_data);
 
+//        if($create_ess_member->id)
+//        {
+//            $this->insert_member($form_data,$create_ess_member->id);
+//
+//        }
         if($create_ess_member->id)
         {
-            $this->insert_member($form_data,$create_ess_member->id);
-
+            $this->send_mail($form_data);
         }
 
         return redirect('ess_members')->with('success', 'Data Added successfully.');
@@ -142,7 +160,7 @@ class EssMembersController extends Controller
      */
     public function show($id)
     {
-        $data = EssMember::findOrFail($id);
+        $data = Membership::findOrFail($id);
         return view('EssMember/view', compact('data'));
     }
 
@@ -155,8 +173,8 @@ class EssMembersController extends Controller
     public function edit($id)
     {
         $status_items=array('1'=>'Active','0'=>'Inactive');
-        $type=array(''=>'Select','Paid'=>'Paid','Cash'=>'Cash','Online Payment'=>'Online Payment');
-        $data = EssMember::findOrFail($id);
+        $type=array(''=>'Select','Cash'=>'Cash','Online Payment'=>'Online Payment');
+        $data = Membership::findOrFail($id);
         return view('EssMember/edit', compact('data','type','status_items'));
     }
 
@@ -176,29 +194,30 @@ class EssMembersController extends Controller
             'active'     =>  'required'
         ]);
 
+
         $form_data = array(
-            'type'       =>   $request->type,
+            'ess_type'        =>    $request->type,
             'name'        =>   $request->name,
-            'email'        =>   $request->email,
-            'active'        =>   $request->active,
+            'email'        =>    $request->email,
+            'active'        =>  $request->active,
 
         );
 
 
-        $updated=EssMember::whereId($id)->update($form_data);
+        $updated=Membership::whereId($id)->update($form_data);
 
-        if($updated)
-        {
-
-            $data = array(
-                'ess_type'        =>   $form_data["type"],
-                'name'        =>   $form_data["name"],
-                'email'        =>   $form_data["email"],
-                'active'        =>  $form_data["active"]
-            );
-            $Membership_updated=Membership::where("ess_id",$id)->update($data);
-
-        }
+//        if($updated)
+//        {
+//
+//            $data = array(
+//                'ess_type'        =>   $form_data["type"],
+//                'name'        =>   $form_data["name"],
+//                'email'        =>   $form_data["email"],
+//                'active'        =>  $form_data["active"]
+//            );
+//            $Membership_updated=Membership::where("ess_id",$id)->update($data);
+//
+//        }
 
         return redirect('ess_members')->with('success', 'Data is successfully updated');
     }
@@ -211,7 +230,7 @@ class EssMembersController extends Controller
      */
     public function destroy($id)
     {
-        $data = EssMember::findOrFail($id);
+        $data = Membership::findOrFail($id);
         $data->delete();
 
         return redirect('ess_members')->with('success', 'Data is successfully deleted');

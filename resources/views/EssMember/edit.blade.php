@@ -36,7 +36,7 @@
 				</div>
 				<div class="col-sm-8">
 
-					{!! Form::select('type', $type, $data->type, ['class' => 'form-control']) !!}
+					{!! Form::select('type', $type, $data->ess_type, ['class' => 'form-control']) !!}
 				</div>
 			</div>
 

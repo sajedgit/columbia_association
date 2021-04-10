@@ -56,7 +56,7 @@
 				   @foreach($data as $row)
                     <tr>
 
-					    <td>{{ $row->type }}</td>
+					    <td>{{ $row->ess_type }}</td>
 						 <td>{{ $row->name }}</td>
 						 <td>{{ $row->email }}</td>
 
