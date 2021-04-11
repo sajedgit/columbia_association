@@ -79,6 +79,7 @@ Route::post('process_payment', 'PayPalPaymentController@processPayment')->name('
 Route::post('process_payment_membership', 'PayPalPaymentController@process_payment_membership')->name('process_payment_membership');
 
 Route::get('event_payment', 'PayPalPaymentController@eventPayment')->name('event.payment');
+Route::get('membership_payment', 'PayPalPaymentController@membershipPayment')->name('membership.payment');
 
 
 

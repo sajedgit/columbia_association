@@ -13,7 +13,7 @@ class Setting extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'url_ios', 'url_android', 'api_key_ios', 'api_key_android'
+        'admin_email', 'membership_price', 'url_ios', 'url_android', 'api_key_ios', 'api_key_android'
     ];
 }
 

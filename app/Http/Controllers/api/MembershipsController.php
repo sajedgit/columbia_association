@@ -125,11 +125,7 @@ class MembershipsController extends Controller
 
                 $login_data = array(
                     'name'            =>   $request->name,
-                  //  'username'        =>   $request->username,
                     'password'        =>   bcrypt($request->password),
-                 //   'email'           =>   $request->email,
-                    'user_type_id'    =>   2,
-                    'active'          =>   1,
                     'updated_at'      =>   date("Y-m-d")
                 );
 
@@ -145,9 +141,7 @@ class MembershipsController extends Controller
                     'member_gender'     =>   $request->member_gender,
                     'member_address'    =>   $request->member_address,
                     'member_zip_code'   =>   $request->member_zip_code,
-                    'member_tax_reg_no' =>   $request->member_tax_reg_no,
-                    'member_personal_info_creating_datetime'        =>   date("Y-m-d"),
-                    'member_personal_info_editing_datetime'        =>   date("Y-m-d")
+                    'member_tax_reg_no' =>   $request->member_tax_reg_no
                 );
 
                 $job_data = array(
@@ -161,9 +155,7 @@ class MembershipsController extends Controller
                     'member_boro'              =>  $request->member_boro,
                     'member_benificiary'       => $request->member_benificiary,
                     'member_reference_no'      => $request->member_reference_no,
-                    'member_retired'           => $request->member_retired,
-                    'member_job_info_creating_datetime' =>   date("Y-m-d"),
-                    'member_job_info_editing_datetime'  =>   date("Y-m-d")
+                    'member_retired'           => $request->member_retired
                 );
 
                 $payment_data = array(
@@ -197,14 +189,6 @@ class MembershipsController extends Controller
                     MemberJobInfo::where("ref_member_job_info_membership_id",$id)->update($job_data);
                 else
                     MemberJobInfo::create($job_data);
-
-
-
-                $membership_payments_infos = DB::select(DB::raw(" SELECT * from membership_payments where  ref_membership_id=$id  "));
-                if(count($membership_payments_infos))
-                    MembershipPayment::where("ref_membership_id",$id)->update($payment_data);
-                else
-                    MembershipPayment::create($payment_data);
 
 
 

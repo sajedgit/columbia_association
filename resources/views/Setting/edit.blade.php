@@ -41,6 +41,15 @@
         </div>
     </div>
 
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3 mb-sm-0">
+            {{ Form::label('membership_price', ('Membership Price'),array('class'=>'control-label')) }}
+        </div>
+        <div class="col-sm-8">
+            {{ Form::number('membership_price', $value = $data->membership_price ,array('class' => 'form-control')) }}
+        </div>
+    </div>
+
 
     <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">

@@ -143,7 +143,7 @@ class PassportController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['success'=>false,'error123'=>$e], 401);
+            return response()->json(['success'=>false,'error'=>$e], 401);
         }
 
 
@@ -194,10 +194,10 @@ class PassportController extends Controller
 
 
             if ($user->active==0)
-                return response()->json(['success' => false, 'error' => 'You are deactive by admin for some reason. Please contact with site admin']);
+                return response()->json(['success' => false,'user_status' => "deactive", 'error' => 'You are deactive by admin for some reason. Please contact with site admin']);
 
-            if ( is_null($user->membership_status) || $user->membership_status !== "Paid")
-                return response()->json(['success' => false, 'error' => 'Your are not paid user or your subscription have to be renew. Please contact with site admin']);
+            if ($user->ess_id==0 && (is_null($user->membership_status) || $user->membership_status !== "Paid" )  )
+                return response()->json(['success' => false,'user_status' => "unpaid", 'error' => 'Your are not paid user or your subscription have to be renew. Please contact with site admin']);
 
 
             $member_devices = MemberDevice::create([

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Helper\Helper;
 use App\Mail\SendEventMail;
+use App\Mail\SendMembershipMail;
 use App\Models\Event;
 use App\Models\Product;
+use App\Models\Membership;
+use App\Models\MembershipPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -242,7 +245,7 @@ class PayPalPaymentController extends Controller
         $paypalModule = new ExpressCheckout;
         $response = $paypalModule->getExpressCheckoutDetails($request->token);
 
-        //print_r($response);
+      //  print_r($response);
         echo "<br/><br/><br/>";
 
 
@@ -252,8 +255,8 @@ class PayPalPaymentController extends Controller
               $api_response=$this->call_product_api($response,$details_info);
             if($action=="buyTicket")
               $api_response=$this->call_event_api($response,$details_info);
-//            if($action=="")
-//              $api_response=$this->call_product_api($response,$details_info);
+            if($action=="buyMembership")
+              $api_response=$this->call_membership_api($response,$details_info);
 
             print_r(json_decode($api_response));
             dd('Payment was successfull. The payment success page goes here!');
@@ -576,6 +579,27 @@ class PayPalPaymentController extends Controller
 
     }
 
+    public function send_mail_Membership($ref_membership_id, $order_id, $source, $payment_type, $details,$start_date,$end_date,$renew_date, $net_amounts)
+    {
+        $event_name = "Buy Membership";
+
+        $user = DB::select(DB::raw(" SELECT * from memberships where  id=$ref_membership_id  "));
+        $user = $user[0];
+        $user_name = $user->name;
+        $user_email = $user->email;
+        $subject = "Buying Membership Confirmation";
+        $mail_to = $user_email;
+        $cc = "sajedaiub@gmail.com";
+        $bcc = "sajedaiub@gmail.com";
+        $msg="";
+
+        Mail::to($mail_to)
+            ->cc($cc)
+            ->bcc($bcc)
+            ->send(new SendMembershipMail( $event_name, $subject, $user_name, $order_id, $source, $payment_type, $details, $start_date,$end_date,$renew_date,  $net_amounts,$msg));
+
+    }
+
     public function send_mail_event($event_id, $ref_membership_id, $order_id, $source, $payment_type, $details, $total_tickets, $net_amounts,$msg)
     {
         $event = DB::select(DB::raw(" SELECT * from events where  id=$event_id  "));
@@ -601,6 +625,146 @@ class PayPalPaymentController extends Controller
 
     }
 
+    public function membershipPayment(Request $request)
+    {
+        $user_id = $request->user_id;
+
+        $setting = DB::select(DB::raw(" SELECT membership_price from settings where  id=1  "));
+        $setting = $setting[0];
+
+        $quantity = 1;
+
+        if (empty($user_id)) {
+            return view('404');
+        }
+
+        $action = "buyMembership";
+
+
+        $item_id = 1234;
+        $item_name = "Buy Membership";
+        $item_description = "Buy Membership for One Year";
+        $price =  $setting->membership_price;
+
+        //$details = $user_id . "_" . $action;
+        $details = $user_id."_".$action."_".$item_id;
+
+        //$this->processPayment($user_id,$product_id,$product_name,$product_description,$price,$quantity,$action);
+
+        return view('membership_payment', compact('user_id', 'item_name', 'item_description', 'price', 'quantity', 'action', 'details'));
+    }
+
+
+
+
+    public function call_membership_api($response,$details_info)
+    {
+        $get_details=explode("_",$details_info);
+        $user_id=$get_details[0];
+        $action=$get_details[1];
+        $item_id=$get_details[2];
+
+        $FIRSTNAME=$response["FIRSTNAME"];
+        $LASTNAME=$response["LASTNAME"];
+        $CORRELATIONID=$response["CORRELATIONID"];
+        $PAYERID=$response["PAYERID"];
+        $INVNUM=$response["INVNUM"];
+        $CURRENCYCODE=$response["CURRENCYCODE"];
+        $L_QTY0=$response["L_QTY0"];
+        $L_AMT0=$response["L_AMT0"];
+        $total_price=$L_QTY0 * $L_AMT0;
+
+        $product_id=$item_id;
+        $member_id=$user_id;
+        $order_id=$INVNUM;
+        $source="PAYPAL";
+        $payment_type="online payment";
+        $details="Membership Payment";
+        $total_item=$L_QTY0;
+        $total_price=$total_price;
+        $buyer_first_name=$FIRSTNAME;
+        $buyer_last_name=$LASTNAME;
+        $CORRELATIONID=$CORRELATIONID;
+        $PAYERID=$PAYERID;
+
+
+        $start_date = date('Y-m-d H:i:s');
+        $end_date = date('Y-m-d',strtotime(date("Y-m-d", time()) . " + 365 day"));
+         $renew_date = date('Y-m-d',strtotime(date("Y-m-d", time()) . " + 366 day"));
+
+        if(empty($product_id) || empty($member_id) || empty($order_id) || empty($source) || empty($payment_type) || empty($details)  || empty($total_item)  || empty($total_price) )
+        {
+
+            return response()->json([
+                'success' => false,
+                'message' => "Please provide these field: 'product_id, member_id, order_id, source, payment_type, details, total_item,total_price' "
+            ]);
+        }
+
+
+        DB::beginTransaction();
+
+        try {
+
+            $member_data = array(
+                'membership_status'            =>  "Paid",
+                'membership_start_date'        =>   NOW(),
+                'membership_end_date'      =>   $end_date
+            );
+            Membership::whereId($user_id)->update($member_data);
+
+
+
+            $payment_data =  array(
+                'ref_membership_id' => $member_id,
+                'membership_payment_by' => $source,
+                'membership_payment_details' => $details,
+
+                'CORRELATIONID' => $CORRELATIONID,
+                'PAYERID' => $PAYERID,
+                'INVNUM' => $INVNUM,
+                'source' => $source,
+                'buyer_first_name' => $buyer_first_name,
+                'buyer_last_name' => $buyer_last_name,
+
+                'membership_payment_datetime' => $start_date,
+                'membership_payment_amount' => $total_price,
+                'membership_next_renewal_date' => $renew_date,
+                'membership_payment_creating_datetime' => $start_date
+            );
+            //print_r($payment_data);
+
+            $aaa=MembershipPayment::create($payment_data);
+
+
+
+            DB::commit();
+
+
+
+            $this->send_mail_Membership( $member_id, $order_id, $source, $payment_type, $details,$start_date,$end_date,$renew_date,  $total_price." ".$CURRENCYCODE);
+            return response()->json([
+                'success' => true,
+                'message' => "Make  Membership Payment Successfully"
+            ]);
+
+
+
+
+
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'success' => false,
+                'message' => "Payment not done Properly",
+                'error'=>$e
+            ]);
+        }
+
+
+
+    }
 
 
 

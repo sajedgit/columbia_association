@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
@@ -30,10 +31,24 @@ class AuthAPIController extends Controller
        // $token = Password::createToken($users_f);
        // print_r($input);
 
-        $email=$input["email"];
-        $message = $response == Password::RESET_LINK_SENT ? " Password reset link send to you email ( $email ) address " : GLOBAL_SOMETHING_WANTS_TO_WRONG;
 
-        return response()->json($message);
+        $email=$input["email"];
+
+        $get_email = DB::select(DB::raw(" SELECT email from memberships where  email='$email'  "));
+        $get_email_address =count($get_email);
+
+        if($get_email_address > 0)
+        {
+            $message = $response == Password::RESET_LINK_SENT ? " Password reset link send to you email ( $email ) address " : GLOBAL_SOMETHING_WANTS_TO_WRONG;
+
+            if($message)
+                return response()->json(['success' => true,'message'=>$message]);
+            else
+                return response()->json(['success' => false]);
+        }
+        else
+            return response()->json(['success' => false,'message'=>"This email is not found in our system"]);
+
     }
 
 
