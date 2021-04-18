@@ -38,14 +38,18 @@ class ContactController extends Controller
 
         $mail_to = $this->adminEmail();
 
-        $send_email=Mail::to($mail_to)
-            ->send(new ContactUsMail($name,$email,$subject,$msg));
 
-       // echo "mail send successfully";
-        if($send_email)
-            return response()->json(['success'=>true,'data'=>"mail send successfully"]);
-        else
-            return response()->json(['success'=>false]);
+
+        try{
+            $send_email=Mail::to($mail_to)
+                ->send(new ContactUsMail($name,$email,$subject,$msg));
+
+            return response()->json(['success'=>true,'msg'=>"mail send successfully"]);
+        }
+        catch (\Exception $e)
+        {
+            return response()->json(['success'=>false,'msg'=>"Something went wrong","error"=>$e]);
+        }
 
 
     }
