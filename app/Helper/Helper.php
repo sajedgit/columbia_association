@@ -74,12 +74,41 @@ class Helper
     public function get_device_id_array_by_user_id($user_ids)
     {
         $get_user_ids = implode(",", $user_ids);
-        $member_device = DB::select(DB::raw(" SELECT group_concat(concat('',member_device_unique_id,'')) as device_id_list from member_devices where  ref_member_device_membership_id IN ($get_user_ids) "));
+        $member_device = DB::select(DB::raw(" SELECT group_concat(concat('',member_device_token_id,'')) as device_id_list from member_devices where  ref_member_device_membership_id IN ($get_user_ids) "));
         $member_device = $member_device[0];
-        $member_device_unique_id = $member_device->device_id_list;
-        $member_device_unique_id = json_encode(explode(",", $member_device_unique_id));
-        return $member_device_unique_id;
+        $member_device_token_id = $member_device->device_id_list;
+        $member_device_token_id = json_encode(explode(",", $member_device_token_id));
+      //  $member_device_token_id = explode(",", $member_device_token_id);
+        return $member_device_token_id;
     }
+
+
+
+
+    public function get_device_id_by_user($user_id)
+    {
+        $member_device = DB::select(DB::raw(" SELECT  member_device_token_id  from member_devices where  
+        ref_member_device_membership_id = $user_id order by member_device_storing_datetime desc limit 0,1"));
+
+        if( count($member_device) > 0)
+        {
+            $member_device = $member_device[0];
+            $member_device_token_id = $member_device->member_device_token_id;
+            return $member_device_token_id;
+        }
+        else
+        {
+            return 0;
+
+        }
+
+
+
+
+    }
+
+
+
 
 }
 

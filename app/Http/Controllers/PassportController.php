@@ -203,7 +203,8 @@ class PassportController extends Controller
             $member_devices = MemberDevice::create([
                 'ref_member_device_membership_id' => $user->id,
                 'member_device_os_type' => $request->member_device_os_type,
-                'member_device_token_id' => $user->createToken('MyApp')->accessToken,
+               // 'member_device_token_id' => $user->createToken('MyApp')->accessToken,
+                'member_device_token_id' => $request->member_device_token_id,
                 'member_device_unique_id' => $request->member_device_unique_id
 
             ]);

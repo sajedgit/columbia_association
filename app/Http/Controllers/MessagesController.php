@@ -62,6 +62,9 @@ class MessagesController extends Controller
 
         $message = Message::create($form_data);
 
+        // for push notification
+        $helper = new Helper();
+
         if ($message) {
             $item_id = $message->id;
             $user_ids = array();
@@ -78,22 +81,24 @@ class MessagesController extends Controller
             foreach ($results as $row) {
                 $mail_to = $row->email;
                 $user_name = $row->name;
-                Mail::to($mail_to)
-                    ->cc($cc)
-                    ->bcc($bcc)
-                    ->send(new SendMessageMail($msg,$subject,$user_name));
+//                Mail::to($mail_to)
+//                    ->cc($cc)
+//                    ->bcc($bcc)
+//                    ->send(new SendMessageMail($msg,$subject,$user_name));
+//
+//                sleep(3);
 
-                //sleep(3);
 
+               // array_push($user_ids, $row->id);
+                // for push notification
+                $device_ids = $helper->get_device_id_by_user($row->id);
 
-                array_push($user_ids, $row->id);
+                if($device_ids)
+                    $helper->send_push_notification($device_ids, $subject, $msg, "message", $item_id);
 
             }
 
-            // for push notification
-            $helper = new Helper();
-            $device_ids = $helper->get_device_id_array_by_user_id($user_ids);
-            $helper->send_push_notification($device_ids, $subject, $msg, "message", $item_id);
+
 
         }
 
@@ -230,4 +235,3 @@ class MessagesController extends Controller
 }
 
 
-	
