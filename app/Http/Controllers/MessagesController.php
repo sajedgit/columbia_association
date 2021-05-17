@@ -69,7 +69,7 @@ class MessagesController extends Controller
             $item_id = $message->id;
             $user_ids = array();
             $subject = "Message From Columbia ADMIN";
-            $msg = $request->message_details;
+            $msg = addslashes($request->message_details);
 
             $results = Membership::orderBy('id', 'desc')
                 ->where("active", 1)
@@ -128,8 +128,9 @@ class MessagesController extends Controller
      */
     public function edit($id)
     {
-        $data = Message::findOrFail($id);
-        return view('Message/edit', compact('data'));
+        return redirect('messages');
+//        $data = Message::findOrFail($id);
+//        return view('Message/edit', compact('data'));
     }
 
     /**
@@ -141,21 +142,21 @@ class MessagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $request->validate([
-            'message_details' => 'required'
-        ]);
-
-
-        $form_data = array(
-            'message_details' => addslashes($request->message_details),
-            'message_active' => 1,
-            'message_edited_datetime' => date("Y-m-d H:i:s")
-        );
-
-        Message::whereId($id)->update($form_data);
-
-        return redirect('messages')->with('success', 'Data is successfully updated');
+        return redirect('messages');
+//        $request->validate([
+//            'message_details' => 'required'
+//        ]);
+//
+//
+//        $form_data = array(
+//            'message_details' => addslashes($request->message_details),
+//            'message_active' => 1,
+//            'message_edited_datetime' => date("Y-m-d H:i:s")
+//        );
+//
+//        Message::whereId($id)->update($form_data);
+//
+//        return redirect('messages')->with('success', 'Data is successfully updated');
     }
 
     /**

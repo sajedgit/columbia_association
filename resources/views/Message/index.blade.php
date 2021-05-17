@@ -58,7 +58,7 @@
 					  {{ Form::open([ 'method'  => 'delete', 'route' => [ 'messages.destroy', $row->id ] ]) }} 
 					  
 							<a href="{{ route('messages.show', $row->id) }}" class="btn btn-primary">Show</a>
-							<a href="{{ route('messages.edit', $row->id) }}" class="btn btn-warning">Edit</a>
+{{--							<a href="{{ route('messages.edit', $row->id) }}" class="btn btn-warning">Edit</a>--}}
 							@csrf
 							@method('DELETE')
 							<button type="submit"  onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">Delete</button>

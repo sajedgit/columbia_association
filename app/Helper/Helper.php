@@ -87,8 +87,9 @@ class Helper
 
     public function get_device_id_by_user($user_id)
     {
-        $member_device = DB::select(DB::raw(" SELECT  member_device_token_id  from member_devices where  
-        ref_member_device_membership_id = $user_id order by member_device_storing_datetime desc limit 0,1"));
+        $member_device = DB::select(DB::raw(" SELECT distinct member_device_token_id  from member_devices where  ref_member_device_membership_id = $user_id "));
+//        $member_device = DB::select(DB::raw(" SELECT distinct member_device_token_id  from member_devices where
+//        ref_member_device_membership_id = $user_id order by member_device_storing_datetime desc limit 0,1"));
 
         if( count($member_device) > 0)
         {
