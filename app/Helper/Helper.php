@@ -40,6 +40,7 @@ class Helper
                 "message" => $messages,
                 "title"=>$title,
                 "action"=>$action,
+                "tag"=>"chat",
                 "item_id"=>$item_id
 
 

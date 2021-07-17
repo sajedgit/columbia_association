@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Mail\CreateEventMail;
 use App\Models\Event;
 use App\Models\Membership;
@@ -89,7 +90,7 @@ class EventsController extends Controller
         $create_events= Event::create($form_data);
         if($create_events->id)
         {
-            $this->send_mail($form_data,"insert");
+            $this->send_mail($form_data,"insert",$create_events->id);
 
         }
 
@@ -98,8 +99,10 @@ class EventsController extends Controller
     }
 
 
-    public function send_mail($data,$action)
+    public function send_mail($data,$action,$item_id)
     {
+        // for push notification
+        $helper = new Helper();
 
         if($action=="insert")
           $subject="New Event (".$data['event_title'].") has been created";
@@ -126,6 +129,22 @@ class EventsController extends Controller
                 ->send(new CreateEventMail($data,$subject,$user_name));
 
             //sleep(1);
+            // for push notification
+            $device_ids = $helper->get_device_id_by_user($row->id);
+
+            if($action=="insert")
+            {
+                $push_subject="New Event has been created";
+                $msg="New Event (".$data['event_title'].") has been created";
+            }
+            else
+            {
+                $push_subject=" Event has been updated";
+                $msg=" Event (".$data['event_title'].") has been updated";
+            }
+
+            if($device_ids)
+                $helper->send_push_notification($device_ids, $push_subject, $msg, "event", $item_id);
         }
 
     }
