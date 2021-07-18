@@ -24,7 +24,7 @@ class Helper
 
         $notification['title'] = $title ;
         $notification['message'] = $messages;
-        $notification['tag'] = "chat";
+        $notification['tag'] = $action;
         $notification['priority'] = "high";
         $notification['foreground'] = true;
         $fields = array (
@@ -40,7 +40,7 @@ class Helper
                 "message" => $messages,
                 "title"=>$title,
                 "action"=>$action,
-                "tag"=>"chat",
+                "tag"=>$action,
                 "item_id"=>$item_id
 
 
